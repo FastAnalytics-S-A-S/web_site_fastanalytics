@@ -200,7 +200,6 @@ function toggleMaterial() {
     $('cv').style.display = 'none';
     $('hints').style.display = 'none';
     $('matTab').classList.add('open');
-    $('matBack').classList.add('open');
     $('matBtn').classList.add('on');
     estadoPrevioMaterial = p.estado();     // ¿reproducía antes de abrir el material?
     p.fijarActivo(false); // el 3D se pausa mientras está oculto
@@ -209,7 +208,6 @@ function toggleMaterial() {
     $('cv').style.display = '';
     $('hints').style.display = '';
     $('matTab').classList.remove('open');
-    $('matBack').classList.remove('open');
     $('matBtn').classList.remove('on');
     // Vuelve al lugar exacto: mismo paso y, si estaba reproduciendo, sigue.
     if (!enMenu && estadoPrevioMaterial === 'reproduciendo') p.reproducir();
@@ -298,7 +296,6 @@ async function boot() {
   $('prevSceneBtn').addEventListener('click', () => irEscena(-1));
   $('menuBtn').addEventListener('click', mostrarMenu);
   $('matBtn').addEventListener('click', toggleMaterial);
-  $('matBack').addEventListener('click', toggleMaterial);
   $('langBtn').addEventListener('click', () => {
     LANG = LANG === 'es' ? 'en' : 'es';
     p.fijarIdioma(LANG);
