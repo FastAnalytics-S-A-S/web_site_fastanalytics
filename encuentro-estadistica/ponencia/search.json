@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "en/index.html",
+    "href": "en/index.html",
+    "title": "2WIE 2026 Talk",
+    "section": "",
+    "text": "📥 Download presentation (PDF) 🌐 Event website 🎓 Workshop (pre-workshop)"
+  },
+  {
+    "objectID": "en/index.html#contents",
+    "href": "en/index.html#contents",
+    "title": "2WIE 2026 Talk",
+    "section": "Contents",
+    "text": "Contents\n\nAbstract\nInterceptions reveal locations and sequences, but not every actor or connection. The talk frames the problem as inference on the unobserved vertices and edges of a spatio-temporal criminal network, and proposes a reproducible build–reconstruct–validate pipeline:\n\nChronnet construction — 586 HF communications from 2018 → 333 vertices and 1,105 directed edges, with accounting identities for verification.\nSupervised reconstruction — classification under extreme imbalance (≈ 1 % edges): PCA + SMOTE + logistic regression, selected by specificity (47 false positives vs. 334 and 1,339).\nUnobserved elements — 107 candidate unknown edges and 84 unique hidden vertices, with spatial validation (Wilcoxon tests by infrastructure and scale) and operational validation with CENAC-DIJIN and DIRAN.\n\nAuthors: Andrés Pérez-Coronado · Gustavo Canavire-Bacarreza · Santiago Ortíz · Henry Laniado (FastAnalytics S.A.S)\nScientific talk — 2nd International Meeting on Statistics 2026, Universidad Nacional de Colombia, Manizales Campus · November 5–6, 2026 · La Nubia Campus, R and W blocks.\n\n\nSlides\n📥 Download the PDF (32 slides, 16:9)\nThe presentation is organized in three parts:\n\n\n\n\n\n\n\nPart\nContents\n\n\n\n\nProblem and data\nObservable subnetwork, element typology (known, unknown, hidden), 586 HF records from 2018\n\n\nMethod\nChronnet construction (equations 1–3), dyadic dataset, SMOTE and model selection, hidden-vertex search with homophily\n\n\nResults and decision\nIn-sample reconstruction (97 % of edges), unknown edges (107) and hidden vertices (84), spatial proximity rule, policy implications\n\n\n\nDeck sources (Quarto/beamer, FastAnalytics style): presentaciones/matematicas/ in the workshop repository.\n\n\nAbout the event\nThe 2nd International Meeting on Statistics 2026 — Methods, Modeling and Applications — takes place on November 5–6, 2026 at the La Nubia Campus (R and W blocks), Universidad Nacional de Colombia, Manizales, with free admission upon registration.\n\n📅 Event program\n🎓 Virtual pre-workshop (November 4): Modeling Criminal Networks and Financial Intelligence, led by Professor Andrés Pérez-Coronado.\n\n\n\n \n\nFastAnalytics S.A.S · Sponsor of the 2nd International Meeting on Statistics 2026"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ponencia 2WIE 2026",
+    "section": "",
+    "text": "📥 Descargar presentación (PDF) 🌐 Sitio del evento 🎓 Taller (pre-workshop)"
+  },
+  {
+    "objectID": "index.html#contenido",
+    "href": "index.html#contenido",
+    "title": "Ponencia 2WIE 2026",
+    "section": "Contenido",
+    "text": "Contenido\n\nResumen\nLas interceptaciones revelan ubicaciones y secuencias, pero no todos los actores ni todas las conexiones. La ponencia formula el problema como inferencia sobre vértices y aristas no observados de una red criminal espaciotemporal, y propone un flujo reproducible de construcción, reconstrucción y validación:\n\nConstrucción del Chronnet — 586 comunicaciones HF de 2018 → 333 vértices y 1.105 aristas dirigidas, con identidades contables de verificación.\nReconstrucción supervisada — clasificación bajo desbalance extremo (≈ 1 % de aristas): PCA + SMOTE + regresión logística, elegida por especificidad (47 falsos positivos frente a 334 y 1.339).\nElementos no observados — 107 aristas desconocidas candidatas y 84 vértices ocultos únicos, con validación espacial (pruebas de Wilcoxon por infraestructura y escala) y validación operativa junto a CENAC-DIJIN y DIRAN.\n\nAutores: Andrés Pérez-Coronado · Gustavo Canavire-Bacarreza · Santiago Ortíz · Henry Laniado (FastAnalytics S.A.S)\nPresentación científica — 2do Encuentro Internacional de Estadística 2026, Universidad Nacional de Colombia, Sede Manizales · 5 y 6 de noviembre de 2026 · Campus La Nubia, Bloques R y W.\n\n\nDiapositivas\n📥 Descargar el PDF (32 diapositivas, 16:9)\nLa presentación está organizada en tres partes:\n\n\n\n\n\n\n\nParte\nContenido\n\n\n\n\nProblema y datos\nSubred observable, tipología de elementos (conocidos, desconocidos, ocultos), 586 registros HF de 2018\n\n\nMétodo\nConstrucción del Chronnet (ecuaciones 1–3), dataset diádico, SMOTE y selección del modelo, búsqueda de vértices ocultos con homofilia\n\n\nResultados y decisión\nReconstrucción dentro de muestra (97 % de aristas), aristas desconocidas (107) y vértices ocultos (84), regla de proximidad espacial, aterrizaje a política pública\n\n\n\nFuentes del deck (Quarto/beamer, estilo FastAnalytics): presentaciones/matematicas/ en el repositorio del taller.\n\n\nSobre el evento\nEl 2do Encuentro Internacional de Estadística 2026 — Métodos, Modelamiento y Aplicaciones — se realiza los días 5 y 6 de noviembre de 2026 en el Campus La Nubia (Bloques R y W) de la Universidad Nacional de Colombia, Sede Manizales, con entrada libre previa inscripción.\n\n📅 Programación del evento\n🎓 Taller virtual pre-workshop (4 de noviembre): Modelado de redes criminales e inteligencia financiera, a cargo del profesor Andrés Pérez-Coronado.\n\n\n\n \n\nFastAnalytics S.A.S · Patrocinador del 2do Encuentro Internacional de Estadística 2026"
+  }
+]
