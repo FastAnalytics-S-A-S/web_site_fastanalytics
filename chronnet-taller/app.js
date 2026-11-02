@@ -160,6 +160,8 @@ function pintarEnlaceMaterial() {
   enlace.removeAttribute('href');
   enlace.style.cursor = 'default';
   enlace.dataset.dest = destino;
+  const tab = $('matTab');
+  if (tab) tab.href = './' + destino;
   enlace.textContent =
     (LANG === 'es' ? 'Material de esta escena: ' : 'Material for this scene: ') +
     destino.replace(/^taller\/(en\/)?/, '');
@@ -301,6 +303,13 @@ async function boot() {
     LANG = LANG === 'es' ? 'en' : 'es';
     p.fijarIdioma(LANG);
     applyLang();
+    // Si el material está abierto, recargarlo en el idioma recién activo.
+    if (materialMode) {
+      const frame = $('matFrame');
+      const dest = urlMat(escenaActual >= 0 ? CODIGO[escenaActual][1] : 'taller/index.html');
+      frame.src = './' + dest;
+      frame.dataset.dest = dest;
+    }
   });
   $('fsBtn').addEventListener('click', alternarPantallaCompleta);
   // sndBtn queda inerte a propósito (sin banda sonora en la página).
