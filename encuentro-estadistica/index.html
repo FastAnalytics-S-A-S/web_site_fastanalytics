@@ -7,8 +7,11 @@
 <style>
   :root{ --teal:#006D6D; --teal3:#0D9488; --amber:#D4883A; --amber2:#B45309; --line:#E2E8F0; --txt:#0F172A; --mut:#64748B; }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F8FAFC;
-    font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;padding:28px}
+  body{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#F8FAFC;
+    font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;padding:28px;gap:34px}
+  .brandrow{display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap;
+    padding:0 12px 26px 12px;border-bottom:1px solid var(--line);max-width:980px;width:100%}
+  .brandrow svg,.brandrow img{height:52px;width:auto}
   .choice{display:grid;grid-template-columns:1fr 1fr;gap:22px;width:100%;max-width:980px}
   @media (max-width:840px){.choice{grid-template-columns:1fr}}
   .chcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 32px;
@@ -17,7 +20,6 @@
   .chcard:hover{transform:translateY(-4px);border-color:var(--teal3);box-shadow:0 12px 28px rgba(0,109,109,.14)}
   .chcard.taller{border-top:4px solid var(--teal3)}
   .chcard.ponencia{border-top:4px solid var(--amber)}
-  .chlogo{height:52px;width:auto;align-self:flex-start}
   .chk{font-size:11px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--teal3)}
   h1{font-size:22px;font-weight:800;color:var(--txt);line-height:1.3}
   .chd{font-size:14px;color:var(--mut);line-height:1.6;flex:1}
@@ -26,30 +28,34 @@
 </style>
 </head>
 <body>
+  <div class="brandrow">
+    <svg viewBox="0 0 300 52" xmlns="http://www.w3.org/2000/svg" aria-label="FastAnalytics">
+      <g transform="translate(2,2)">
+        <polygon points="24,1 38,5.8 45,19 42,33 32,43 16,43 6,33 3,19 10,5.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linejoin="round"/>
+        <rect x="15" y="23" width="5.5" height="14" rx="1.8" fill="#0D9488" opacity="0.8"/>
+        <rect x="21.5" y="17" width="5.5" height="20" rx="1.8" fill="#0D9488"/>
+        <rect x="28" y="12" width="5.5" height="25" rx="1.8" fill="#D4883A"/>
+      </g>
+      <text x="58" y="30" font-family="Inter,-apple-system,sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5">
+        <tspan fill="#0D9488">F</tspan><tspan fill="#D4883A">a</tspan><tspan fill="#0D9488">stAnalyt</tspan><tspan fill="#D4883A">i</tspan><tspan fill="#0D9488">cs</tspan>
+      </text>
+      <text x="58" y="47" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.8">IA ESPACIOTEMPORAL PARA DECISIONES PREDICTIVAS</text>
+    </svg>
+    <img src="logo-2wie.svg" alt="2do Encuentro Internacional de Estadística">
+    <img src="logo-unal.svg" alt="Universidad Nacional de Colombia">
+  </div>
+
   <div class="choice">
     <a class="chcard taller" href="./taller/">
-      <svg class="chlogo" viewBox="0 0 300 52" xmlns="http://www.w3.org/2000/svg" aria-label="FastAnalytics">
-        <g transform="translate(2,2)">
-          <polygon points="24,1 38,5.8 45,19 42,33 32,43 16,43 6,33 3,19 10,5.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linejoin="round"/>
-          <rect x="15" y="23" width="5.5" height="14" rx="1.8" fill="#0D9488" opacity="0.8"/>
-          <rect x="21.5" y="17" width="5.5" height="20" rx="1.8" fill="#0D9488"/>
-          <rect x="28" y="12" width="5.5" height="25" rx="1.8" fill="#D4883A"/>
-        </g>
-        <text x="58" y="30" font-family="Inter,-apple-system,sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5">
-          <tspan fill="#0D9488">F</tspan><tspan fill="#D4883A">a</tspan><tspan fill="#0D9488">stAnalyt</tspan><tspan fill="#D4883A">i</tspan><tspan fill="#0D9488">cs</tspan>
-        </text>
-        <text x="58" y="47" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.8">IA ESPACIOTEMPORAL PARA DECISIONES PREDICTIVAS</text>
-      </svg>
       <div class="chk">Taller · Pre-workshop</div>
       <h1>Modelado de redes criminales e inteligencia financiera</h1>
       <p class="chd">Animaciones 3D del Chronnet Show y material Quarto bilingüe (ES · EN) · 6 módulos con el dataset FinCEN/ICIJ · pre-workshop virtual del 4 de noviembre.</p>
       <span class="chgo">Abrir el taller ↗</span>
     </a>
     <a class="chcard ponencia" href="./ponencia/">
-      <img class="chlogo" src="logo-2wie.svg" alt="2do Encuentro Internacional de Estadística">
       <div class="chk">Ponencia · 2WIE 2026</div>
       <h1>Reconstrucción de redes criminales espaciotemporales para su disrupción en la Amazonía</h1>
-      <p class="chd">Presentación científica · 5 y 6 de noviembre · Universidad Nacional de Colombia, Sede Manizales · página con pestañas y descarga del PDF (32 diapositivas).</p>
+      <p class="chd">Presentación científica · 5 y 6 de noviembre · Universidad Nacional de Colombia, Sede Manizales · página Quarto con pestañas y descarga del PDF (32 diapositivas).</p>
       <span class="chgo">Ver la ponencia ↗</span>
     </a>
   </div>
