@@ -210,8 +210,12 @@ function toggleMaterial() {
     $('matTab').classList.remove('open');
     $('matBtn').classList.remove('on');
     // Vuelve al lugar exacto: mismo paso y, si estaba reproduciendo, sigue.
-    if (!enMenu && estadoPrevioMaterial === 'reproduciendo') p.reproducir();
-    else if (!enMenu) p.fijarActivo(true);
+    // Siempre reactivar el ciclo de render (fijarActivo), no solo reproducir():
+    // sin esto, el estado avanza pero el bucle de dibujo sigue detenido.
+    if (!enMenu) {
+      p.fijarActivo(true);
+      if (estadoPrevioMaterial === 'reproduciendo') p.reproducir();
+    }
   }
 }
 
