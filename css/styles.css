@@ -3561,19 +3561,19 @@ a.pub-item:hover {
   line-height: 1.7;
 }
 
-.training-card-link {
+.training-card .training-card-link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   margin-top: auto;
-  color: var(--primary);
+  color: #FFFFFF;
   font-size: 0.92rem;
   font-weight: 800;
 }
 
-.training-card-link::after {
+.training-card .training-card-link::after {
   content: '→';
-  color: var(--accent);
+  color: #FFFFFF;
   font-size: 1.2em;
   transition: transform var(--transition);
 }
