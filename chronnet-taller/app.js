@@ -6,6 +6,8 @@
 
 let LANG = 'es';
 const T = (bi) => (typeof bi === 'string' ? bi : bi[LANG]);
+// Ruta del material Quarto según idioma activo (taller/en/ para inglés).
+const urlMat = (f) => 'taller/' + (LANG === 'en' ? 'en/' : '') + f.replace(/^taller\//, '');
 
 /* Metadatos de las 8 escenas (títulos vienen del catálogo del presentador). */
 const KICKERS = [
@@ -95,7 +97,7 @@ function construirMenu() {
     for (let c = 0; c < CODIGO[i].length; c += 2) {
       const a = document.createElement('a');
       a.className = 'codigo';
-      a.href = CODIGO[i][c + 1];
+      a.href = urlMat(CODIGO[i][c + 1]);
       a.target = '_blank';
       a.rel = 'noopener';
       a.textContent = T(CODIGO[i][c]);
@@ -152,14 +154,15 @@ function pintarEnlaceMaterial() {
   const enlace = $('matLink');
   if (!enlace) return;
   if (escenaActual < 0) { enlace.style.display = 'none'; return; }
-  const destino = CODIGO[escenaActual][1];
+  const destino = urlMat(CODIGO[escenaActual][1]);
   enlace.style.display = '';
-  // Sin hipervínculo: se muestra el nombre del material pero no navega.
+  // Sin navegación: muestra el nombre del material (según idioma) pero no enlaza.
   enlace.removeAttribute('href');
   enlace.style.cursor = 'default';
+  enlace.dataset.dest = destino;
   enlace.textContent =
     (LANG === 'es' ? 'Material de esta escena: ' : 'Material for this scene: ') +
-    destino.replace('taller/', '');
+    destino.replace(/^taller\/(en\/)?/, '');
 }
 
 function pintarPaso(paso, total) {  const info = p.escenas[escenaActual];
@@ -189,7 +192,7 @@ function toggleMaterial() {
   const frame = $('matFrame');
   if (materialMode) {
     // Carga el material de la escena actual (señal de correspondencia).
-    const dest = escenaActual >= 0 ? CODIGO[escenaActual][1] : 'taller/index.html';
+    const dest = urlMat(escenaActual >= 0 ? CODIGO[escenaActual][1] : 'taller/index.html');
     if (frame.dataset.dest !== dest) { frame.src = './' + dest; frame.dataset.dest = dest; }
     frame.classList.add('open');
     $('cv').style.display = 'none';
