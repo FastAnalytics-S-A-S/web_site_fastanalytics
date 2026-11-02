@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronnet Show — Analítica de redes e inteligencia financiera contra el crimen organizado · FastAnalytics</title>
+<style>
+  :root{
+    --teal:#006D6D; --teal2:#0F766E; --teal3:#0D9488; --amber:#D4883A; --amber2:#B45309;
+    --slate:#64748B; --bg:#FFFFFF; --bg2:#F8FAFC; --panel:#FFFFFF; --line:#E2E8F0;
+    --txt:#0F172A; --mut:#64748B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--bg);color:var(--txt);
+    font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+  #app{display:flex;flex-direction:column;height:100vh}
+  /* ---------- top bar ---------- */
+  #topbar{display:flex;align-items:center;gap:10px;padding:10px 18px;
+    background:#FFFFFF;border-bottom:1px solid var(--line);z-index:20}
+  #topbar .brand{display:flex;align-items:center;gap:10px;min-width:0}
+  #topbar svg{height:26px;flex:none}
+  #sceneTitle{font-size:15px;font-weight:700;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #sceneKicker{font-size:11px;color:var(--amber);letter-spacing:1.6px;text-transform:uppercase}
+  .spacer{flex:1}
+  .tbtn{background:#F1F5F9;border:1px solid var(--line);color:var(--txt);border-radius:8px;
+    padding:6px 12px;font-size:12px;cursor:pointer;font-weight:600;white-space:nowrap}
+  .tbtn:hover{background:#E2E8F0}
+  .tbtn.on{background:var(--teal);border-color:var(--teal);color:#fff}
+  /* ---------- main ---------- */
+  #main{flex:1;display:flex;min-height:0}
+  /* ---------- menu (portada) ---------- */
+  #menu{flex:1;overflow:auto;padding:34px 44px;display:none}
+  #menu.open{display:block}
+  #menu h1{font-size:34px;font-weight:800;line-height:1.15;max-width:760px;letter-spacing:-0.5px}
+  #menu h1 .a{color:var(--amber)}
+  #menu .sub{margin-top:12px;font-size:16px;color:var(--mut);max-width:720px;line-height:1.5}
+  .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px;max-width:1150px}
+  .mcard{background:#FFFFFF;border:1px solid var(--line);box-shadow:0 1px 3px rgba(15,23,42,0.06);border-radius:14px;padding:16px;
+    cursor:pointer;transition:.18s;position:relative}
+  .mcard:hover{transform:translateY(-3px);border-color:var(--teal3);box-shadow:0 8px 20px rgba(0,109,109,0.12)}
+  .mcard .num{font-size:11px;font-weight:800;color:var(--amber);letter-spacing:2px}
+  .mcard .k{font-size:10px;color:var(--teal3);text-transform:uppercase;letter-spacing:2.2px;margin-top:8px;font-weight:700}
+  .mcard h3{font-size:17px;font-weight:700;color:var(--txt);margin-top:6px;line-height:1.3}
+  .mcard p{font-size:12.5px;color:var(--mut);margin-top:8px;line-height:1.5}
+  .mcard .codigo{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:var(--teal3);text-decoration:none}
+  .mcard .codigo:hover{color:var(--amber);text-decoration:underline}
+  .mcard.concepto{border-left:3px solid var(--teal3)}
+  .mcard.datos{border-left:3px solid var(--amber)}
+  /* ---------- stage ---------- */
+  #stageWrap{flex:1;display:none;flex-direction:column;min-width:0}
+  #stageWrap.open{display:flex}
+  #canvasBox{flex:1;position:relative;min-height:0;background:#F8FAFC}
+  canvas#cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+  #matFrame{position:absolute;inset:0;width:100%;height:100%;border:none;display:none;background:#fff;z-index:6}
+  #matFrame.open{display:block}
+  #matTab{position:absolute;top:12px;right:14px;z-index:7;display:none;font-size:12px;font-weight:700}
+  #matTab.open{display:inline-block}
+  /* Botón flotante de regreso: visible sobre el iframe, también a pantalla completa. */
+  /* ---------- scene controls bar (controles específicos del motor) ---------- */
+  #simbar{display:none;gap:8px;align-items:center;padding:8px 14px;border-top:1px solid var(--line);
+    background:#F8FAFC;flex-wrap:wrap}
+  #simbar.open{display:flex}
+  #simbar:empty{display:none}
+  /* ---------- bottom controls ---------- */
+  #controls{border-top:1px solid var(--line);background:#F8FAFC;padding:10px 18px 12px;z-index:20}
+  #caption{font-size:16px;font-weight:600;min-height:44px;display:flex;align-items:center;line-height:1.4}
+  #caption .stepno{color:var(--amber);font-family:monospace;margin-right:10px;font-size:13px;flex:none}
+  #ctrlRow{display:flex;align-items:center;gap:10px;margin-top:8px}
+  .cbtn{width:42px;height:42px;border-radius:50%;background:var(--teal);border:none;color:#fff;
+    font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+  .cbtn:hover{background:var(--teal3)}
+  .cbtn.ghost{background:#F1F5F9;border:1px solid var(--line);color:var(--txt)}
+  #prog{flex:1;height:8px;background:#E2E8F0;border-radius:6px;position:relative;cursor:pointer}
+  #progFill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal3));border-radius:6px;width:0%}
+  #progDot{position:absolute;top:-4px;width:16px;height:16px;background:var(--amber);border-radius:50%;
+    transform:translateX(-8px);box-shadow:0 0 10px #D4883AAA;left:0%}
+  #stepCount{font-size:12px;color:var(--mut);min-width:64px;text-align:right;font-family:monospace}
+  #hints{position:absolute;top:12px;right:14px;font-size:11px;color:var(--mut);
+    background:#FFFFFFDD;border:1px solid var(--line);padding:6px 10px;border-radius:8px;line-height:1.6;z-index:5}
+  #chipRow{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  /* Señal de correspondencia con el material Quarto de la escena */
+  #matRow{margin-top:6px}
+  #matLink{display:inline-block;font-size:12px;font-weight:700;color:var(--teal);
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-decoration:none;
+    border:1px solid var(--teal);border-radius:20px;padding:3px 12px;background:#fff}
+  #matLink:hover{background:var(--teal);color:#fff}
+  .chipwarn{background:#FFF7ED;border:1px solid #D4883A;color:#B45309;border-radius:20px;
+    padding:4px 12px;font-size:12px;font-weight:700}
+  /* ---- sección de medios generados ---- */
+  .mediaSec{margin-top:34px;max-width:1150px}
+  .mediaSec h2{font-size:20px;font-weight:800;color:var(--txt)}
+  .mediaSec .mh{font-size:12px;color:var(--teal3);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:4px}
+  .mediaSec .msub{font-size:13px;color:var(--mut);margin-top:6px}
+  .mgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+  .mcard2{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,.06);position:relative}
+  .mcard2 video,.mcard2 img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:#0B1C22}
+  .mcard2 .mt{padding:10px 14px 12px}
+  .mcard2 .mt b{font-size:13.5px;color:var(--txt);display:block}
+  .mcard2 .mt span{font-size:11.5px;color:var(--mut)}
+  .mcard2 .badge{position:absolute;top:10px;left:10px;background:#B45309;color:#fff;font-size:10.5px;
+    font-weight:800;letter-spacing:1px;padding:4px 10px;border-radius:6px;text-transform:uppercase;z-index:2}
+  @media (max-width:980px){
+    .mgrid{grid-template-columns:repeat(2,1fr)}
+    .mgrid2{grid-template-columns:repeat(2,1fr)}
+    #menu{padding:22px}
+  }
+  /* Botón destacado de la ponencia 2WIE */
+  .tbtn.pri{background:var(--amber);border-color:var(--amber);color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+  .tbtn.pri:hover{background:var(--amber2);border-color:var(--amber2)}
+  /* Franja de patrocinio en portada */
+  .sponsor{margin-top:26px;max-width:1150px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;
+    padding:14px 20px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .sponsor .slogos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;flex:none}
+  .sponsor .slogos svg,.sponsor .slogos img{height:44px;width:auto}
+  .sponsor .stxt{font-size:12.5px;color:var(--mut);line-height:1.55;flex:1;min-width:260px}
+  .sponsor .stxt b{color:var(--teal)}
+  /* Dos tarjetas de acceso: taller (pre-workshop) y ponencia 2WIE */
+  .choice{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;max-width:1150px}
+  .chcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px 18px;
+    display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;
+    box-shadow:0 1px 3px rgba(15,23,42,.06);transition:.18s;position:relative}
+  .chcard:hover{transform:translateY(-3px);border-color:var(--teal3);box-shadow:0 8px 20px rgba(0,109,109,.12)}
+  .chcard.taller{border-top:3px solid var(--teal3)}
+  .chcard.ponencia{border-top:3px solid var(--amber)}
+  .chcard .chlogo{height:46px;width:auto}
+  .chcard .chk{font-size:10.5px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--teal3)}
+  .chcard h3{font-size:20px;font-weight:800;color:var(--txt);line-height:1.25}
+  .chcard p{font-size:13px;color:var(--mut);line-height:1.55;flex:1}
+  .chcard .chgo{font-size:13px;font-weight:800;color:var(--teal)}
+  .chcard:hover .chgo{color:var(--amber2)}
+  @media (max-width:980px){.choice{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="topbar">
+    <div class="brand">
+      <!-- Logo FastAnalytics (nonagono, inline) -->
+      <svg viewBox="0 0 300 52" xmlns="http://www.w3.org/2000/svg" aria-label="FastAnalytics">
+        <g transform="translate(2,2)">
+          <polygon points="24,1 38,5.8 45,19 42,33 32,43 16,43 6,33 3,19 10,5.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linejoin="round"/>
+          <rect x="15" y="23" width="5.5" height="14" rx="1.8" fill="#0D9488" opacity="0.8"/>
+          <rect x="21.5" y="17" width="5.5" height="20" rx="1.8" fill="#0D9488"/>
+          <rect x="28" y="12" width="5.5" height="25" rx="1.8" fill="#D4883A"/>
+        </g>
+        <text x="58" y="30" font-family="Inter,-apple-system,sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5">
+          <tspan fill="#0D9488">F</tspan><tspan fill="#D4883A">a</tspan><tspan fill="#0D9488">stAnalyt</tspan><tspan fill="#D4883A">i</tspan><tspan fill="#0D9488">cs</tspan>
+        </text>
+        <text x="58" y="47" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.8">IA ESPACIOTEMPORAL PARA DECISIONES PREDICTIVAS</text>
+      </svg>
+      <div>
+        <div id="sceneKicker">2DO ENCUENTRO INTERNACIONAL DE ESTADÍSTICA</div>
+        <div id="sceneTitle">Portada</div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <a class="tbtn" href="../index.html#eventos" data-es="← Eventos" data-en="← Events">← Eventos</a>
+    <button class="tbtn" id="matBtn" title="./taller/index.html"><span data-es="Material del taller" data-en="Workshop material">Material del taller</span> ⇄ <span data-es="Animación 3D" data-en="3D animation">Animación 3D</span></button>
+    <a class="tbtn pri" href="./taller/ponencia.html" target="_blank" rel="noopener">📊 <span data-es="Ponencia 2WIE" data-en="2WIE talk">Ponencia 2WIE</span> ↗</a>
+    <button class="tbtn" id="menuBtn">☰ <span data-es="Menú" data-en="Menu">Menú</span></button>
+    <button class="tbtn" id="langBtn">EN</button>
+    <button class="tbtn" id="sndBtn" title="(inerte)">🔇</button>
+    <button class="tbtn" id="fsBtn">⛶</button>
+  </div>
+
+  <div id="main">
+    <!-- ============ PORTADA / MENÚ ============ -->
+    <div id="menu" class="open">
+      <h1>La red del lavado, <span class="a">construida y disruptada</span> ante tus ojos</h1>
+      <p class="sub" style="margin-top:18px;font-size:17px;color:#D4883A;font-weight:600" data-es="El futuro habla en datos. Lo anticipamos con decisiones." data-en="The future speaks in data. We anticipate it with decisions."></p>
+      <p class="sub" style="margin-top:16px;font-size:14px;color:#0D9488;font-weight:700;letter-spacing:1.5px" data-es="CHARLA · 2DO ENCUENTRO INTERNACIONAL DE ESTADÍSTICA" data-en="TALK · 2ND INTERNATIONAL MEETING ON STATISTICS"></p>
+      <div class="choice">
+        <a class="chcard taller" href="./taller/index.html" target="_blank" rel="noopener">
+          <svg class="chlogo" viewBox="0 0 300 52" xmlns="http://www.w3.org/2000/svg" aria-label="FastAnalytics">
+            <g transform="translate(2,2)">
+              <polygon points="24,1 38,5.8 45,19 42,33 32,43 16,43 6,33 3,19 10,5.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linejoin="round"/>
+              <rect x="15" y="23" width="5.5" height="14" rx="1.8" fill="#0D9488" opacity="0.8"/>
+              <rect x="21.5" y="17" width="5.5" height="20" rx="1.8" fill="#0D9488"/>
+              <rect x="28" y="12" width="5.5" height="25" rx="1.8" fill="#D4883A"/>
+            </g>
+            <text x="58" y="30" font-family="Inter,-apple-system,sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5">
+              <tspan fill="#0D9488">F</tspan><tspan fill="#D4883A">a</tspan><tspan fill="#0D9488">stAnalyt</tspan><tspan fill="#D4883A">i</tspan><tspan fill="#0D9488">cs</tspan>
+            </text>
+            <text x="58" y="47" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.8">IA ESPACIOTEMPORAL PARA DECISIONES PREDICTIVAS</text>
+          </svg>
+          <div class="chk" data-es="Taller · Pre-workshop" data-en="Workshop · Pre-workshop"></div>
+          <h3 data-es="Modelado de redes criminales e inteligencia financiera" data-en="Modeling Criminal Networks and Financial Intelligence"></h3>
+          <p data-es="Taller práctico de 3 horas · 6 módulos Quarto con el dataset FinCEN/ICIJ · material del pre-workshop virtual (4 de noviembre) y escenas 3D del Chronnet Show." data-en="3-hour hands-on workshop · 6 Quarto modules on the FinCEN/ICIJ dataset · virtual pre-workshop material (November 4) and Chronnet Show 3D scenes."></p>
+          <span class="chgo" data-es="Abrir el taller ↗" data-en="Open the workshop ↗"></span>
+        </a>
+        <a class="chcard ponencia" href="./taller/ponencia.html" target="_blank" rel="noopener">
+          <img class="chlogo" src="logo-2wie.svg" alt="2do Encuentro Internacional de Estadística">
+          <div class="chk" data-es="Ponencia · 2WIE 2026" data-en="Talk · 2WIE 2026"></div>
+          <h3 data-es="Reconstrucción de redes criminales espaciotemporales para su disrupción en la Amazonía" data-en="Reconstructing spatio-temporal criminal networks for disruption in the Amazon"></h3>
+          <p data-es="Presentación científica · 5 y 6 de noviembre · Universidad Nacional de Colombia, Sede Manizales · 32 diapositivas con la construcción matemática, la evidencia estadística y la decisión aplicada." data-en="Scientific talk · November 5–6 · Universidad Nacional de Colombia, Manizales campus · 32 slides covering the mathematical construction, statistical evidence and applied decision."></p>
+          <span class="chgo" data-es="Ver la ponencia ↗" data-en="View the talk ↗"></span>
+        </a>
+      </div>
+      <div class="sponsor">
+        <div class="slogos">
+          <svg viewBox="0 0 300 52" xmlns="http://www.w3.org/2000/svg" aria-label="FastAnalytics">
+            <g transform="translate(2,2)">
+              <polygon points="24,1 38,5.8 45,19 42,33 32,43 16,43 6,33 3,19 10,5.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linejoin="round"/>
+              <rect x="15" y="23" width="5.5" height="14" rx="1.8" fill="#0D9488" opacity="0.8"/>
+              <rect x="21.5" y="17" width="5.5" height="20" rx="1.8" fill="#0D9488"/>
+              <rect x="28" y="12" width="5.5" height="25" rx="1.8" fill="#D4883A"/>
+            </g>
+            <text x="58" y="30" font-family="Inter,-apple-system,sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5">
+              <tspan fill="#0D9488">F</tspan><tspan fill="#D4883A">a</tspan><tspan fill="#0D9488">stAnalyt</tspan><tspan fill="#D4883A">i</tspan><tspan fill="#0D9488">cs</tspan>
+            </text>
+            <text x="58" y="47" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.8">IA ESPACIOTEMPORAL PARA DECISIONES PREDICTIVAS</text>
+          </svg>
+          <img src="logo-2wie.svg" alt="2do Encuentro Internacional de Estadística">
+        </div>
+        <div class="stxt" data-es="FastAnalytics S.A.S · Patrocinador del 2do Encuentro Internacional de Estadística — Universidad Nacional de Colombia, Sede Manizales · 5 y 6 de noviembre de 2026 · Campus La Nubia"
+             data-en="FastAnalytics S.A.S · Sponsor of the 2nd International Meeting on Statistics — Universidad Nacional de Colombia, Manizales Campus · November 5–6, 2026 · La Nubia Campus"></div>
+      </div>
+      <p class="sub" data-es="Punto de entrada del 2do Encuentro Internacional de Estadística: elige el taller práctico (pre-workshop — 6 módulos Quarto con las cifras del análisis FinCEN/ICIJ y motor 3D en cada tarjeta) o la ponencia científica sobre redes criminales en la Amazonía (descarga en PDF). Controles de presentador: pausa, avance paso a paso y barra de tiempo."
+         data-en="Entry point of the 2nd International Meeting on Statistics: choose the hands-on workshop (pre-workshop — 6 Quarto modules with the figures of the FinCEN/ICIJ analysis and a 3D engine on every card) or the scientific talk on criminal networks in the Amazon (PDF download). Presenter controls: pause, step forward and a timeline scrubber."></p>
+      <div class="mgrid" id="mgrid"></div>
+      <div class="mediaSec">
+        <div class="mh" data-es="RENDERIZADOS EN BLENDER · MOTOR 3D PROPIO" data-en="RENDERED IN BLENDER · OWN 3D ENGINE">RENDERIZADOS EN BLENDER · MOTOR 3D PROPIO</div>
+        <h2 data-es="Recursos cinematográficos del taller" data-en="Cinematic assets of the workshop">Recursos cinematográficos del taller</h2>
+        <p class="msub" data-es="Clips y láminas del taller, reproducibles aquí o descargables." data-en="Workshop clips and stills, playable here or downloadable."></p>
+        <div class="mgrid2">
+          <div class="mcard2">
+            <span class="badge" data-es="EN PRODUCCIÓN" data-en="IN PRODUCTION" style="display:none">EN PRODUCCIÓN</span>
+            <video data-media="media/clip1_la_red_del_lavado.mp4" controls preload="metadata"></video>
+            <div class="mt"><b data-es="La red del lavado" data-en="The laundering network">La red del lavado</b><span>Blender · taller_3d</span></div>
+          </div>
+          <div class="mcard2">
+            <span class="badge" data-es="EN PRODUCCIÓN" data-en="IN PRODUCTION">EN PRODUCCIÓN</span>
+            <video data-media="media/clip2_el_raid.mp4" controls preload="metadata"></video>
+            <div class="mt"><b data-es="El raid" data-en="The raid">El raid</b><span>Blender · taller_3d</span></div>
+          </div>
+          <div class="mcard2">
+            <span class="badge" data-es="EN PRODUCCIÓN" data-en="IN PRODUCTION">EN PRODUCCIÓN</span>
+            <video data-media="media/clip3_actores_clave.mp4" controls preload="metadata"></video>
+            <div class="mt"><b data-es="Actores clave" data-en="Key players">Actores clave</b><span>Blender · taller_3d</span></div>
+          </div>
+          <div class="mcard2">
+            <span class="badge" data-es="EN PRODUCCIÓN" data-en="IN PRODUCTION">EN PRODUCCIÓN</span>
+            <img data-media="media/still_portada.png" alt="Portada">
+            <div class="mt"><b data-es="Portada del taller" data-en="Workshop cover">Portada del taller</b><span>Blender · still</span></div>
+          </div>
+          <div class="mcard2">
+            <span class="badge" data-es="EN PRODUCCIÓN" data-en="IN PRODUCTION">EN PRODUCCIÓN</span>
+            <img data-media="media/still_lema.png" alt="Lema">
+            <div class="mt"><b data-es="El lema" data-en="The motto">El lema</b><span>Blender · still</span></div>
+          </div>
+          <div class="mcard2">
+            <span class="badge" data-es="EN PRODUCCIÓN" data-en="IN PRODUCTION">EN PRODUCCIÓN</span>
+            <img data-media="media/still_cierre.png" alt="Cierre">
+            <div class="mt"><b data-es="Cierre" data-en="Closing">Cierre</b><span>Blender · still</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:26px;font-size:12px" data-es="Dataset: 4.501 filas · 534 SAR · 2.275 bancos · 129 países · 2000–2017. Las escenas 3D usan redes de demostración con datos sintéticos donde no es el dataset real; las cifras impresas provienen del análisis final. Flechas del teclado ← → para avanzar o retroceder."
+         data-en="Dataset: 4,501 rows · 534 SARs · 2,275 banks · 129 countries · 2000–2017. The 3D scenes use demonstration networks with synthetic data where not the real dataset; printed figures come from the final analysis. Keyboard arrows ← → to step back or forward."></p>
+    </div>
+
+    <!-- ============ ESCENARIO ============ -->
+    <div id="stageWrap">
+      <div id="canvasBox">
+        <canvas id="cv"></canvas>
+        <iframe id="matFrame" title="Material del taller" src="about:blank"></iframe>
+        <a class="tbtn" id="matTab" href="./taller/index.html" target="_blank" rel="noopener"><span data-es="abrir en pestaña ↗" data-en="open in new tab ↗">abrir en pestaña ↗</a>
+        <div id="hints">← → <span data-es="paso" data-en="step">paso</span> · ⇤ ⇥ / [ ] <span data-es="escena" data-en="scene">escena</span> · <span data-es="espacio pausa · F pantalla completa" data-en="space pause · F fullscreen">espacio pausa · F pantalla completa</span></div>
+      </div>
+      <div id="simbar"></div>
+      <div id="controls">
+        <div id="caption"><span class="stepno"></span><span id="capText"></span></div>
+        <div id="matRow"><a id="matLink" style="display:none"></a></div>
+        <div id="chipRow"></div>
+        <div id="ctrlRow">
+          <button class="cbtn ghost" id="prevSceneBtn" title="Escena anterior">⇤</button>
+          <button class="cbtn ghost" id="prevBtn" title="Paso anterior">⏮</button>
+          <button class="cbtn" id="playBtn" title="Pausa / reproducir">⏸</button>
+          <button class="cbtn ghost" id="nextBtn" title="Paso siguiente">⏭</button>
+          <button class="cbtn ghost" id="nextSceneBtn" title="Escena siguiente">⇥</button>
+          <div id="prog"><div id="progFill"></div><div id="progDot"></div></div>
+          <div id="stepCount">0 / 0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
