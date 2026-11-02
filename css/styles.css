@@ -248,6 +248,54 @@ ul {
   width: 100%;
 }
 
+.nav-links a:is(.nav-link--resultados, .nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones) {
+  color: var(--nav-link-color);
+  font-weight: 600;
+}
+
+.nav-links a:is(.nav-link--resultados, .nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones)::after {
+  background: currentColor;
+}
+
+.nav-links a:is(.nav-link--resultados, .nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones):hover {
+  color: var(--nav-link-hover);
+}
+
+.nav-links .nav-link--resultados {
+  --nav-link-color: #237A57;
+  --nav-link-hover: #175C40;
+}
+
+.nav-links .nav-link--capacidades {
+  --nav-link-color: #B66A24;
+  --nav-link-hover: #8F5016;
+}
+
+.nav-links .nav-link--productos {
+  --nav-link-color: var(--primary);
+  --nav-link-hover: var(--primary-dark);
+}
+
+.nav-links .nav-link--ciencia {
+  --nav-link-color: var(--primary-dark);
+  --nav-link-hover: #003A3A;
+}
+
+.nav-links .nav-link--formaciones {
+  --nav-link-color: #9A6428;
+  --nav-link-hover: #754817;
+}
+
+.nav-links a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
+.nav-links a:focus-visible::after {
+  width: 100%;
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
