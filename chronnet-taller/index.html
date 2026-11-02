@@ -104,6 +104,31 @@
     .mgrid2{grid-template-columns:repeat(2,1fr)}
     #menu{padding:22px}
   }
+  /* Botón destacado de la ponencia 2WIE */
+  .tbtn.pri{background:var(--amber);border-color:var(--amber);color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+  .tbtn.pri:hover{background:var(--amber2);border-color:var(--amber2)}
+  /* Franja de patrocinio en portada */
+  .sponsor{margin-top:26px;max-width:1150px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;
+    padding:14px 20px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .sponsor .slogos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;flex:none}
+  .sponsor .slogos svg,.sponsor .slogos img{height:44px;width:auto}
+  .sponsor .stxt{font-size:12.5px;color:var(--mut);line-height:1.55;flex:1;min-width:260px}
+  .sponsor .stxt b{color:var(--teal)}
+  /* Dos tarjetas de acceso: taller (pre-workshop) y ponencia 2WIE */
+  .choice{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;max-width:1150px}
+  .chcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px 18px;
+    display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;
+    box-shadow:0 1px 3px rgba(15,23,42,.06);transition:.18s;position:relative}
+  .chcard:hover{transform:translateY(-3px);border-color:var(--teal3);box-shadow:0 8px 20px rgba(0,109,109,.12)}
+  .chcard.taller{border-top:3px solid var(--teal3)}
+  .chcard.ponencia{border-top:3px solid var(--amber)}
+  .chcard .chlogo{height:46px;width:auto}
+  .chcard .chk{font-size:10.5px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--teal3)}
+  .chcard h3{font-size:20px;font-weight:800;color:var(--txt);line-height:1.25}
+  .chcard p{font-size:13px;color:var(--mut);line-height:1.55;flex:1}
+  .chcard .chgo{font-size:13px;font-weight:800;color:var(--teal)}
+  .chcard:hover .chgo{color:var(--amber2)}
+  @media (max-width:980px){.choice{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -131,6 +156,7 @@
     <div class="spacer"></div>
     <a class="tbtn" href="../index.html#eventos" data-es="← Eventos" data-en="← Events">← Eventos</a>
     <button class="tbtn" id="matBtn" title="./taller/index.html"><span data-es="Material del taller" data-en="Workshop material">Material del taller</span> ⇄ <span data-es="Animación 3D" data-en="3D animation">Animación 3D</span></button>
+    <a class="tbtn pri" href="./taller/ponencia.html" target="_blank" rel="noopener">📊 <span data-es="Ponencia 2WIE" data-en="2WIE talk">Ponencia 2WIE</span> ↗</a>
     <button class="tbtn" id="menuBtn">☰ <span data-es="Menú" data-en="Menu">Menú</span></button>
     <button class="tbtn" id="langBtn">EN</button>
     <button class="tbtn" id="sndBtn" title="(inerte)">🔇</button>
@@ -143,8 +169,54 @@
       <h1>La red del lavado, <span class="a">construida y disruptada</span> ante tus ojos</h1>
       <p class="sub" style="margin-top:18px;font-size:17px;color:#D4883A;font-weight:600" data-es="El futuro habla en datos. Lo anticipamos con decisiones." data-en="The future speaks in data. We anticipate it with decisions."></p>
       <p class="sub" style="margin-top:16px;font-size:14px;color:#0D9488;font-weight:700;letter-spacing:1.5px" data-es="CHARLA · 2DO ENCUENTRO INTERNACIONAL DE ESTADÍSTICA" data-en="TALK · 2ND INTERNATIONAL MEETING ON STATISTICS"></p>
-      <p class="sub" data-es="Página de presentación del taller con motor 3D real: apertura, los 6 módulos con las cifras del análisis final (dataset FinCEN/ICIJ) y cierre. Cada tarjeta abre su escena 3D y enlaza el código Quarto del módulo. Controles de presentador: pausa, avance paso a paso y barra de tiempo."
-         data-en="Presentation page of the workshop with a real 3D engine: opening, the 6 modules with the figures of the final analysis (FinCEN/ICIJ dataset) and closing. Each card opens its 3D scene and links the Quarto code of the module. Presenter controls: pause, step forward and a timeline scrubber."></p>
+      <div class="choice">
+        <a class="chcard taller" href="./taller/index.html" target="_blank" rel="noopener">
+          <svg class="chlogo" viewBox="0 0 300 52" xmlns="http://www.w3.org/2000/svg" aria-label="FastAnalytics">
+            <g transform="translate(2,2)">
+              <polygon points="24,1 38,5.8 45,19 42,33 32,43 16,43 6,33 3,19 10,5.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linejoin="round"/>
+              <rect x="15" y="23" width="5.5" height="14" rx="1.8" fill="#0D9488" opacity="0.8"/>
+              <rect x="21.5" y="17" width="5.5" height="20" rx="1.8" fill="#0D9488"/>
+              <rect x="28" y="12" width="5.5" height="25" rx="1.8" fill="#D4883A"/>
+            </g>
+            <text x="58" y="30" font-family="Inter,-apple-system,sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5">
+              <tspan fill="#0D9488">F</tspan><tspan fill="#D4883A">a</tspan><tspan fill="#0D9488">stAnalyt</tspan><tspan fill="#D4883A">i</tspan><tspan fill="#0D9488">cs</tspan>
+            </text>
+            <text x="58" y="47" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.8">IA ESPACIOTEMPORAL PARA DECISIONES PREDICTIVAS</text>
+          </svg>
+          <div class="chk" data-es="Taller · Pre-workshop" data-en="Workshop · Pre-workshop"></div>
+          <h3 data-es="Modelado de redes criminales e inteligencia financiera" data-en="Modeling Criminal Networks and Financial Intelligence"></h3>
+          <p data-es="Taller práctico de 3 horas · 6 módulos Quarto con el dataset FinCEN/ICIJ · material del pre-workshop virtual (4 de noviembre) y escenas 3D del Chronnet Show." data-en="3-hour hands-on workshop · 6 Quarto modules on the FinCEN/ICIJ dataset · virtual pre-workshop material (November 4) and Chronnet Show 3D scenes."></p>
+          <span class="chgo" data-es="Abrir el taller ↗" data-en="Open the workshop ↗"></span>
+        </a>
+        <a class="chcard ponencia" href="./taller/ponencia.html" target="_blank" rel="noopener">
+          <img class="chlogo" src="logo-2wie.svg" alt="2do Encuentro Internacional de Estadística">
+          <div class="chk" data-es="Ponencia · 2WIE 2026" data-en="Talk · 2WIE 2026"></div>
+          <h3 data-es="Reconstrucción de redes criminales espaciotemporales para su disrupción en la Amazonía" data-en="Reconstructing spatio-temporal criminal networks for disruption in the Amazon"></h3>
+          <p data-es="Presentación científica · 5 y 6 de noviembre · Universidad Nacional de Colombia, Sede Manizales · 32 diapositivas con la construcción matemática, la evidencia estadística y la decisión aplicada." data-en="Scientific talk · November 5–6 · Universidad Nacional de Colombia, Manizales campus · 32 slides covering the mathematical construction, statistical evidence and applied decision."></p>
+          <span class="chgo" data-es="Ver la ponencia ↗" data-en="View the talk ↗"></span>
+        </a>
+      </div>
+      <div class="sponsor">
+        <div class="slogos">
+          <svg viewBox="0 0 300 52" xmlns="http://www.w3.org/2000/svg" aria-label="FastAnalytics">
+            <g transform="translate(2,2)">
+              <polygon points="24,1 38,5.8 45,19 42,33 32,43 16,43 6,33 3,19 10,5.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linejoin="round"/>
+              <rect x="15" y="23" width="5.5" height="14" rx="1.8" fill="#0D9488" opacity="0.8"/>
+              <rect x="21.5" y="17" width="5.5" height="20" rx="1.8" fill="#0D9488"/>
+              <rect x="28" y="12" width="5.5" height="25" rx="1.8" fill="#D4883A"/>
+            </g>
+            <text x="58" y="30" font-family="Inter,-apple-system,sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5">
+              <tspan fill="#0D9488">F</tspan><tspan fill="#D4883A">a</tspan><tspan fill="#0D9488">stAnalyt</tspan><tspan fill="#D4883A">i</tspan><tspan fill="#0D9488">cs</tspan>
+            </text>
+            <text x="58" y="47" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="1.8">IA ESPACIOTEMPORAL PARA DECISIONES PREDICTIVAS</text>
+          </svg>
+          <img src="logo-2wie.svg" alt="2do Encuentro Internacional de Estadística">
+        </div>
+        <div class="stxt" data-es="FastAnalytics S.A.S · Patrocinador del 2do Encuentro Internacional de Estadística — Universidad Nacional de Colombia, Sede Manizales · 5 y 6 de noviembre de 2026 · Campus La Nubia"
+             data-en="FastAnalytics S.A.S · Sponsor of the 2nd International Meeting on Statistics — Universidad Nacional de Colombia, Manizales Campus · November 5–6, 2026 · La Nubia Campus"></div>
+      </div>
+      <p class="sub" data-es="Punto de entrada del 2do Encuentro Internacional de Estadística: elige el taller práctico (pre-workshop — 6 módulos Quarto con las cifras del análisis FinCEN/ICIJ y motor 3D en cada tarjeta) o la ponencia científica sobre redes criminales en la Amazonía (descarga en PDF). Controles de presentador: pausa, avance paso a paso y barra de tiempo."
+         data-en="Entry point of the 2nd International Meeting on Statistics: choose the hands-on workshop (pre-workshop — 6 Quarto modules with the figures of the FinCEN/ICIJ analysis and a 3D engine on every card) or the scientific talk on criminal networks in the Amazon (PDF download). Presenter controls: pause, step forward and a timeline scrubber."></p>
       <div class="mgrid" id="mgrid"></div>
       <div class="mediaSec">
         <div class="mh" data-es="RENDERIZADOS EN BLENDER · MOTOR 3D PROPIO" data-en="RENDERED IN BLENDER · OWN 3D ENGINE">RENDERIZADOS EN BLENDER · MOTOR 3D PROPIO</div>
