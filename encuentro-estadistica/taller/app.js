@@ -7,7 +7,7 @@
 let LANG = 'es';
 const T = (bi) => (typeof bi === 'string' ? bi : bi[LANG]);
 // Ruta del material Quarto según idioma activo (taller/en/ para inglés).
-const urlMat = (f) => .taller-quarto/. + (LANG === 'en' ? 'en/' : '') + f.replace(/^taller\//, '');
+const urlMat = (f) => 'taller-quarto/' + (LANG === 'en' ? 'en/' : '') + f.replace(/^taller\//, '');
 
 /* Metadatos de las 8 escenas (títulos vienen del catálogo del presentador). */
 const KICKERS = [
