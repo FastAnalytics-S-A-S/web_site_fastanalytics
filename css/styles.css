@@ -3511,6 +3511,11 @@ a.pub-item:hover {
   text-transform: uppercase;
 }
 
+.training-card-badge--current {
+  background: var(--accent);
+  color: var(--text);
+}
+
 .training-card-body {
   display: flex;
   flex: 1;
