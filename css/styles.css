@@ -3232,3 +3232,93 @@ ul {
   visibility: hidden;
   scroll-margin-top: var(--nav-height);
 }
+
+/* ========== INVESTIGACIÓN Y CIENCIA (publicaciones) ========== */
+.pub-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pub-thumb {
+  width: 64px;
+  height: 85px;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.pub-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a.pub-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 77, 77, 0.08);
+}
+
+.pub-title {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.pub-venue {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted, #8888A0);
+}
+
+.pub-arrow {
+  color: var(--primary);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.pub-books {
+  max-width: 900px;
+  margin: 36px auto 0;
+}
+
+.pub-subtitle {
+  font-size: 1.15rem;
+  color: var(--primary-dark);
+  margin-bottom: 16px;
+}
+
+.pub-more {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.pub-more a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pub-more a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .pub-item { padding: 14px 16px; gap: 14px; }
+  .pub-thumb { width: 52px; height: 70px; }
+}
