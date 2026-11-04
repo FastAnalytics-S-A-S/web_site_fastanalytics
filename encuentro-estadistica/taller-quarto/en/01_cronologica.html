@@ -4450,13 +4450,22 @@ color: var(--fa-slate);
 <p><em>In module 1 we cleaned and explored the SAR reports. Now we turn them into a chronological network — the object every later module works on.</em></p>
 <section id="what-is-a-chronnet" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-a-chronnet">1. What is a chronnet?</h2>
-<p>A criminal network is not a photo: it is a <strong>movie</strong>. The same pair of banks may operate together in March and never again. If we only ask <em>“who is connected to whom?”</em> we lose the order in which things happened — and in money laundering the order <strong>is</strong> the evidence: money leaves A, reaches B, is split in C.</p>
-<p>A <strong>chronnet</strong> (<em>chronological network</em>) turns a list of events with location and date into a network where an edge means <em>“after operating here, the network operated there”</em>. Each event <span class="math inline">\(e_a\)</span> has its location <span class="math inline">\(l_a = (x_a, y_a)\)</span> and its time <span class="math inline">\(t_a\)</span>, ordered <span class="math inline">\(t_1 \le t_2 \le \dots \le t_{N_E}\)</span>.</p>
-<p>Here the events are the <strong>reported transactions</strong> (the dataset rows) and the locations are the <strong>bank headquarters</strong>. Important detail: the chronnet is built with <strong>transactions, not SAR forms</strong>. Why? A single SAR (form) groups many transactions with its own date range (<code>begin_date</code>–<code>end_date</code>); using forms as events would give only 534 events with imprecise dates, and the chronnet needs <strong>one-day resolution</strong> to order the sequence. Each row —each reported transaction— has its exact date; that is why the event count is 9,002 (two per row: originator and beneficiary) and not 534.</p>
+<ul>
+<li>A criminal network is not a photo: it is a <strong>movie</strong>. The same pair of banks may operate together in March and never again.</li>
+<li>If we only ask <em>“who is connected to whom?”</em> we lose the <strong>order</strong> of events — and in money laundering the order <strong>is</strong> the evidence: money leaves A, reaches B, is split in C.</li>
+<li>A <strong>chronnet</strong> (<em>chronological network</em>) turns a list of events with location and date into a network where an edge means <em>“after operating here, the network operated there”</em>.</li>
+<li>Each event <span class="math inline">\(e_a\)</span> has its location <span class="math inline">\(l_a = (x_a, y_a)\)</span> and its time <span class="math inline">\(t_a\)</span>, ordered <span class="math inline">\(t_1 \le t_2 \le \dots \le t_{N_E}\)</span>.</li>
+<li><strong>Events here</strong>: the <strong>reported transactions</strong> (the dataset rows). <strong>Locations</strong>: the bank headquarters.</li>
+<li><strong>Built with transactions, not SAR forms</strong>: a SAR groups many transactions with its own date range (<code>begin_date</code>–<code>end_date</code>) — 534 events with imprecise dates would not give the <strong>one-day resolution</strong>.</li>
+<li>Each row has its exact date: that is why the event count is 9,002 (two per row: originator and beneficiary) and not 534.</li>
+</ul>
 </section>
 <section id="step-1-the-vertices-the-financial-entities" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-the-vertices-the-financial-entities">2. Step 1 — The vertices: the financial entities</h2>
-<p>The vertex is <strong>each bank</strong>, positioned at its headquarters coordinates (<code>data/bancos_geo.csv</code>). Only banks that appear in at least one report become vertices.</p>
+<ul>
+<li>The vertex is <strong>each bank</strong>, positioned at its headquarters coordinates (<code>data/bancos_geo.csv</code>).</li>
+<li>Only banks that appear in at least one report become vertices.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4481,11 +4490,17 @@ color: var(--fa-slate);
 5 city-national-bank          City National Bank       United… USA    40.7 -74.0</code></pre>
 </div>
 </div>
-<p><strong>In R</strong>: <code>select()</code> picks columns; <code>head()</code> shows the first rows. The stable identifier is <code>bank_id</code> (a lowercase slug), not the name — names come with variants.</p>
+<ul>
+<li><code>select()</code> picks columns; <code>head()</code> shows the first rows.</li>
+<li>The stable identifier is <code>bank_id</code> (a lowercase slug), not the name — names come with variants.</li>
+</ul>
 </section>
 <section id="step-2-the-events-each-report-generates-two" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-the-events-each-report-generates-two">3. Step 2 — The events: each report generates two</h2>
-<p>Each dataset row is an originator → beneficiary flow. We convert it into <strong>two events</strong>: one for the sending bank, one for the receiving bank.</p>
+<ul>
+<li>Each dataset row is an originator → beneficiary flow.</li>
+<li>We convert it into <strong>two events</strong>: one for the sending bank, one for the receiving bank.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4514,12 +4529,19 @@ color: var(--fa-slate);
 5 2000-03-07 banco-de-credito-del-peru       origin     </code></pre>
 </div>
 </div>
-<p><code>bind_rows()</code> stacks the two tables; <code>transmute()</code> creates new columns; <code>arrange(t)</code> sorts chronologically — the time order is the heart of the chronnet.</p>
+<ul>
+<li><code>bind_rows()</code> stacks the two tables; <code>transmute()</code> creates new columns; <code>arrange(t)</code> sorts chronologically.</li>
+<li>The time order is the heart of the chronnet.</li>
+</ul>
 </section>
 <section id="step-3-time-windows-active-days-only" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-time-windows-active-days-only">4. Step 3 — Time windows: active days only</h2>
-<p>The period is divided into <span class="math inline">\(\Delta t = 1\)</span> day windows, and <strong>only active windows</strong> enter (days with at least one event). If no reports occurred between August 3 and 10, the chronnet connects the 3rd directly to the 10th: a hop joins two consecutive active days, not two consecutive calendar days. Gaps in data do not break the sequence.</p>
-<p>Let <span class="math inline">\(n_m^{(k)}\)</span> be the number of events of entity <span class="math inline">\(m\)</span> in active window <span class="math inline">\(k\)</span>.</p>
+<ul>
+<li>The period is divided into <span class="math inline">\(\Delta t = 1\)</span> day windows, and <strong>only active windows</strong> enter (days with at least one event).</li>
+<li>If no reports occurred between August 3 and 10, the chronnet connects the 3rd directly to the 10th: a hop joins two consecutive active days, not two consecutive calendar days.</li>
+<li>Gaps in data do not break the sequence.</li>
+<li>Let <span class="math inline">\(n_m^{(k)}\)</span> be the number of events of entity <span class="math inline">\(m\)</span> in active window <span class="math inline">\(k\)</span>.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4548,16 +4570,27 @@ color: var(--fa-slate);
 5 2000-03-07 banco-de-comercio-lima-peru-per     1</code></pre>
 </div>
 </div>
-<p><code>count(ventana, node)</code> says <em>how many events</em> each <em>bank</em> had on <em>each day</em>. From here come the <span class="math inline">\(n_m^{(k)}\)</span> of the formula.</p>
+<ul>
+<li><code>count(ventana, node)</code> = <em>how many events</em> each <em>bank</em> had on <em>each day</em>.</li>
+<li>From here come the <span class="math inline">\(n_m^{(k)}\)</span> of the formula.</li>
+</ul>
 </section>
 <section id="step-4-edges-and-weights" class="level2">
 <h2 class="anchored" data-anchor-id="step-4-edges-and-weights">5. Step 4 — Edges and weights</h2>
-<p>A directed edge <span class="math inline">\(v_i \to v_j\)</span> when entity <span class="math inline">\(i\)</span> is active in one window and <span class="math inline">\(j\)</span> in the next. The weight accumulates the product of their activities across all consecutive window pairs:</p>
+<ul>
+<li>A directed edge <span class="math inline">\(v_i \to v_j\)</span> when entity <span class="math inline">\(i\)</span> is active in one window and <span class="math inline">\(j\)</span> in the next.</li>
+<li>The weight accumulates the product of their activities across all consecutive window pairs:</li>
+</ul>
 <p><span class="math display">\[w_{ij} = \sum_{k=1}^{K-1} n_i^{(k)} \cdot n_j^{(k+1)}\]</span></p>
-<p><strong>Read it slowly</strong>: if bank <span class="math inline">\(i\)</span> had 3 events on Monday and bank <span class="math inline">\(j\)</span> had 2 on Tuesday, that contributes <span class="math inline">\(3 \times 2 = 6\)</span> to the weight <span class="math inline">\(w_{ij}\)</span>. Self-loops (<span class="math inline">\(w_{ii}\)</span>): sustained activity within the same entity.</p>
-<p>Limiting case (one transaction per window):</p>
+<ul>
+<li><strong>Read it slowly</strong>: if bank <span class="math inline">\(i\)</span> had 3 events on Monday and bank <span class="math inline">\(j\)</span> had 2 on Tuesday, that contributes <span class="math inline">\(3 \times 2 = 6\)</span> to the weight <span class="math inline">\(w_{ij}\)</span>.</li>
+<li><strong>Self-loops</strong> (<span class="math inline">\(w_{ii}\)</span>): sustained activity within the same entity (active two consecutive active days).</li>
+<li>Limiting case (one transaction per window):</li>
+</ul>
 <p><span class="math display">\[w_{ij} = \sum_{a=1}^{N_E-1} \mathbb{I}\bigl(\kappa(l_a)=i\bigr)\,\mathbb{I}\bigl(\kappa(l_{a+1})=j\bigr)\]</span></p>
-<p>and the general accounting identity:</p>
+<ul>
+<li>and the general accounting identity:</li>
+</ul>
 <p><span class="math display">\[\sum_{i,j} w_{ij} = \sum_{k=1}^{K-1} N^{(k)} N^{(k+1)}, \qquad N^{(k)} = \sum_m n_m^{(k)}\]</span></p>
 <div class="cell">
 <details open class="code-fold">
@@ -4588,23 +4621,33 @@ color: var(--fa-slate);
 <span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p><code>crossing(a, b)</code> produces the cartesian product “who acted today” × “who acted tomorrow”; multiplying <code>n_i * n_j</code> and summing implements the <span class="math inline">\(w_{ij}\)</span> formula.</p>
+<ul>
+<li><code>crossing(a, b)</code> produces the cartesian product “who acted today” × “who acted tomorrow”.</li>
+<li>Multiplying <code>n_i * n_j</code> and summing implements the <span class="math inline">\(w_{ij}\)</span> formula.</li>
+</ul>
 </section>
 <section id="directed-or-undirected" class="level2">
 <h2 class="anchored" data-anchor-id="directed-or-undirected">6. Directed or undirected?</h2>
-<p><strong>The chronnet we build is directed</strong>: the edge <span class="math inline">\(i \to j\)</span> means that the activity of <span class="math inline">\(j\)</span> <em>follows</em> that of <span class="math inline">\(i\)</span>, not the reverse. That direction is the temporal signal. In modules 3–4 some metrics (communities, transitivity, paths) use the <strong>undirected</strong> version of the graph (collapsing A→B and B→A into a single connection) because the algorithms require it — we say so whenever it happens.</p>
+<ul>
+<li><strong>The chronnet is directed</strong>: the edge <span class="math inline">\(i \to j\)</span> means that the activity of <span class="math inline">\(j\)</span> <em>follows</em> that of <span class="math inline">\(i\)</span>, not the reverse.</li>
+<li>That direction <strong>is the temporal signal</strong> — it does not indicate a flow of money.</li>
+<li>In modules 3–4 some metrics (communities, transitivity, paths) use the <strong>undirected</strong> version (collapsing A→B and B→A into a single connection) because the algorithms require it — we say so whenever it happens.</li>
+</ul>
 </section>
 <section id="reproducibility-check" class="level2">
 <h2 class="anchored" data-anchor-id="reproducibility-check">7. Reproducibility check</h2>
-<p>The accounting identity fixes the total weight from the event counts alone: an aggregation error is detected numerically, not by eye.</p>
+<ul>
+<li>The accounting identity pins down the total weight from the event counts alone.</li>
+<li>An aggregation error is caught <strong>numerically</strong>, not by eye.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construcción inline (la función chronnet_create se definió arriba en este módulo;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># el pipeline equivalente vive en R/03_chronnet.R)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inline construction (chronnet_create was defined above in this module;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the equivalent pipeline lives in R/03_chronnet.R)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>eventos_dual <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  tx <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(<span class="at">t =</span> fecha, <span class="at">node =</span> originator_bank_id, <span class="at">rol =</span> <span class="st">&quot;origen&quot;</span>),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  tx <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(<span class="at">t =</span> fecha, <span class="at">node =</span> beneficiary_bank_id, <span class="at">rol =</span> <span class="st">&quot;destino&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  tx <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(<span class="at">t =</span> fecha, <span class="at">node =</span> originator_bank_id, <span class="at">rol =</span> <span class="st">&quot;origin&quot;</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  tx <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(<span class="at">t =</span> fecha, <span class="at">node =</span> beneficiary_bank_id, <span class="at">rol =</span> <span class="st">&quot;destination&quot;</span>)</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(t)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>chronnet <span class="ot">&lt;-</span> <span class="fu">chronnet_create</span>(eventos_dual, <span class="at">self_loops =</span> <span class="cn">TRUE</span>, <span class="at">mode =</span> <span class="st">&quot;directed&quot;</span>, <span class="at">dt_days =</span> <span class="dv">1</span>)</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>Nk <span class="ot">&lt;-</span> <span class="fu">attr</span>(chronnet, <span class="st">&quot;Nk&quot;</span>)</span>
@@ -4623,25 +4666,28 @@ color: var(--fa-slate);
 </div>
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Match?&quot;</span>, <span class="fu">sum</span>(<span class="fu">E</span>(chronnet)<span class="sc">$</span>weight) <span class="sc">==</span> identidad, <span class="st">&quot;✓</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Do they match?&quot;</span>, <span class="fu">sum</span>(<span class="fu">E</span>(chronnet)<span class="sc">$</span>weight) <span class="sc">==</span> identidad, <span class="st">&quot;✓</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Match? TRUE ✓</code></pre>
+<pre><code>Do they match? TRUE ✓</code></pre>
 </div>
 </div>
 </section>
 <section id="the-result-grouping-and-components" class="level2">
 <h2 class="anchored" data-anchor-id="the-result-grouping-and-components">8. The result: grouping and components</h2>
-<p>The chronnet comes out as a single connected block: by construction it links every entity active on one day to every entity active on the next active day, so the largest connected component (LCC) absorbs the whole network. Let us verify it: how many components, and of what size:</p>
+<ul>
+<li>The chronnet comes out connected as <strong>a single block</strong>: its rule joins every entity active on one day to every entity active on the next, so the largest connected component (LCC) absorbs the whole network.</li>
+<li>We verify it: how many components, and of what size:</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>comp_c <span class="ot">&lt;-</span> <span class="fu">components</span>(chronnet)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">component =</span> <span class="fu">seq_len</span>(comp_c<span class="sc">$</span>no),</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_nodes =</span> <span class="fu">sort</span>(comp_c<span class="sc">$</span>csize, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">componente =</span> <span class="fu">seq_len</span>(comp_c<span class="sc">$</span>no),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_nodos =</span> <span class="fu">sort</span>(comp_c<span class="sc">$</span>csize, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cumulative =</span> <span class="fu">cumsum</span>(n_nodes) <span class="sc">/</span> <span class="fu">sum</span>(n_nodes)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">acumulado =</span> <span class="fu">cumsum</span>(n_nodos) <span class="sc">/</span> <span class="fu">sum</span>(n_nodos)) <span class="sc">%&gt;%</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;The 10 largest components of the chronnet&quot;</span>,</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Rank&quot;</span>, <span class="st">&quot;Nº of nodes&quot;</span>, <span class="st">&quot;Cumulative % of nodes&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -4674,11 +4720,22 @@ color: var(--fa-slate);
 <pre><code>Total: 1 components | LCC = 2275 nodes ( 100 % of the network)</code></pre>
 </div>
 </div>
-<p><strong>Vocabulary clarification</strong>: the <strong>LCC</strong> (<em>largest connected component</em>) is the largest connected subgraph of a given network. Here the LCC <strong>is</strong> the entire chronnet: the working network of the whole workshop. Mind the interpretation: that full connectivity is an artifact of the construction — two banks are linked if they operated on consecutive days, even if they never transacted with each other. <strong>Money</strong> does not live in the chronnet’s edges: it is computed from the reports and attached as an attribute (monto_total per bank, amount circulated per pair), as we will see in modules 3 to 6.</p>
+<p><strong>Vocabulary clarification:</strong></p>
+<ul>
+<li><strong>LCC</strong> (<em>largest connected component</em>): the largest connected subgraph of a given network.</li>
+<li>Here the LCC <strong>is</strong> the entire chronnet: the working network of the whole workshop.</li>
+<li>Mind the interpretation: that full connectivity is an <strong>artifact of the construction</strong> — two banks are linked if they operated on consecutive days, even if they never transacted with each other.</li>
+<li><strong>Money</strong> does not live in the chronnet’s edges: it is computed from the reports and attached as an attribute (monto_total per bank, amount circulated per pair), as we will see in modules 3 to 6.</li>
+</ul>
 </section>
 <section id="why-not-prune-edges" class="level2">
 <h2 class="anchored" data-anchor-id="why-not-prune-edges">9. Why not prune edges</h2>
-<p>We keep ALL edges, even those of weight 1: criminal data is expensive to obtain and every record can be significant; pruning weak edges would eliminate infrequent but crucial records; and keeping everything preserves the complete components.</p>
+<ul>
+<li>We keep <strong>ALL</strong> edges, even those with weight 1.</li>
+<li>Criminal data is expensive to obtain: every record can be significant.</li>
+<li>Pruning weak edges would remove infrequent but crucial records.</li>
+<li>Keeping everything leaves the components complete.</li>
+</ul>
 </section>
 <section id="the-chronnet-drawn" class="level2">
 <h2 class="anchored" data-anchor-id="the-chronnet-drawn">10. The chronnet drawn</h2>
@@ -4702,9 +4759,19 @@ color: var(--fa-slate);
 </div>
 </div>
 </div>
-<p><strong>How to read this figure</strong>: each dot is a bank; its size is its activity (how many temporal successions it participates in); each line is an edge <span class="math inline">\(i \to j\)</span> — thickness is <span class="math inline">\(w_{ij}\)</span>. Most nodes form a periphery with few connections; a handful of central nodes concentrate the successions.</p>
+<p><strong>How to read this figure:</strong></p>
+<ul>
+<li>Each dot is a bank; its size = its <strong>activity</strong> (how many temporal successions it participates in).</li>
+<li>Each line is an edge <span class="math inline">\(i \to j\)</span>; thickness is <span class="math inline">\(w_{ij}\)</span> (intensity of the succession).</li>
+<li>Most nodes form a periphery with few connections; a handful of central nodes concentrate the successions.</li>
+</ul>
 <div class="lectura-criminal">
-<p><span class="lc-titulo">Criminal reading</span> The strong edges trace <strong>money-laundering operational chains</strong>: which entity “activates” which in the temporal sequence of SAR reports. If after every suspicious operation at a bank in Dubai there systematically follows one at a bank in the British Virgin Islands, the chronnet draws it as a thick edge. The thickness of the line is the frequency of that succession — and frequency is habit, and habit is the pattern an investigation looks for.</p>
+<p><span class="lc-titulo">Criminal reading</span></p>
+<ul>
+<li>The strong edges trace <strong>operational chains</strong>: which entity “activates” which in the temporal sequence of the SAR reports.</li>
+<li>If a suspicious operation at a bank in Dubai is systematically followed by one at a bank in the Virgin Islands, the chronnet draws it as a thick edge.</li>
+<li>The line thickness is the <strong>frequency</strong> of that succession — and frequency is habit, and habit is the pattern an investigation looks for.</li>
+</ul>
 </div>
 
 

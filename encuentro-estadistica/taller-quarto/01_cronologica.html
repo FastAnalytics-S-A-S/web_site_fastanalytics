@@ -4450,13 +4450,22 @@ color: var(--fa-slate);
 </div>
 <section id="qué-es-un-chronnet" class="level2">
 <h2 class="anchored" data-anchor-id="qué-es-un-chronnet">1. ¿Qué es un chronnet?</h2>
-<p>Una red criminal no es una foto: es una <strong>película</strong>. El mismo par de bancos puede operar juntos en marzo y no volver a hacerlo nunca. Si solo preguntamos <em>“¿quién está conectado con quién?”</em> perdemos el orden en que ocurrieron las cosas — y en lavado de activos el orden <strong>es</strong> la evidencia: el dinero sale de A, llega a B, se fracciona en C.</p>
-<p>Un <strong>chronnet</strong> (<em>chronological network</em>) transforma una lista de eventos con lugar y fecha en una red donde una arista significa <em>“después de operar aquí, la red operó allá”</em>. Cada evento <span class="math inline">\(e_a\)</span> tiene su ubicación <span class="math inline">\(l_a = (x_a, y_a)\)</span> y su instante <span class="math inline">\(t_a\)</span>, ordenados <span class="math inline">\(t_1 \le t_2 \le \dots \le t_{N_E}\)</span>.</p>
-<p>Aquí los eventos son las <strong>transacciones reportadas</strong> (las filas del dataset) y las ubicaciones son <strong>las sedes de los bancos</strong>. Detalle importante: el chronnet se construye con <strong>transacciones, no con formularios SAR</strong>. ¿Por qué? Un mismo SAR (formulario) agrupa muchas transacciones con un rango de fechas propio (<code>begin_date</code>–<code>end_date</code>); si usáramos los SAR como eventos tendríamos solo 534 eventos con fechas imprecisas, y el chronnet necesita <strong>resolución de un día</strong> para ordenar la secuencia. Cada fila —cada transacción reportada— tiene su fecha exacta; por eso el conteo de eventos es 9.002 (dos por fila: originador y beneficiario) y no 534.</p>
+<ul>
+<li>Una red criminal no es una foto: es una <strong>película</strong>. El mismo par de bancos puede operar juntos en marzo y no volver a hacerlo nunca.</li>
+<li>Si solo preguntamos <em>“¿quién está conectado con quién?”</em> perdemos el <strong>orden</strong> de los eventos — y en lavado de activas el orden <strong>es</strong> la evidencia: el dinero sale de A, llega a B, se fracciona en C.</li>
+<li>Un <strong>chronnet</strong> (<em>chronological network</em>) transforma una lista de eventos con lugar y fecha en una red donde una arista significa <em>“después de operar aquí, la red operó allá”</em>.</li>
+<li>Cada evento <span class="math inline">\(e_a\)</span> tiene su ubicación <span class="math inline">\(l_a = (x_a, y_a)\)</span> y su instante <span class="math inline">\(t_a\)</span>, ordenados <span class="math inline">\(t_1 \le t_2 \le \dots \le t_{N_E}\)</span>.</li>
+<li><strong>Eventos aquí</strong>: las <strong>transacciones reportadas</strong> (las filas del dataset). <strong>Ubicaciones</strong>: las sedes de los bancos.</li>
+<li><strong>Se construye con transacciones, no con formularios SAR</strong>: un SAR agrupa muchas transacciones con rango de fechas propio (<code>begin_date</code>–<code>end_date</code>) — 534 eventos con fechas imprecisas no alcanzan la <strong>resolución de un día</strong>.</li>
+<li>Cada fila tiene fecha exacta: por eso el conteo de eventos es 9.002 (dos por fila: originador y beneficiario) y no 534.</li>
+</ul>
 </section>
 <section id="paso-1-los-vértices-las-entidades-financieras" class="level2">
 <h2 class="anchored" data-anchor-id="paso-1-los-vértices-las-entidades-financieras">2. Paso 1 — Los vértices: las entidades financieras</h2>
-<p>El vértice es <strong>cada banco</strong>, posicionado en las coordenadas de su sede (<code>data/bancos_geo.csv</code>). Solo los bancos que aparecen en al menos un reporte se convierten en vértices.</p>
+<ul>
+<li>El vértice es <strong>cada banco</strong>, posicionado en las coordenadas de su sede (<code>data/bancos_geo.csv</code>).</li>
+<li>Solo los bancos que aparecen en al menos un reporte se convierten en vértices.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4481,11 +4490,17 @@ color: var(--fa-slate);
 5 city-national-bank          City National Bank       United… USA    40.7 -74.0</code></pre>
 </div>
 </div>
-<p><strong>En R</strong>: <code>select()</code> elige columnas; <code>head()</code> muestra las primeras filas. El identificador estable es <code>bank_id</code> (un slug en minúsculas), no el nombre — los nombres vienen con variantes.</p>
+<ul>
+<li><code>select()</code> elige columnas; <code>head()</code> muestra las primeras filas.</li>
+<li>El identificador estable es <code>bank_id</code> (slug en minúsculas), no el nombre — los nombres vienen con variantes.</li>
+</ul>
 </section>
 <section id="paso-2-los-eventos-cada-reporte-genera-dos" class="level2">
 <h2 class="anchored" data-anchor-id="paso-2-los-eventos-cada-reporte-genera-dos">3. Paso 2 — Los eventos: cada reporte genera dos</h2>
-<p>Cada fila del dataset es un flujo originador → beneficiario. Lo convertimos en <strong>dos eventos</strong>: uno para el banco que envía y otro para el que recibe.</p>
+<ul>
+<li>Cada fila del dataset es un flujo originador → beneficiario.</li>
+<li>Lo convertimos en <strong>dos eventos</strong>: uno para el banco que envía y otro para el que recibe.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4514,12 +4529,19 @@ color: var(--fa-slate);
 5 2000-03-07 banco-de-credito-del-peru       origen </code></pre>
 </div>
 </div>
-<p><code>bind_rows()</code> apila las dos tablas; <code>transmute()</code> crea columnas nuevas; <code>arrange(t)</code> ordena cronológicamente — el orden temporal es el corazón del chronnet.</p>
+<ul>
+<li><code>bind_rows()</code> apila las dos tablas; <code>transmute()</code> crea columnas nuevas; <code>arrange(t)</code> ordena cronológicamente.</li>
+<li>El orden temporal es el corazón del chronnet.</li>
+</ul>
 </section>
 <section id="paso-3-ventanas-de-tiempo-solo-días-activos" class="level2">
 <h2 class="anchored" data-anchor-id="paso-3-ventanas-de-tiempo-solo-días-activos">4. Paso 3 — Ventanas de tiempo: solo días activos</h2>
-<p>El período se divide en ventanas de <span class="math inline">\(\Delta t = 1\)</span> día, y <strong>solo entran las ventanas activas</strong> (días con al menos un evento). Si entre el 3 y el 10 de agosto no hubo reportes, el chronnet une directamente el 3 con el 10: un salto conecta dos días activos consecutivos, no dos días calendario. Los huecos sin datos no rompen la secuencia.</p>
-<p>Sea <span class="math inline">\(n_m^{(k)}\)</span> el número de eventos de la entidad <span class="math inline">\(m\)</span> en la ventana activa <span class="math inline">\(k\)</span>.</p>
+<ul>
+<li>El período se divide en ventanas de <span class="math inline">\(\Delta t = 1\)</span> día, y <strong>solo entran las ventanas activas</strong> (días con al menos un evento).</li>
+<li>Si entre el 3 y el 10 de agosto no hubo reportes, el chronnet une directamente el 3 con el 10: un salto conecta dos días activos consecutivos, no dos días calendario.</li>
+<li>Los huecos sin datos no rompen la secuencia.</li>
+<li>Sea <span class="math inline">\(n_m^{(k)}\)</span> el número de eventos de la entidad <span class="math inline">\(m\)</span> en la ventana activa <span class="math inline">\(k\)</span>.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4548,16 +4570,27 @@ color: var(--fa-slate);
 5 2000-03-07 banco-de-comercio-lima-peru-per     1</code></pre>
 </div>
 </div>
-<p><code>count(ventana, node)</code> dice <em>cuántos eventos</em> tuvo <em>cada banco</em> en <em>cada día</em>. De aquí salen los <span class="math inline">\(n_m^{(k)}\)</span> de la fórmula.</p>
+<ul>
+<li><code>count(ventana, node)</code> = <em>cuántos eventos</em> tuvo <em>cada banco</em> en <em>cada día</em>.</li>
+<li>De aquí salen los <span class="math inline">\(n_m^{(k)}\)</span> de la fórmula.</li>
+</ul>
 </section>
 <section id="paso-4-aristas-y-pesos" class="level2">
 <h2 class="anchored" data-anchor-id="paso-4-aristas-y-pesos">5. Paso 4 — Aristas y pesos</h2>
-<p>Arista dirigida <span class="math inline">\(v_i \to v_j\)</span> cuando la entidad <span class="math inline">\(i\)</span> está activa en una ventana y la <span class="math inline">\(j\)</span> en la siguiente. El peso acumula el producto de sus actividades en todas las parejas de ventanas consecutivas:</p>
+<ul>
+<li>Arista dirigida <span class="math inline">\(v_i \to v_j\)</span> cuando la entidad <span class="math inline">\(i\)</span> está activa en una ventana y la <span class="math inline">\(j\)</span> en la siguiente.</li>
+<li>El peso acumula el producto de sus actividades en todas las parejas de ventanas consecutivas:</li>
+</ul>
 <p><span class="math display">\[w_{ij} = \sum_{k=1}^{K-1} n_i^{(k)} \cdot n_j^{(k+1)}\]</span></p>
-<p><strong>Léase con calma</strong>: si el banco <span class="math inline">\(i\)</span> tuvo 3 eventos el lunes y el banco <span class="math inline">\(j\)</span> tuvo 2 el martes, eso aporta <span class="math inline">\(3 \times 2 = 6\)</span> al peso <span class="math inline">\(w_{ij}\)</span>. Self-loops (<span class="math inline">\(w_{ii}\)</span>): actividad sostenida en la misma entidad.</p>
-<p>Caso límite (una transacción por ventana):</p>
+<ul>
+<li><strong>Léase con calma</strong>: si el banco <span class="math inline">\(i\)</span> tuvo 3 eventos el lunes y el banco <span class="math inline">\(j\)</span> tuvo 2 el martes, eso aporta <span class="math inline">\(3 \times 2 = 6\)</span> al peso <span class="math inline">\(w_{ij}\)</span>.</li>
+<li><strong>Self-loops</strong> (<span class="math inline">\(w_{ii}\)</span>): actividad sostenida en la misma entidad (opera dos días activos seguidos).</li>
+<li>Caso límite (una transacción por ventana):</li>
+</ul>
 <p><span class="math display">\[w_{ij} = \sum_{a=1}^{N_E-1} \mathbb{I}\bigl(\kappa(l_a)=i\bigr)\,\mathbb{I}\bigl(\kappa(l_{a+1})=j\bigr)\]</span></p>
-<p>e identidad contable general:</p>
+<ul>
+<li>e identidad contable general:</li>
+</ul>
 <p><span class="math display">\[\sum_{i,j} w_{ij} = \sum_{k=1}^{K-1} N^{(k)} N^{(k+1)}, \qquad N^{(k)} = \sum_m n_m^{(k)}\]</span></p>
 <div class="cell">
 <details open class="code-fold">
@@ -4588,15 +4621,25 @@ color: var(--fa-slate);
 <span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p><code>crossing(a, b)</code> produce el producto cartesiano “quienes actuaron hoy” × “quienes actuaron mañana”; multiplicar <code>n_i * n_j</code> y sumar implementa la fórmula de <span class="math inline">\(w_{ij}\)</span>.</p>
+<ul>
+<li><code>crossing(a, b)</code> produce el producto cartesiano “quienes actuaron hoy” × “quienes actuaron mañana”.</li>
+<li>Multiplicar <code>n_i * n_j</code> y sumar implementa la fórmula de <span class="math inline">\(w_{ij}\)</span>.</li>
+</ul>
 </section>
 <section id="dirigido-o-no-dirigido" class="level2">
 <h2 class="anchored" data-anchor-id="dirigido-o-no-dirigido">6. ¿Dirigido o no dirigido?</h2>
-<p><strong>El chronnet que construimos es dirigido</strong>: la arista <span class="math inline">\(i \to j\)</span> significa que la actividad de <span class="math inline">\(j\)</span> <em>sigue</em> a la de <span class="math inline">\(i\)</span>, y no al revés. Esa dirección es la señal temporal. En los módulos 3–4 algunas métricas (comunidades, transitividad, caminos) usan la versión <strong>no dirigida</strong> del grafo (colapsando A→B y B→A en una sola conexión) porque los algoritmos lo requieren — lo diremos siempre que ocurra.</p>
+<ul>
+<li><strong>El chronnet es dirigido</strong>: la arista <span class="math inline">\(i \to j\)</span> significa que la actividad de <span class="math inline">\(j\)</span> <em>sigue</em> a la de <span class="math inline">\(i\)</span>, y no al revés.</li>
+<li>La dirección <strong>es la señal temporal</strong> — no indica flujo de dinero.</li>
+<li>En los módulos 3–4 algunas métricas (comunidades, transitividad, caminos) usan la versión <strong>no dirigida</strong> (colapsando A→B y B→A en una sola conexión) porque los algoritmos lo requieren — lo diremos siempre que ocurra.</li>
+</ul>
 </section>
 <section id="chequeo-de-reproducibilidad" class="level2">
 <h2 class="anchored" data-anchor-id="chequeo-de-reproducibilidad">7. Chequeo de reproducibilidad</h2>
-<p>La identidad contable fija el peso total desde los conteos de eventos solos: un error de agregación se detecta numéricamente, no a ojo.</p>
+<ul>
+<li>La identidad contable fija el peso total desde los conteos de eventos solos.</li>
+<li>Un error de agregación se detecta <strong>numéricamente</strong>, no a ojo.</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4632,7 +4675,10 @@ color: var(--fa-slate);
 </section>
 <section id="el-resultado-agrupación-y-componentes" class="level2">
 <h2 class="anchored" data-anchor-id="el-resultado-agrupación-y-componentes">8. El resultado: agrupación y componentes</h2>
-<p>El chronnet sale conectado de un solo bloque: su regla de construcción une toda entidad activa en un día con toda entidad activa el día activo siguiente, así que el componente gigante (LCC) absorbe toda la red. Lo comprobamos: cuántos componentes hay y de qué tamaño:</p>
+<ul>
+<li>El chronnet sale conectado de <strong>un solo bloque</strong>: su regla une toda entidad activa en un día con toda entidad activa el día siguiente, así que el componente gigante (LCC) absorbe toda la red.</li>
+<li>Lo comprobamos: cuántos componentes hay y de qué tamaño:</li>
+</ul>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4674,11 +4720,22 @@ color: var(--fa-slate);
 <pre><code>Total: 1 componentes | LCC = 2275 nodos ( 100 % de la red )</code></pre>
 </div>
 </div>
-<p><strong>Aclaración de vocabulario</strong>: el <strong>LCC</strong> (<em>largest connected component</em>, componente gigante) es el subgrafo conectado más grande de una red dada. Aquí el LCC <strong>es</strong> el chronnet completo: la red de trabajo de todo el taller. Ojo a la interpretación: esa conectividad total es propia de la construcción — dos bancos quedan unidos si operaron en días consecutivos, aunque jamás hayan transado entre sí. El <strong>dinero</strong> no vive en las aristas del chronnet: se calcula desde los reportes y se pega como atributo (monto_total por banco, monto circulado por par), como veremos en los módulos 3 a 6.</p>
+<p><strong>Aclaración de vocabulario:</strong></p>
+<ul>
+<li><strong>LCC</strong> (<em>largest connected component</em>, componente gigante): el subgrafo conectado más grande de una red dada.</li>
+<li>Aquí el LCC <strong>es</strong> el chronnet completo: la red de trabajo de todo el taller.</li>
+<li>Ojo a la interpretación: esa conectividad total es <strong>propia de la construcción</strong> — dos bancos quedan unidos si operaron en días consecutivos, aunque jamás hayan transado entre sí.</li>
+<li>El <strong>dinero</strong> no vive en las aristas del chronnet: se calcula desde los reportes y se pega como atributo (monto_total por banco, monto circulado por par), como veremos en los módulos 3 a 6.</li>
+</ul>
 </section>
 <section id="por-qué-no-podar-aristas" class="level2">
 <h2 class="anchored" data-anchor-id="por-qué-no-podar-aristas">9. Por qué no podar aristas</h2>
-<p>Conservamos TODAS las aristas, incluso las de peso 1: los datos criminales son caros de obtener y cada registro puede ser significativo; podar aristas débiles eliminaría registros infrecuentes pero cruciales; y conservar todo mantiene los componentes completos.</p>
+<ul>
+<li>Conservamos <strong>TODAS</strong> las aristas, incluso las de peso 1.</li>
+<li>Los datos criminales son caros de obtener: cada registro puede ser significativo.</li>
+<li>Podar aristas débiles eliminaría registros infrecuentes pero cruciales.</li>
+<li>Conservar todo mantiene los componentes completos.</li>
+</ul>
 </section>
 <section id="el-chronnet-dibujado" class="level2">
 <h2 class="anchored" data-anchor-id="el-chronnet-dibujado">10. El chronnet dibujado</h2>
@@ -4702,9 +4759,19 @@ color: var(--fa-slate);
 </div>
 </div>
 </div>
-<p><strong>Cómo leer esta figura</strong>: cada punto es un banco; su tamaño, su actividad (en cuántas sucesiones temporales participa); cada línea es una arista <span class="math inline">\(i \to j\)</span> — el grosor es <span class="math inline">\(w_{ij}\)</span>. La mayoría forma una periferia con pocas conexiones; unos pocos nodos centrales concentran las sucesiones.</p>
+<p><strong>Cómo leer esta figura:</strong></p>
+<ul>
+<li>Cada punto es un banco; su tamaño = su <strong>actividad</strong> (en cuántas sucesiones temporales participa).</li>
+<li>Cada línea es una arista <span class="math inline">\(i \to j\)</span>; el grosor es <span class="math inline">\(w_{ij}\)</span> (intensidad de la sucesión).</li>
+<li>La mayoría forma una periferia con pocas conexiones; unos pocos nodos centrales concentran las sucesiones.</li>
+</ul>
 <div class="lectura-criminal">
-<p><span class="lc-titulo">Lectura criminal</span> Las aristas fuertes trazan <strong>cadenas operativas de lavado</strong>: qué entidad “activa” a cuál en la secuencia temporal de los reportes SAR. Si después de cada operación sospechosa en un banco de Dubai sigue sistemáticamente una en un banco de las Islas Vírgenes, el chronnet lo dibuja como una arista gruesa. El grosor de la línea es la frecuencia de esa sucesión — y la frecuencia es la costumbre, y la costumbre es el patrón que la investigación busca.</p>
+<p><span class="lc-titulo">Lectura criminal</span></p>
+<ul>
+<li>Las aristas fuertes trazan <strong>cadenas operativas</strong>: qué entidad “activa” a cuál en la secuencia temporal de los reportes SAR.</li>
+<li>Si después de cada operación sospechosa en un banco de Dubai sigue sistemáticamente una en un banco de las Islas Vírgenes, el chronnet lo dibuja como una arista gruesa.</li>
+<li>El grosor de la línea es la <strong>frecuencia</strong> de esa sucesión — y la frecuencia es la costumbre, y la costumbre es el patrón que la investigación busca.</li>
+</ul>
 </div>
 
 
