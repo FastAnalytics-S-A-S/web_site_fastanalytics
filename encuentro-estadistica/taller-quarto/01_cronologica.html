@@ -4442,8 +4442,7 @@ color: var(--fa-slate);
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph); <span class="fu">library</span>(ggraph); <span class="fu">library</span>(dplyr); <span class="fu">library</span>(readr); <span class="fu">library</span>(lubridate); <span class="fu">library</span>(tidyr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tx <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;../outputs/tx_limpio.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>geo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;../data/bancos_geo.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>grafo <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;../outputs/grafo_bancos.rds&quot;</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="qué-es-un-chronnet" class="level2">
@@ -4560,7 +4559,7 @@ color: var(--fa-slate);
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función completa en R/06_chronnet.R</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función completa en R/03_chronnet.R (pipeline)</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>chronnet_create <span class="ot">&lt;-</span> <span class="cf">function</span>(dataset, <span class="at">self_loops =</span> <span class="cn">TRUE</span>, <span class="at">mode =</span> <span class="st">&quot;directed&quot;</span>, <span class="at">dt_days =</span> <span class="dv">1</span>) {</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ventana =</span> <span class="fu">floor</span>(<span class="fu">as.numeric</span>(<span class="fu">difftime</span>(t, <span class="fu">min</span>(t, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
@@ -4598,32 +4597,30 @@ color: var(--fa-slate);
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;../R/06_chronnet.R&quot;</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Chequeo reproducibilidad — sum(w_ij) = 51944 | sum_k N^(k)N^(k+1) = 51944 ✓ 
-Chronnet (ventanas diarias activas): 2275 nodos | 31122 aristas | 1762 ventanas activas
-Período: 10995 a 17414 </code></pre>
-</div>
-<details open class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Nk <span class="ot">&lt;-</span> <span class="fu">attr</span>(chronnet, <span class="st">&quot;Nk&quot;</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>identidad <span class="ot">&lt;-</span> <span class="fu">sum</span>(Nk[<span class="sc">-</span><span class="fu">length</span>(Nk)] <span class="sc">*</span> Nk[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;sum(w_ij)             =&quot;</span>, <span class="fu">sum</span>(<span class="fu">E</span>(chronnet)<span class="sc">$</span>weight), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construcción inline (la función chronnet_create se definió arriba en este módulo;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># el pipeline equivalente vive en R/03_chronnet.R)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>eventos_dual <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  tx <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(<span class="at">t =</span> fecha, <span class="at">node =</span> originator_bank_id, <span class="at">rol =</span> <span class="st">&quot;origen&quot;</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  tx <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(<span class="at">t =</span> fecha, <span class="at">node =</span> beneficiary_bank_id, <span class="at">rol =</span> <span class="st">&quot;destino&quot;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(t)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>chronnet <span class="ot">&lt;-</span> <span class="fu">chronnet_create</span>(eventos_dual, <span class="at">self_loops =</span> <span class="cn">TRUE</span>, <span class="at">mode =</span> <span class="st">&quot;directed&quot;</span>, <span class="at">dt_days =</span> <span class="dv">1</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>Nk <span class="ot">&lt;-</span> <span class="fu">attr</span>(chronnet, <span class="st">&quot;Nk&quot;</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>identidad <span class="ot">&lt;-</span> <span class="fu">sum</span>(Nk[<span class="sc">-</span><span class="fu">length</span>(Nk)] <span class="sc">*</span> Nk[<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;sum(w_ij)             =&quot;</span>, <span class="fu">sum</span>(<span class="fu">E</span>(chronnet)<span class="sc">$</span>weight), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>sum(w_ij)             = 51944 </code></pre>
 </div>
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;sum_k N^(k) * N^(k+1) =&quot;</span>, identidad, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;sum_k N^(k) * N^(k+1) =&quot;</span>, identidad, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>sum_k N^(k) * N^(k+1) = 51944 </code></pre>
 </div>
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;¿Coinciden?&quot;</span>, <span class="fu">sum</span>(<span class="fu">E</span>(chronnet)<span class="sc">$</span>weight) <span class="sc">==</span> identidad, <span class="st">&quot;✓</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;¿Coinciden?&quot;</span>, <span class="fu">sum</span>(<span class="fu">E</span>(chronnet)<span class="sc">$</span>weight) <span class="sc">==</span> identidad, <span class="st">&quot;✓</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>¿Coinciden? TRUE ✓</code></pre>
@@ -4632,19 +4629,19 @@ Período: 10995 a 17414 </code></pre>
 </section>
 <section id="el-resultado-agrupación-y-componentes" class="level2">
 <h2 class="anchored" data-anchor-id="el-resultado-agrupación-y-componentes">8. El resultado: agrupación y componentes</h2>
-<p>La red no es una isla única. Veamos cómo se agrupa: cuántos componentes hay, de qué tamaño, y cuál es el <strong>componente gigante (LCC)</strong> sobre el que trabajaremos todo el taller:</p>
+<p>El chronnet sale conectado de un solo bloque: su regla de construcción une toda entidad activa en un día con toda entidad activa el día activo siguiente, así que el componente gigante (LCC) absorbe toda la red. Lo comprobamos: cuántos componentes hay y de qué tamaño:</p>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>comp_c <span class="ot">&lt;-</span> <span class="fu">components</span>(chronnet)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">componente =</span> <span class="fu">seq_len</span>(comp_c<span class="sc">$</span>no),</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_nodos =</span> <span class="fu">sort</span>(comp_c<span class="sc">$</span>csize, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">acumulado =</span> <span class="fu">cumsum</span>(n_nodos) <span class="sc">/</span> <span class="fu">sum</span>(n_nodos)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Los 10 componentes más grandes del chronnet&quot;</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Ranking&quot;</span>, <span class="st">&quot;Nº de nodos&quot;</span>, <span class="st">&quot;% acumulado de nodos&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>comp_c <span class="ot">&lt;-</span> <span class="fu">components</span>(chronnet)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">componente =</span> <span class="fu">seq_len</span>(comp_c<span class="sc">$</span>no),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_nodos =</span> <span class="fu">sort</span>(comp_c<span class="sc">$</span>csize, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">acumulado =</span> <span class="fu">cumsum</span>(n_nodos) <span class="sc">/</span> <span class="fu">sum</span>(n_nodos)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Los 10 componentes más grandes del chronnet&quot;</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Ranking&quot;</span>, <span class="st">&quot;Nº de nodos&quot;</span>, <span class="st">&quot;% acumulado de nodos&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -4667,14 +4664,14 @@ Período: 10995 a 17414 </code></pre>
 </div>
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total:&quot;</span>, comp_c<span class="sc">$</span>no, <span class="st">&quot;componentes | LCC =&quot;</span>, <span class="fu">max</span>(comp_c<span class="sc">$</span>csize), <span class="st">&quot;nodos (&quot;</span>,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">max</span>(comp_c<span class="sc">$</span>csize) <span class="sc">/</span> <span class="fu">vcount</span>(chronnet), <span class="dv">1</span>), <span class="st">&quot;% de la red )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total:&quot;</span>, comp_c<span class="sc">$</span>no, <span class="st">&quot;componentes | LCC =&quot;</span>, <span class="fu">max</span>(comp_c<span class="sc">$</span>csize), <span class="st">&quot;nodos (&quot;</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">max</span>(comp_c<span class="sc">$</span>csize) <span class="sc">/</span> <span class="fu">vcount</span>(chronnet), <span class="dv">1</span>), <span class="st">&quot;% de la red )</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total: 1 componentes | LCC = 2275 nodos ( 100 % de la red )</code></pre>
 </div>
 </div>
-<p><strong>Aclaración de vocabulario</strong>: “isla”, “componente gigante” y <strong>LCC</strong> son el mismo objeto: el subgrafo conectado más grande. Todo lo que sigue (caracterización, comunidades, centralidad, disrupción) corre sobre él, no sobre la red completa.</p>
+<p><strong>Aclaración de vocabulario</strong>: el <strong>LCC</strong> (<em>largest connected component</em>, componente gigante) es el subgrafo conectado más grande de una red dada. Aquí el LCC <strong>es</strong> el chronnet completo: la red de trabajo de todo el taller. Ojo a la interpretación: esa conectividad total es propia de la construcción — dos bancos quedan unidos si operaron en días consecutivos, aunque jamás hayan transado entre sí. El <strong>dinero</strong> no vive en las aristas del chronnet: se calcula desde los reportes y se pega como atributo (monto_total por banco, monto circulado por par), como veremos en los módulos 3 a 6.</p>
 </section>
 <section id="por-qué-no-podar-aristas" class="level2">
 <h2 class="anchored" data-anchor-id="por-qué-no-podar-aristas">9. Por qué no podar aristas</h2>
@@ -4685,13 +4682,14 @@ Período: 10995 a 17414 </code></pre>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(chronnet, <span class="at">layout =</span> <span class="st">&quot;stress&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">width =</span> weight), <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">&quot;grey55&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> strength), <span class="at">color =</span> <span class="st">&quot;#0D9488&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">7</span>)) <span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="dv">2</span>), <span class="at">guide =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(chronnet)<span class="sc">$</span>actividad <span class="ot">&lt;-</span> <span class="fu">strength</span>(chronnet, <span class="at">mode =</span> <span class="st">&quot;all&quot;</span>, <span class="at">weights =</span> <span class="fu">E</span>(chronnet)<span class="sc">$</span>weight)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(chronnet, <span class="at">layout =</span> <span class="st">&quot;stress&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">width =</span> weight), <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">&quot;grey55&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> actividad), <span class="at">color =</span> <span class="st">&quot;#0D9488&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="dv">2</span>), <span class="at">guide =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -4701,7 +4699,7 @@ Período: 10995 a 17414 </code></pre>
 </div>
 </div>
 </div>
-<p><strong>Cómo leer esta figura</strong>: cada punto es un banco; su tamaño, su fuerza (en cuántas sucesiones temporales participa); cada línea es una arista <span class="math inline">\(i \to j\)</span> — el grosor es <span class="math inline">\(w_{ij}\)</span>. La mayoría forma una periferia con pocas conexiones; unos pocos nodos centrales concentran las sucesiones.</p>
+<p><strong>Cómo leer esta figura</strong>: cada punto es un banco; su tamaño, su actividad (en cuántas sucesiones temporales participa); cada línea es una arista <span class="math inline">\(i \to j\)</span> — el grosor es <span class="math inline">\(w_{ij}\)</span>. La mayoría forma una periferia con pocas conexiones; unos pocos nodos centrales concentran las sucesiones.</p>
 <div class="lectura-criminal">
 <p><span class="lc-titulo">Lectura criminal</span> Las aristas fuertes trazan <strong>cadenas operativas de lavado</strong>: qué entidad “activa” a cuál en la secuencia temporal de los reportes SAR. Si después de cada operación sospechosa en un banco de Dubai sigue sistemáticamente una en un banco de las Islas Vírgenes, el chronnet lo dibuja como una arista gruesa. El grosor de la línea es la frecuencia de esa sucesión — y la frecuencia es la costumbre, y la costumbre es el patrón que la investigación busca.</p>
 </div>
