@@ -9,8 +9,8 @@
   *{margin:0;padding:0;box-sizing:border-box}
   body{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#F8FAFC;
     font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;padding:28px;gap:34px}
-  #langBtn{position:fixed;top:16px;right:16px;z-index:10;background:#fff;border:1.5px solid var(--teal);
-    color:var(--teal);border-radius:20px;padding:6px 16px;font-size:13px;font-weight:800;cursor:pointer;
+  #langBtn{margin:-14px 0 0 0;background:#fff;border:1.5px solid var(--teal);
+    color:var(--teal);border-radius:20px;padding:6px 22px;font-size:13px;font-weight:800;cursor:pointer;
     font-family:inherit;transition:.15s}
   #langBtn:hover{background:var(--teal);color:#fff}
   .brandrow{display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap;
@@ -32,8 +32,6 @@
 </style>
 </head>
 <body>
-  <button id="langBtn" type="button">EN</button>
-
   <div class="brandrow">
     <img src="logo-fastanalytics-lema.png" alt="FastAnalytics" style="height:60px;width:auto">
     <img src="logo-2wie.svg" alt="2do Encuentro Internacional de Estadística">
@@ -43,6 +41,8 @@
     <strong style="color:var(--teal)" data-es="FastAnalytics S.A.S" data-en="FastAnalytics S.A.S"></strong><span data-es=" · Patrocinador oficial del " data-en=" · Official sponsor of the "></span>
     <strong data-es="2do Encuentro Internacional de Estadística 2026" data-en="2nd International Meeting on Statistics 2026"></strong>
   </p>
+
+  <button id="langBtn" type="button">EN</button>
 
   <div class="choice">
     <a class="chcard taller" href="./taller/">
