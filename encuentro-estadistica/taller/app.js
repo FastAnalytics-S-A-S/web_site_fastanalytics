@@ -4,7 +4,7 @@
    Motor: assets3d/chronnet3d.js (bundle autocontenido, three embebido)
    ===================================================================== */
 
-let LANG = 'es';
+let LANG = localStorage.getItem('ee-lang') === 'en' ? 'en' : 'es';
 const T = (bi) => (typeof bi === 'string' ? bi : bi[LANG]);
 // Ruta del material Quarto según idioma activo (taller/en/ para inglés).
 const urlMat = (f) => '../taller-quarto/' + (LANG === 'en' ? 'en/' : '') + f.replace(/^taller\//, '');
@@ -302,6 +302,7 @@ async function boot() {
   $('matBtn').addEventListener('click', toggleMaterial);
   $('langBtn').addEventListener('click', () => {
     LANG = LANG === 'es' ? 'en' : 'es';
+    localStorage.setItem('ee-lang', LANG);
     p.fijarIdioma(LANG);
     applyLang();
     // Si el material está abierto, recargarlo en el idioma recién activo.
