@@ -30,6 +30,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:#E2E8
 .card-img{transition:transform .4s ease}
 dialog{border:none;padding:0;background:transparent;max-width:none;max-height:none}
 dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
+#modal-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0B111C;transition:opacity .3s ease}
+#modal-loading[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .card:hover{transform:none}
@@ -76,7 +78,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-8 sm:mt-10">
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Escucha" data-video="assets/demo/v-escucha.mp4" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Escucha" data-escena="1" data-paso="0" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-escucha.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Escucha: el ciudadano reporta desde Telegram o una llamada">
         </span>
@@ -87,7 +89,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
         </span>
       </button>
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Investiga" data-video="assets/demo/v-investiga.mp4" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Investiga" data-escena="1" data-paso="1" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-investiga.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Investiga: identificación del sospechoso, su vehículo y su red">
         </span>
@@ -98,7 +100,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
         </span>
       </button>
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Coordina" data-video="assets/demo/v-coordina.mp4" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Coordina" data-escena="2" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-coordina.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Coordina: tablero conjunto de Policía, Gaula, Fiscalía y Alcaldía">
         </span>
@@ -109,7 +111,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
         </span>
       </button>
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Predice" data-video="assets/demo/v-predice.mp4" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Predice" data-escena="3" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-predice.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Predice: pronóstico de dónde y cuándo golpeará el delito">
         </span>
@@ -126,15 +128,16 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
 </main>
 
 <dialog id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="fixed inset-0 flex items-center justify-center p-4">
-    <div class="relative w-full max-w-3xl rounded-2xl border border-white/10 bg-[#0B111C] p-3 sm:p-4" style="box-shadow:0 24px 80px rgba(0,0,0,.6)">
-      <div class="flex items-center justify-between gap-3 px-1 pb-3">
-        <h2 id="modal-title" class="text-sm sm:text-base font-extrabold tracking-[.15em] text-white"></h2>
-        <button type="button" id="modal-close" class="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-slate-300 transition hover:text-white hover:brightness-125" style="border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05)" aria-label="Cerrar">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
+  <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-3">
+    <div class="relative w-full h-full max-w-[1600px] rounded-2xl overflow-hidden border border-white/10 bg-[#0B111C]" style="box-shadow:0 24px 80px rgba(0,0,0,.6)">
+      <h2 id="modal-title" class="sr-only"></h2>
+      <iframe id="modal-frame" title="Demo inmersiva" class="w-full h-full" src="about:blank" allow="autoplay 'src'; fullscreen 'src'; encrypted-media 'src'; picture-in-picture 'src'" allowfullscreen loading="lazy"></iframe>
+      <div id="modal-loading" aria-hidden="true">
+        <div class="animate-spin" style="width:44px;height:44px;border-radius:50%;border:3px solid rgba(0,109,109,.25);border-top-color:#2DD4BF"></div>
       </div>
-      <video id="modal-video" class="w-full aspect-video rounded-xl bg-black" controls playsinline preload="metadata"></video>
+      <button type="button" id="modal-close" class="absolute top-3 right-3 z-10 w-10 h-10 rounded-full flex items-center justify-center text-slate-300 transition hover:text-white hover:brightness-125" style="border:1px solid rgba(255,255,255,.18);background:rgba(8,12,20,.72);backdrop-filter:blur(8px)" aria-label="Cerrar demo">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
     </div>
   </div>
 </dialog>
@@ -142,36 +145,36 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
 <script>
 (function(){
   var modal=document.getElementById('modal');
-  var modalVideo=document.getElementById('modal-video');
+  var frame=document.getElementById('modal-frame');
+  var loading=document.getElementById('modal-loading');
   var modalTitle=document.getElementById('modal-title');
   var closeBtn=document.getElementById('modal-close');
   var lastTrigger=null;
 
   function openModal(trigger){
     lastTrigger=trigger;
-    modalTitle.textContent=trigger.dataset.title;
-    modalVideo.src=trigger.dataset.video;
+    var title=trigger.getAttribute('data-title');
+    var escena=trigger.getAttribute('data-escena')||'1';
+    var paso=trigger.getAttribute('data-paso');
+    modalTitle.textContent=title+' — demo inmersiva';
+    frame.setAttribute('title','Demo inmersiva: '+title);
+    frame.src='demo-seguridad-urbana-completa.html?popup=1&escena='+encodeURIComponent(escena)+(paso!==null?'&paso='+encodeURIComponent(paso):'');
+    loading.hidden=false;
     modal.showModal();
     closeBtn.focus();
   }
   function closeModal(){
-    modalVideo.pause();
-    modalVideo.removeAttribute('src');
-    modalVideo.load();
     modal.close();
+    frame.src='about:blank';
     if(lastTrigger){lastTrigger.focus();lastTrigger=null;}
   }
 
-  document.querySelectorAll('[data-video]').forEach(function(btn){
+  frame.addEventListener('load',function(){loading.hidden=true;});
+  document.querySelectorAll('[data-escena]').forEach(function(btn){
     btn.addEventListener('click',function(){openModal(btn);});
   });
   closeBtn.addEventListener('click',closeModal);
-  modal.addEventListener('cancel',function(){
-    modalVideo.pause();
-    modalVideo.removeAttribute('src');
-    modalVideo.load();
-    if(lastTrigger){lastTrigger.focus();lastTrigger=null;}
-  });
+  modal.addEventListener('cancel',closeModal);
   modal.addEventListener('click',function(e){
     if(e.target===modal){closeModal();}
   });
