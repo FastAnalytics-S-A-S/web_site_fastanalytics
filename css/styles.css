@@ -248,22 +248,17 @@ ul {
   width: 100%;
 }
 
-.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones, .nav-link--fundador) {
+.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones) {
   color: var(--nav-link-color);
   font-weight: 600;
 }
 
-.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones, .nav-link--fundador)::after {
+.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones)::after {
   background: currentColor;
 }
 
-.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones, .nav-link--fundador):hover {
+.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones):hover {
   color: var(--nav-link-hover);
-}
-
-.nav-links .nav-link--resultados {
-  --nav-link-color: #237A57;
-  --nav-link-hover: #175C40;
 }
 
 .nav-links .nav-link--capacidades {
@@ -284,11 +279,6 @@ ul {
 .nav-links .nav-link--formaciones {
   --nav-link-color: #9A6428;
   --nav-link-hover: #754817;
-}
-
-.nav-links .nav-link--fundador {
-  --nav-link-color: #237A57;
-  --nav-link-hover: #175C40;
 }
 
 .nav-links a:focus-visible {
