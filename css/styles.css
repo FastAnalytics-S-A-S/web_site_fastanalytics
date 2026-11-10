@@ -3276,94 +3276,122 @@ ul {
   scroll-margin-top: var(--nav-height);
 }
 
-/* ========== INVESTIGACIÓN Y CIENCIA (publicaciones) ========== */
-.pub-list {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* ========== INVESTIGACIÓN Y CIENCIA (publicaciones agrupadas en tarjetas) ========== */
+.science-tag {
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.pub-thumb {
-  width: 64px;
-  height: 85px;
+.science-card .training-card-description {
+  margin-bottom: 16px;
+}
+
+.science-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: auto;
+}
+
+.science-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+
+a.science-link {
+  text-decoration: none;
+}
+
+a.science-link:hover .science-link-title,
+a.science-link:focus-visible .science-link-title {
+  color: var(--primary);
+}
+
+.science-link-thumb {
+  width: 34px;
+  height: 46px;
   object-fit: cover;
   object-position: top;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 4px;
   background: #fff;
   flex-shrink: 0;
 }
 
-.pub-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 18px 24px;
-  background: var(--card-bg, #fff);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+.science-link-body {
+  flex: 1;
+  min-width: 0;
 }
 
-a.pub-item:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 77, 77, 0.08);
-}
-
-.pub-title {
+.science-link-title {
   display: block;
+  font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text);
   line-height: 1.35;
+  color: var(--text);
+  transition: color var(--transition);
 }
 
-.pub-venue {
+.science-link-venue {
   display: block;
-  margin-top: 4px;
-  font-size: 0.85rem;
-  color: var(--text-muted, #8888A0);
+  margin-top: 2px;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--text-muted);
 }
 
-.pub-arrow {
+.science-link-arrow {
   color: var(--primary);
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   flex-shrink: 0;
+  transition: transform var(--transition);
 }
 
-.pub-books {
-  max-width: 900px;
-  margin: 36px auto 0;
+a.science-link:hover .science-link-arrow,
+a.science-link:focus-visible .science-link-arrow {
+  transform: translateX(4px);
 }
 
-.pub-subtitle {
-  font-size: 1.15rem;
-  color: var(--primary-dark);
-  margin-bottom: 16px;
+.science-link--static {
+  cursor: default;
 }
 
-.pub-more {
+.science-link--static .science-link-title {
+  color: var(--text-secondary);
+}
+
+.science-more {
   text-align: center;
-  margin-top: 28px;
+  margin-top: 32px;
 }
 
-.pub-more a {
+.science-more a {
   color: var(--primary);
   font-weight: 600;
   text-decoration: none;
 }
 
-.pub-more a:hover {
+.science-more a:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 600px) {
-  .pub-item { padding: 14px 16px; gap: 14px; }
-  .pub-thumb { width: 52px; height: 70px; }
+@media (max-width: 480px) {
+  .science-link { gap: 10px; padding: 8px 0; }
+  .science-link-thumb { width: 30px; height: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .science-link-title,
+  .science-link-arrow {
+    transition: none;
+  }
 }
 
 /* ========== CATÁLOGO DE FORMACIONES ========== */
