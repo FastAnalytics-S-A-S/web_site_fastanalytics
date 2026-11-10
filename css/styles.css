@@ -248,16 +248,16 @@ ul {
   width: 100%;
 }
 
-.nav-links a:is(.nav-link--resultados, .nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones) {
+.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones, .nav-link--fundador) {
   color: var(--nav-link-color);
   font-weight: 600;
 }
 
-.nav-links a:is(.nav-link--resultados, .nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones)::after {
+.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones, .nav-link--fundador)::after {
   background: currentColor;
 }
 
-.nav-links a:is(.nav-link--resultados, .nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones):hover {
+.nav-links a:is(.nav-link--capacidades, .nav-link--productos, .nav-link--ciencia, .nav-link--formaciones, .nav-link--fundador):hover {
   color: var(--nav-link-hover);
 }
 
@@ -284,6 +284,11 @@ ul {
 .nav-links .nav-link--formaciones {
   --nav-link-color: #9A6428;
   --nav-link-hover: #754817;
+}
+
+.nav-links .nav-link--fundador {
+  --nav-link-color: #237A57;
+  --nav-link-hover: #175C40;
 }
 
 .nav-links a:focus-visible {
