@@ -3382,6 +3382,95 @@ a.science-link:focus-visible .science-link-arrow {
   text-decoration: underline;
 }
 
+/* --- Tarjeta destacada: grupo de investigación MathDecision --- */
+.science-group {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: 32px;
+  padding: 40px;
+  background: linear-gradient(120deg, var(--primary-light) 0%, #FFFFFF 58%);
+  border: 1px solid rgba(0, 109, 109, 0.22);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.science-group:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 20px 44px rgba(0, 77, 77, 0.14);
+}
+
+.science-group-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 190px;
+  padding: 20px;
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.science-group-logo {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.science-group-body {
+  min-width: 0;
+}
+
+.science-group .science-tag {
+  display: inline-block;
+}
+
+.science-group-title {
+  margin-bottom: 12px;
+  color: var(--text);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.science-group-description {
+  max-width: 560px;
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .science-group {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px;
+  }
+
+  .science-group-media {
+    min-height: 0;
+  }
+
+  .science-group-logo {
+    max-width: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .science-group {
+    transition: none;
+  }
+
+  .science-group:hover {
+    transform: none;
+  }
+}
+
 @media (max-width: 480px) {
   .science-link { gap: 10px; padding: 8px 0; }
   .science-link-thumb { width: 30px; height: 40px; }
