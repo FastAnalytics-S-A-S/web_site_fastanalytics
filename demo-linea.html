@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#080C14">
+<title>Demo — FastAnalytics</title>
+<link rel="icon" type="image/svg+xml" href="assets/demo/favicon.svg">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--dark:#080C14;--teal:#006D6D;--orange:#D4883A}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:#E2E8F0;overflow-x:hidden}
+::selection{background:rgba(0,109,109,.5)}
+[hidden]{display:none!important}
+:focus{outline:none}
+:focus-visible{outline:2px solid #2DD4BF;outline-offset:3px;border-radius:4px}
+.chip{transition:border-color .2s ease,background .2s ease,color .2s ease}
+.chip[aria-pressed="true"]{border-color:rgba(45,212,191,.55)!important;background:rgba(0,109,109,.18)!important;color:#fff}
+.pulse-suave{animation:pulseSuave 1.6s ease-in-out infinite}
+@keyframes pulseSuave{0%,100%{box-shadow:0 0 0 0 rgba(45,212,191,.35)}50%{box-shadow:0 0 0 8px rgba(45,212,191,0)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<main id="app" class="max-w-4xl mx-auto px-4 sm:px-6 py-5 sm:py-8" aria-labelledby="titulo">
+
+  <!-- Barra superior: identificación de la línea + controles -->
+  <div class="flex items-start justify-between gap-3">
+    <div class="min-w-0">
+      <p class="text-[11px] font-extrabold tracking-[.22em] uppercase" style="color:#D4883A">Demo inmersiva</p>
+      <h1 id="titulo" class="mt-1 text-2xl sm:text-3xl font-black tracking-tight text-white truncate">
+        <span id="num">· ·</span> · <span id="nombre" style="color:#2DD4BF">—</span>
+      </h1>
+      <p id="producto" class="mt-1 text-xs font-bold tracking-wide" style="color:#006D6D"></p>
+    </div>
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <button type="button" id="btnMusica" aria-pressed="false" title="Música de fondo muy baja"
+        class="flex items-center gap-2 text-xs font-semibold px-3 h-10 rounded-full transition hover:brightness-125"
+        style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04)">
+        <span id="musicDot" class="w-2 h-2 rounded-full bg-slate-600" aria-hidden="true"></span>🎵 <span class="hidden sm:inline">Música</span>
+      </button>
+      <button type="button" id="btnCerrar" title="Cerrar" aria-label="Cerrar demo"
+        class="w-10 h-10 rounded-full flex items-center justify-center text-slate-300 transition hover:text-white hover:brightness-125"
+        style="border:1px solid rgba(255,255,255,.18);background:rgba(8,12,20,.72)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Frase exacta de la línea -->
+  <p id="frase" class="mt-4 text-base sm:text-lg leading-relaxed text-slate-300 border-l-4 pl-4" style="border-color:#006D6D"></p>
+
+  <!-- Video protagonista de la línea -->
+  <video id="video" class="mt-4 w-full aspect-video rounded-2xl border border-white/10 bg-black"
+    controls playsinline loop preload="metadata" width="1280" height="720"></video>
+
+  <!-- Narración: el botón de altavoz aparece si el autoplay se bloquea -->
+  <div class="mt-3 flex flex-wrap items-center gap-3">
+    <button type="button" id="btnNarr" hidden
+      class="flex items-center gap-2 text-sm font-bold px-4 h-10 rounded-full text-white transition hover:brightness-125"
+      style="border:1px solid rgba(45,212,191,.45);background:rgba(0,109,109,.25)">
+      <span id="narrIcon" aria-hidden="true">🔊</span><span id="narrLabel">Escuchar narración</span>
+    </button>
+    <span id="narrEstado" class="text-xs text-slate-500" role="status" aria-live="polite"></span>
+  </div>
+
+  <!-- Visualización secundaria propia de la línea -->
+  <section id="visual" class="mt-6" aria-label="Visualización de la línea"></section>
+
+  <p class="mt-6 text-[11px] text-slate-600">Simulación ilustrativa · FastAnalytics</p>
+</main>
+
+<audio id="musica" src="assets/demo/cinematic-theme.mp3" loop preload="none"></audio>
+
+<script>
+(function(){
+'use strict';
+
+/* ── Configuración: una sola línea por pop-up, nada de la demo completa ── */
+var LINEAS={
+  escucha:{
+    num:'01',nombre:'ESCUCHA',producto:'AlejoSeguro + CatheAsiste',
+    video:'assets/demo/v-escucha.mp4',poster:'assets/demo/paso-escucha.webp',
+    narr:'assets/demo/narr/scene1.mp3',
+    frase:'El ciudadano reporta por Telegram o llamada, sin instalar nada; cada reporte llega con evidencia y GPS.',
+    altVideo:'Video de la línea Escucha: el ciudadano reporta por Telegram o llamada',
+    visual:'evidencias'
+  },
+  investiga:{
+    num:'02',nombre:'INVESTIGA',producto:'MileInvestiga',
+    video:'assets/demo/v-investiga.mp4',poster:'assets/demo/paso-investiga.webp',
+    narr:'assets/demo/narr/s1mile.mp3',
+    frase:'Identifica al sospechoso, su vehículo y su red en segundos, no en semanas.',
+    altVideo:'Video de la línea Investiga: identificación del sospechoso, su vehículo y su red',
+    visual:'deteccion',
+    img:'assets/demo/investiga-red.webp',
+    altImg:'Red criminal identificada por MileInvestiga: cinco actores vinculados con su nodo central',
+    tituloVisual:'Detección sobre la evidencia',
+    chips:[
+      {t:'Rostro',d:'Sospechoso identificado: alias «El Flaco», coincidencia 94%.'},
+      {t:'Placa',d:'Placa de la moto detectada y cruzada con cámaras de la ciudad.'},
+      {t:'Vehículo',d:'Moto negra, dos ocupantes, vista hace 12 minutos en un punto de control.'},
+      {t:'Red',d:'5 actores vinculados; El Flaco es el nodo central de la estructura.'}
+    ]
+  },
+  coordina:{
+    num:'03',nombre:'COORDINA',producto:'GusCoordina',
+    video:'assets/demo/v-coordina.mp4',poster:'assets/demo/paso-coordina.webp',
+    narr:'assets/demo/narr/scene2.mp3',
+    frase:'Policía, Gaula, Fiscalía y Alcaldía en un solo tablero, en tiempo real.',
+    altVideo:'Video de la línea Coordina: respuesta institucional coordinada en el Puesto de Mando Unificado',
+    visual:'pmu',
+    img:'assets/demo/coordina-pmu.webp',
+    altImg:'Tablero del Puesto de Mando Unificado con Policía, Gaula, Fiscalía y Alcaldía',
+    tituloVisual:'Puesto de Mando Unificado — estados en vivo',
+    chips:[
+      {t:'Policía',d:'Patrulla asignada · llega en 4 minutos por la Carrera 46.',estado:'En camino'},
+      {t:'Gaula',d:'Notificada: el caso es extorsión y queda adscrito a su línea.',estado:'Notificada'},
+      {t:'Fiscalía',d:'Fiscal de turno en línea, recibe la evidencia ya procesada.',estado:'En línea'},
+      {t:'Alcaldía',d:'Secretaría de Seguridad convocada al tablero del incidente.',estado:'Convocada'}
+    ]
+  },
+  predice:{
+    num:'04',nombre:'PREDICE',producto:'GabyPredice',
+    video:'assets/demo/v-predice.mp4',poster:'assets/demo/paso-predice.webp',
+    narr:'assets/demo/narr/scene3.mp3',
+    frase:'Le dice dónde y cuándo golpeará el delito la próxima semana.',
+    altVideo:'Video de la línea Predice: pronóstico de dónde y cuándo golpeará el delito',
+    visual:'senales',
+    img:'assets/demo/predice-ciudad.webp',
+    altImg:'Mapa de la ciudad con puntos calientes de criminalidad pronosticados para la próxima semana',
+    tituloVisual:'Señales del mapa predictivo',
+    chips:[
+      {t:'3 puntos calientes',d:'Tres zonas con riesgo alto para la próxima semana.'},
+      {t:'Heatmap horario',d:'La intensidad se concentra viernes entre 5 y 7 p. m.'},
+      {t:'89% confianza',d:'Pronóstico entrenado con 847 reportes históricos verificados.'}
+    ]
+  }
+};
+var MUSICAS={
+  escucha:'assets/demo/m1-suspenso.mp3',
+  investiga:'assets/demo/m1-suspenso.mp3',
+  coordina:'assets/demo/m2-construccion.mp3',
+  predice:'assets/demo/m3-confianza.mp3'
+};
+
+var params=new URLSearchParams(window.location.search);
+var linea=(params.get('linea')||'').toLowerCase();
+var cfg=LINEAS[linea];
+var prm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function $(id){return document.getElementById(id);}
+
+/* ── Línea no válida: mensaje mínimo, sin navegación ── */
+if(!cfg){
+  document.title='Línea no válida — FastAnalytics';
+  $('num').textContent='· ·';
+  $('nombre').textContent='—';
+  $('frase').textContent='Línea no especificada. Abra este pop-up con ?linea=escucha, ?linea=investiga, ?linea=coordina o ?linea=predice.';
+  $('frase').classList.add('text-slate-400');
+  $('video').style.display='none';
+  $('visual').style.display='none';
+  $('narrEstado').textContent='';
+}else{
+
+/* ── Identidad de la línea ── */
+document.title=cfg.num+' · '+cfg.nombre+' — FastAnalytics';
+$('num').textContent=cfg.num;
+$('nombre').textContent=cfg.nombre;
+$('producto').textContent=cfg.producto;
+$('frase').textContent=cfg.frase;
+
+/* ── Video protagonista ── */
+var video=$('video');
+video.poster=cfg.poster;
+video.setAttribute('aria-label',cfg.altVideo);
+var srcVideo=document.createElement('source');
+srcVideo.src=cfg.video;srcVideo.type='video/mp4';
+video.appendChild(srcVideo);
+if(!prm){video.muted=true;var pv=video.play();if(pv&&pv.catch)pv.catch(function(){/* el usuario tiene los controles */});}
+
+/* ── Narración con botón de altavoz si el autoplay se bloquea ── */
+var narr=new Audio(cfg.narr);narr.preload='auto';
+var btnNarr=$('btnNarr'),narrLabel=$('narrLabel'),narrIcon=$('narrIcon'),narrEstado=$('narrEstado');
+var musicaSonando=false,musicaVol=0.08;
+
+function estadoNarr(t){narrEstado.textContent=t||'';}
+function uiNarr(){
+  if(narr.paused){narrIcon.textContent='🔊';narrLabel.textContent='Escuchar narración';btnNarr.classList.add('pulse-suave');}
+  else{narrIcon.textContent='🔇';narrLabel.textContent='Silenciar narración';btnNarr.classList.remove('pulse-suave');}
+}
+function duck(on){var m=$('musica');if(!m||!musicaSonando)return;m.volume=on?musicaVol*0.4:musicaVol;}
+function narrPlay(){
+  var p=narr.play();
+  if(p&&p.catch)p.catch(function(err){
+    if(err&&err.name==='NotAllowedError'){btnNarr.hidden=false;estadoNarr('El navegador bloqueó el audio automático: toque el altavoz para escuchar la narración.');}
+    uiNarr();
+  });
+  duck(true);uiNarr();
+}
+narr.addEventListener('play',uiNarr);
+narr.addEventListener('pause',function(){duck(false);uiNarr();});
+narr.addEventListener('ended',function(){duck(false);estadoNarr('');uiNarr();});
+btnNarr.addEventListener('click',function(){
+  if(narr.paused){narr.currentTime=narr.currentTime||0;narrPlay();estadoNarr('');}
+  else{narr.pause();estadoNarr('');}
+});
+btnNarr.hidden=false;
+if(prm){estadoNarr('Movimiento reducido activo: la narración no arranca sola.');}
+else{narrPlay();}
+uiNarr();
+
+/* ── Música opcional muy baja ── */
+var musica=$('musica'),btnMusica=$('btnMusica'),musicDot=$('musicDot');
+musica.src=MUSICAS[linea]||'assets/demo/cinematic-theme.mp3';
+musica.volume=musicaVol;
+btnMusica.addEventListener('click',function(){
+  if(musica.paused){
+    musicaSonando=true;musica.volume=musicaVol;
+    var p=musica.play();if(p&&p.catch)p.catch(function(){musicaSonando=false;});
+    btnMusica.setAttribute('aria-pressed','true');musicDot.className='w-2 h-2 rounded-full flex-shrink-0 animate-pulse';musicDot.style.background='#2DD4BF';
+  }else{
+    musicaSonando=false;musica.pause();
+    btnMusica.setAttribute('aria-pressed','false');musicDot.className='w-2 h-2 rounded-full bg-slate-600 flex-shrink-0';musicDot.style.background='';
+  }
+});
+
+/* ── Cerrar: avisa al padre (pop-up en iframe), cierra ventana o retrocede ── */
+function cerrar(){
+  try{narr.pause();video.pause();musica.pause();}catch(e){}
+  try{window.parent.postMessage({tipo:'demo-linea:cerrar',linea:linea},'*');}catch(e){}
+  window.close();
+  if(window.history.length>1){window.history.back();}
+}
+$('btnCerrar').addEventListener('click',cerrar);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')cerrar();});
+
+/* ── Visualización secundaria propia de cada línea ── */
+var visual=$('visual');
+
+function chipBtn(c,i){
+  var b=document.createElement('button');
+  b.type='button';b.className='chip text-xs sm:text-sm font-bold px-3.5 py-2 rounded-full text-slate-300';
+  b.style.border='1px solid rgba(255,255,255,.15)';b.style.background='rgba(255,255,255,.03)';
+  b.setAttribute('aria-pressed','false');
+  b.textContent=c.t+(c.estado?' · '+c.estado:'');
+  b.addEventListener('click',function(){
+    var activo=b.getAttribute('aria-pressed')==='true';
+    visual.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed',activo?'false':'true');
+    detalle.textContent=activo?'':c.d;
+  });
+  return b;
+}
+
+var detalle=document.createElement('p');
+detalle.className='mt-3 text-sm text-slate-400 leading-relaxed min-h-[1.5em]';
+detalle.setAttribute('role','status');detalle.setAttribute('aria-live','polite');
+
+if(cfg.visual==='evidencias'){
+  /* Escucha: evidencias estructuradas (GPS, foto, video, audio) */
+  var tit=document.createElement('h2');
+  tit.className='text-xs font-extrabold tracking-[.2em] uppercase text-slate-500';
+  tit.textContent='Evidencia estructurada de cada reporte';
+  visual.appendChild(tit);
+  var grid=document.createElement('div');
+  grid.className='mt-3 grid grid-cols-2 lg:grid-cols-4 gap-3';
+  var ICONOS={
+    gps:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>',
+    foto:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M8 5l1.5-2h5L16 5"/></svg>',
+    video:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" aria-hidden="true"><rect x="2" y="6" width="13" height="12" rx="2"/><path d="M15 10l6-3v10l-6-3"/></svg>',
+    audio:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'
+  };
+  [{k:'gps',t:'GPS',v:'4.6097° N, 74.0817° O',s:'Ubicación exacta'},
+   {k:'foto',t:'Foto',v:'Panfleto de extorsión',s:'Recibida · 18:42'},
+   {k:'video',t:'Video',v:'Sospechoso en moto',s:'12 s · geolocalizado'},
+   {k:'audio',t:'Audio',v:'Voz del ciudadano',s:'Transcrita en vivo'}
+  ].forEach(function(ev){
+    var card=document.createElement('div');
+    card.className='rounded-xl border border-white/10 p-3.5';
+    card.style.background='rgba(255,255,255,.03)';
+    card.innerHTML='<div class="flex items-center gap-2">'+ICONOS[ev.k]+'<span class="text-xs font-extrabold tracking-wide" style="color:#2DD4BF">'+ev.t+'</span></div>'
+      +'<p class="mt-2 text-sm font-semibold text-white leading-snug">'+ev.v+'</p>'
+      +'<p class="mt-1 text-[11px] text-slate-500">'+ev.s+'</p>';
+    grid.appendChild(card);
+  });
+  visual.appendChild(grid);
+}else{
+  /* Investiga / Coordina / Predice: imagen propia + chips breves */
+  var tit2=document.createElement('h2');
+  tit2.className='text-xs font-extrabold tracking-[.2em] uppercase text-slate-500';
+  tit2.textContent=cfg.tituloVisual;
+  visual.appendChild(tit2);
+  var img=document.createElement('img');
+  img.src=cfg.img;img.alt=cfg.altImg;img.width=1024;img.height=576;img.loading='lazy';
+  img.className='mt-3 w-full rounded-2xl border border-white/10';
+  visual.appendChild(img);
+  var chips=document.createElement('div');
+  chips.className='mt-3 flex flex-wrap gap-2';
+  chips.setAttribute('role','group');
+  chips.setAttribute('aria-label',cfg.tituloVisual);
+  cfg.chips.forEach(function(c,i){chips.appendChild(chipBtn(c,i));});
+  visual.appendChild(chips);
+  visual.appendChild(detalle);
+}
+
+}
+})();
+</script>
+
+</body>
+</html>

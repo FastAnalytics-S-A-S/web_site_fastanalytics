@@ -78,7 +78,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-8 sm:mt-10">
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Escucha" data-escena="1" data-paso="0" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Escucha" data-linea="escucha" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-escucha.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Escucha: el ciudadano reporta desde Telegram o una llamada">
         </span>
@@ -89,7 +89,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
         </span>
       </button>
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Investiga" data-escena="1" data-paso="1" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Investiga" data-linea="investiga" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-investiga.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Investiga: identificación del sospechoso, su vehículo y su red">
         </span>
@@ -100,7 +100,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
         </span>
       </button>
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Coordina" data-escena="2" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Coordina" data-linea="coordina" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-coordina.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Coordina: tablero conjunto de Policía, Gaula, Fiscalía y Alcaldía">
         </span>
@@ -111,7 +111,7 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
         </span>
       </button>
 
-      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Predice" data-escena="3" aria-haspopup="dialog">
+      <button type="button" class="card text-left rounded-2xl overflow-hidden border border-white/10 bg-white/[.03] cursor-pointer" data-title="Predice" data-linea="predice" aria-haspopup="dialog">
         <span class="block overflow-hidden">
           <img src="assets/demo/paso-predice.webp" width="1024" height="640" loading="lazy" class="card-img w-full aspect-[8/5] object-cover" alt="Predice: pronóstico de dónde y cuándo golpeará el delito">
         </span>
@@ -154,11 +154,10 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
   function openModal(trigger){
     lastTrigger=trigger;
     var title=trigger.getAttribute('data-title');
-    var escena=trigger.getAttribute('data-escena')||'1';
-    var paso=trigger.getAttribute('data-paso');
+    var linea=trigger.getAttribute('data-linea');
     modalTitle.textContent=title+' — demo inmersiva';
     frame.setAttribute('title','Demo inmersiva: '+title);
-    frame.src='demo-seguridad-urbana-completa.html?popup=1&escena='+encodeURIComponent(escena)+(paso!==null?'&paso='+encodeURIComponent(paso):'');
+    frame.src='demo-linea.html?linea='+encodeURIComponent(linea);
     loading.hidden=false;
     modal.showModal();
     closeBtn.focus();
@@ -169,8 +168,11 @@ dialog::backdrop{background:rgba(8,12,20,.85);backdrop-filter:blur(6px)}
     if(lastTrigger){lastTrigger.focus();lastTrigger=null;}
   }
 
+  window.addEventListener('message',function(e){
+    if(e.data&&e.data.tipo==='demo-linea:cerrar')closeModal();
+  });
   frame.addEventListener('load',function(){loading.hidden=true;});
-  document.querySelectorAll('[data-escena]').forEach(function(btn){
+  document.querySelectorAll('[data-linea]').forEach(function(btn){
     btn.addEventListener('click',function(){openModal(btn);});
   });
   closeBtn.addEventListener('click',closeModal);
