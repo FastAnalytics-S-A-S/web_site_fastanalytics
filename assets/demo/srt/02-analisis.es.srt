@@ -1,0 +1,19 @@
+1
+00:00:00,500 --> 00:00:06,405
+MileInvestiga: más de veinte modelos de analítica y aprendizaje automático procesan la evidencia
+
+2
+00:00:06,405 --> 00:00:12,311
+en segundos — rostros, placas, transcripción y grafos de redes criminales.
+
+3
+00:00:12,711 --> 00:00:16,395
+AlejoGeo: georreferencia la evidencia multimodal y la cruza con fuentes abiertas y las bases de
+
+4
+00:00:16,395 --> 00:00:20,080
+datos del cliente.
+
+5
+00:00:20,280 --> 00:00:24,449
+Quién, dónde, cuándo y con quién. Evidencia lista para actuar.

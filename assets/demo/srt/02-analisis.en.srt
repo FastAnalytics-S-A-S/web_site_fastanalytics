@@ -1,0 +1,19 @@
+1
+00:00:00,500 --> 00:00:06,405
+MileInvestiga: more than twenty analytics and machine learning models process the
+
+2
+00:00:06,405 --> 00:00:12,311
+evidence in seconds — faces, plates, transcription and criminal network graphs.
+
+3
+00:00:12,711 --> 00:00:16,395
+AlejoGeo: it georeferences the multimodal evidence and cross-references
+
+4
+00:00:16,395 --> 00:00:20,080
+it with open sources and the client's databases.
+
+5
+00:00:20,280 --> 00:00:24,449
+Who, where, when and with whom. Evidence ready to act on.

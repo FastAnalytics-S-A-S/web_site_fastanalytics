@@ -437,3 +437,10 @@ En previews locales, el formulario de agenda apunta a `http://<host>:8787/demo-r
 - **Commit 15e0a9a** — Tema claro en la portada; nuevas secciones «Nuestra visión» y «Resultados, no promesas»; 4 tarjetas de líneas con imagen; footer reorganizado por taxonomía.
 - **Agendamiento de Asistentes de IA**: `asistentes-ia.html#agendar` (9 preguntas de preparación) → `POST api.fastanalytics.co/agenda-asistente` → sala Jitsi `meet.fastanalytics.co/asistente-<hash>` + correos al cliente y a `hola@fastanalytics.co`.
 - README actualizado: estructura de páginas, flujo de agendamiento y notas de mantenimiento (versionado `styles.css?v=N`, assets pesados, no commitear `.bak`).
+
+### 2026-11-13 (33) — Producción cinematográfica demo_seguridad_v1 en la web
+- Nuevos 5 videos institucionales (prod. servidor `/mnt/modelos/demo_seguridad_v1/`, voces F5 + música original, subtítulos ES quemados −16 LUFS): `00-intro.mp4` (hero), `01-datos.mp4` (Escucha), `02-analisis.mp4` (Investiga), `03-mando.mp4` (Coordina), `04-anticipacion.mp4` (Predice) en `assets/demo/`.
+- `demo-seguridad-urbana.html`: video hero → `00-intro.mp4` con póster propio y tracks EN/FR (`assets/demo/srt/00-intro.{en,fr}.srt`); queda el demo anterior `video-ecosistema-sdr.mp4` como histórico (sin referenciar).
+- `demo-linea.html`: cada línea reproduce su pieza nueva con póster y tracks EN/FR (`assets/demo/srt/<pieza>.{en,fr}.srt`). Se elimina la narración MP3 separada y el botón de música: la voz y el bed ya van integrados en cada video (hint bajo el reproductor indica activar sonido / CC).
+- Pósters `assets/demo/poster-*.jpg` extraídos del primer frame de cada pieza.
+- SRT ES disponibles en `assets/demo/srt/*.es.srt` para descarga futura (en la web no se cargan: ES ya va quemado en el video).

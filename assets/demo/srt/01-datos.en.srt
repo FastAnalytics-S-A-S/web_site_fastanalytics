@@ -1,0 +1,19 @@
+1
+00:00:00,500 --> 00:00:05,016
+AlejoSeguro: citizens report via Telegram or app — photo,
+
+2
+00:00:05,016 --> 00:00:09,531
+video, audio and location, georeferenced instantly.
+
+3
+00:00:09,931 --> 00:00:14,387
+CatheAsiste: no data or smartphone? It answers the call, converses
+
+4
+00:00:14,387 --> 00:00:18,842
+naturally and turns the voice into the same structured data.
+
+5
+00:00:19,042 --> 00:00:22,509
+Two channels, the same data. No one is left out.

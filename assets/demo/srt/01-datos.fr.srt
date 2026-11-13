@@ -1,0 +1,19 @@
+1
+00:00:00,500 --> 00:00:05,016
+AlejoSeguro : le citoyen signale via Telegram ou l'application — photo,
+
+2
+00:00:05,016 --> 00:00:09,531
+video, audio et localisation, georeferences instantanement.
+
+3
+00:00:09,931 --> 00:00:14,387
+CatheAsiste : sans donnees ni smartphone ? Elle repond a l'appel, converse
+
+4
+00:00:14,387 --> 00:00:18,842
+naturellement et transforme la voix en la meme donnee structuree.
+
+5
+00:00:19,042 --> 00:00:22,509
+Deux canaux, la meme donnee. Personne n'est laisse de cote.

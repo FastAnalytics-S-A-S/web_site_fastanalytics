@@ -1,0 +1,15 @@
+1
+00:00:00,500 --> 00:00:06,297
+GusCoordina: every report activates a unified command post — six specialized
+
+2
+00:00:06,297 --> 00:00:12,095
+agents coordinate the institutions while the incident is underway.
+
+3
+00:00:12,495 --> 00:00:16,910
+Web dashboard, projection screen and geodashboard: everyone sees the same
+
+4
+00:00:16,910 --> 00:00:21,326
+situation and decides together. Response goes from hours to minutes.

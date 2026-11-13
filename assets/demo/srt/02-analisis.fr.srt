@@ -1,0 +1,19 @@
+1
+00:00:00,500 --> 00:00:06,405
+MileInvestiga : plus de vingt modeles d'analytique et d'apprentissage automatique traitent la preuve
+
+2
+00:00:06,405 --> 00:00:12,311
+en quelques secondes — visages, plaques, transcription et graphes de reseaux criminels.
+
+3
+00:00:12,711 --> 00:00:16,395
+AlejoGeo : il georeference la preuve multimodale et la croise
+
+4
+00:00:16,395 --> 00:00:20,080
+avec des sources ouvertes et les bases de donnees du client.
+
+5
+00:00:20,280 --> 00:00:24,449
+Qui, ou, quand et avec qui. Des preuves pretes a l'action.

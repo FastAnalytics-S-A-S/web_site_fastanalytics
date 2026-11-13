@@ -1,0 +1,15 @@
+1
+00:00:00,500 --> 00:00:06,297
+GusCoordina : chaque signalement active un poste de commandement unifie — six agents
+
+2
+00:00:06,297 --> 00:00:12,095
+specialises articulent les institutions pendant que l'incident est en cours.
+
+3
+00:00:12,495 --> 00:00:16,910
+Tableau web, ecran de projection et geodashboard : tout le monde regarde la
+
+4
+00:00:16,910 --> 00:00:21,326
+meme situation et decide ensemble. La reponse passe d'heures a minutes.

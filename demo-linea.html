@@ -41,11 +41,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:#E2E8
       <p id="producto" class="mt-1 text-xs font-bold tracking-wide" style="color:#006D6D"></p>
     </div>
     <div class="flex items-center gap-2 flex-shrink-0">
-      <button type="button" id="btnMusica" aria-pressed="false" title="Música de fondo muy baja"
-        class="flex items-center gap-2 text-xs font-semibold px-3 h-10 rounded-full transition hover:brightness-125"
-        style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04)">
-        <span id="musicDot" class="w-2 h-2 rounded-full bg-slate-600" aria-hidden="true"></span>🎵 <span class="hidden sm:inline">Música</span>
-      </button>
       <button type="button" id="btnCerrar" title="Cerrar" aria-label="Cerrar demo"
         class="w-10 h-10 rounded-full flex items-center justify-center text-slate-300 transition hover:text-white hover:brightness-125"
         style="border:1px solid rgba(255,255,255,.18);background:rgba(8,12,20,.72)">
@@ -61,23 +56,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:#E2E8
   <video id="video" class="mt-4 w-full aspect-video rounded-2xl border border-white/10 bg-black"
     controls playsinline loop preload="metadata" width="1280" height="720"></video>
 
-  <!-- Narración: el botón de altavoz aparece si el autoplay se bloquea -->
-  <div class="mt-3 flex flex-wrap items-center gap-3">
-    <button type="button" id="btnNarr" hidden
-      class="flex items-center gap-2 text-sm font-bold px-4 h-10 rounded-full text-white transition hover:brightness-125"
-      style="border:1px solid rgba(45,212,191,.45);background:rgba(0,109,109,.25)">
-      <span id="narrIcon" aria-hidden="true">🔊</span><span id="narrLabel">Escuchar narración</span>
-    </button>
-    <span id="narrEstado" class="text-xs text-slate-500" role="status" aria-live="polite"></span>
-  </div>
+  <!-- El video lleva narración y música integradas: basta activar el sonido en el reproductor -->
+  <p id="hintSonido" class="mt-3 text-xs text-slate-500">El video tiene narración y música: active el sonido en el reproductor (CC: English / Français).</p>
 
   <!-- Visualización secundaria propia de la línea -->
   <section id="visual" class="mt-6" aria-label="Visualización de la línea"></section>
 
   <p class="mt-6 text-[11px] text-slate-600">Simulación ilustrativa · FastAnalytics</p>
 </main>
-
-<audio id="musica" src="assets/demo/cinematic-theme.mp3" loop preload="none"></audio>
 
 <script>
 (function(){
@@ -87,16 +73,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:#E2E8
 var LINEAS={
   escucha:{
     num:'01',nombre:'ESCUCHA',producto:'AlejoSeguro + CatheAsiste',
-    video:'assets/demo/v-escucha.mp4',poster:'assets/demo/paso-escucha.webp',
-    narr:'assets/demo/narr/scene1.mp3',
+    video:'assets/demo/01-datos.mp4',poster:'assets/demo/poster-01-datos.jpg',srt:'01-datos',
     frase:'El ciudadano reporta por Telegram o llamada, sin instalar nada; cada reporte llega con evidencia y GPS.',
     altVideo:'Video de la línea Escucha: el ciudadano reporta por Telegram o llamada',
     visual:'evidencias'
   },
   investiga:{
     num:'02',nombre:'INVESTIGA',producto:'MileInvestiga',
-    video:'assets/demo/v-investiga.mp4',poster:'assets/demo/paso-investiga.webp',
-    narr:'assets/demo/narr/s1mile.mp3',
+    video:'assets/demo/02-analisis.mp4',poster:'assets/demo/poster-02-analisis.jpg',srt:'02-analisis',
     frase:'Identifica al sospechoso, su vehículo y su red en segundos, no en semanas.',
     altVideo:'Video de la línea Investiga: identificación del sospechoso, su vehículo y su red',
     visual:'deteccion',
@@ -112,8 +96,7 @@ var LINEAS={
   },
   coordina:{
     num:'03',nombre:'COORDINA',producto:'GusCoordina',
-    video:'assets/demo/v-coordina.mp4',poster:'assets/demo/paso-coordina.webp',
-    narr:'assets/demo/narr/scene2.mp3',
+    video:'assets/demo/03-mando.mp4',poster:'assets/demo/poster-03-mando.jpg',srt:'03-mando',
     frase:'Gobiernos y entidades en un solo tablero, en tiempo real.',
     altVideo:'Video de la línea Coordina: respuesta coordinada en el Centro de Coordinación Conjunta',
     visual:'pmu',
@@ -129,8 +112,7 @@ var LINEAS={
   },
   predice:{
     num:'04',nombre:'PREDICE',producto:'GabyPredice',
-    video:'assets/demo/v-predice.mp4',poster:'assets/demo/paso-predice.webp',
-    narr:'assets/demo/narr/scene3.mp3',
+    video:'assets/demo/04-anticipacion.mp4',poster:'assets/demo/poster-04-anticipacion.jpg',srt:'04-anticipacion',
     frase:'Le dice dónde y cuándo golpeará el delito la próxima semana.',
     altVideo:'Video de la línea Predice: pronóstico de dónde y cuándo golpeará el delito',
     visual:'senales',
@@ -143,12 +125,6 @@ var LINEAS={
       {t:'89% confianza',d:'Pronóstico entrenado con 847 reportes históricos verificados.'}
     ]
   }
-};
-var MUSICAS={
-  escucha:'assets/demo/m1-suspenso.mp3',
-  investiga:'assets/demo/m1-suspenso.mp3',
-  coordina:'assets/demo/m2-construccion.mp3',
-  predice:'assets/demo/m3-confianza.mp3'
 };
 
 var params=new URLSearchParams(window.location.search);
@@ -167,7 +143,7 @@ if(!cfg){
   $('frase').classList.add('text-slate-400');
   $('video').style.display='none';
   $('visual').style.display='none';
-  $('narrEstado').textContent='';
+  $('hintSonido').style.display='none';
 }else{
 
 /* ── Identidad de la línea ── */
@@ -177,64 +153,24 @@ $('nombre').textContent=cfg.nombre;
 $('producto').textContent=cfg.producto;
 $('frase').textContent=cfg.frase;
 
-/* ── Video protagonista ── */
+/* ── Video protagonista: narración y música ya van integradas en la pieza ── */
 var video=$('video');
 video.poster=cfg.poster;
 video.setAttribute('aria-label',cfg.altVideo);
+[['en','English'],['fr','Français']].forEach(function(t){
+  var tr=document.createElement('track');
+  tr.kind='subtitles';tr.srclang=t[0];tr.label=t[1];
+  tr.src='assets/demo/srt/'+cfg.srt+'.'+t[0]+'.srt';
+  video.appendChild(tr);
+});
 var srcVideo=document.createElement('source');
 srcVideo.src=cfg.video;srcVideo.type='video/mp4';
 video.appendChild(srcVideo);
 if(!prm){video.muted=true;var pv=video.play();if(pv&&pv.catch)pv.catch(function(){/* el usuario tiene los controles */});}
 
-/* ── Narración con botón de altavoz si el autoplay se bloquea ── */
-var narr=new Audio(cfg.narr);narr.preload='auto';
-var btnNarr=$('btnNarr'),narrLabel=$('narrLabel'),narrIcon=$('narrIcon'),narrEstado=$('narrEstado');
-var musicaSonando=false,musicaVol=0.08;
-
-function estadoNarr(t){narrEstado.textContent=t||'';}
-function uiNarr(){
-  if(narr.paused){narrIcon.textContent='🔊';narrLabel.textContent='Escuchar narración';btnNarr.classList.add('pulse-suave');}
-  else{narrIcon.textContent='🔇';narrLabel.textContent='Silenciar narración';btnNarr.classList.remove('pulse-suave');}
-}
-function duck(on){var m=$('musica');if(!m||!musicaSonando)return;m.volume=on?musicaVol*0.4:musicaVol;}
-function narrPlay(){
-  var p=narr.play();
-  if(p&&p.catch)p.catch(function(err){
-    if(err&&err.name==='NotAllowedError'){btnNarr.hidden=false;estadoNarr('El navegador bloqueó el audio automático: toque el altavoz para escuchar la narración.');}
-    uiNarr();
-  });
-  duck(true);uiNarr();
-}
-narr.addEventListener('play',uiNarr);
-narr.addEventListener('pause',function(){duck(false);uiNarr();});
-narr.addEventListener('ended',function(){duck(false);estadoNarr('');uiNarr();});
-btnNarr.addEventListener('click',function(){
-  if(narr.paused){narr.currentTime=narr.currentTime||0;narrPlay();estadoNarr('');}
-  else{narr.pause();estadoNarr('');}
-});
-btnNarr.hidden=false;
-if(prm){estadoNarr('Movimiento reducido activo: la narración no arranca sola.');}
-else{narrPlay();}
-uiNarr();
-
-/* ── Música opcional muy baja ── */
-var musica=$('musica'),btnMusica=$('btnMusica'),musicDot=$('musicDot');
-musica.src=MUSICAS[linea]||'assets/demo/cinematic-theme.mp3';
-musica.volume=musicaVol;
-btnMusica.addEventListener('click',function(){
-  if(musica.paused){
-    musicaSonando=true;musica.volume=musicaVol;
-    var p=musica.play();if(p&&p.catch)p.catch(function(){musicaSonando=false;});
-    btnMusica.setAttribute('aria-pressed','true');musicDot.className='w-2 h-2 rounded-full flex-shrink-0 animate-pulse';musicDot.style.background='#2DD4BF';
-  }else{
-    musicaSonando=false;musica.pause();
-    btnMusica.setAttribute('aria-pressed','false');musicDot.className='w-2 h-2 rounded-full bg-slate-600 flex-shrink-0';musicDot.style.background='';
-  }
-});
-
 /* ── Cerrar: avisa al padre (pop-up en iframe), cierra ventana o retrocede ── */
 function cerrar(){
-  try{narr.pause();video.pause();musica.pause();}catch(e){}
+  try{video.pause();}catch(e){}
   try{window.parent.postMessage({tipo:'demo-linea:cerrar',linea:linea},'*');}catch(e){}
   window.close();
   if(window.history.length>1){window.history.back();}

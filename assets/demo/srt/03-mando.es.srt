@@ -1,0 +1,15 @@
+1
+00:00:00,500 --> 00:00:06,297
+GusCoordina: cada reporte activa un puesto de mando unificado — seis agentes especializados
+
+2
+00:00:06,297 --> 00:00:12,095
+articulan a las instituciones mientras el incidente está en curso.
+
+3
+00:00:12,495 --> 00:00:16,910
+Tablero web, pantalla de proyección y geodashboard: todos miran la misma situación y deciden
+
+4
+00:00:16,910 --> 00:00:21,326
+juntos. La respuesta pasa de horas a minutos.
