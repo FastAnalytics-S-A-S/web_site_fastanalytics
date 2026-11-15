@@ -3878,6 +3878,44 @@ a.science-link:focus-visible .science-link-arrow {
 }
 
 /* --- S1.5 · Eneágono Decisional (sección propia: el método) --- */
+.metodo-cols {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 44px;
+  align-items: start;
+  margin-top: 26px;
+  text-align: left;
+}
+
+.metodo-col-text .metodo-lead {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.metodo-col-text .metodo-desc {
+  margin: 16px 0 0;
+  max-width: none;
+}
+
+.metodo-col-fn .metodo-fn {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.metodo-col-fn .metodo-fn-note {
+  margin: 14px 0 0;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .metodo-cols {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
 .metodo .metodo-lead {
   font-size: 1.3rem;
   font-weight: 600;
@@ -3929,8 +3967,10 @@ a.science-link:focus-visible .science-link-arrow {
   font-family: Georgia, 'Times New Roman', serif;
   font-style: italic;
   font-weight: 800;
-  font-size: 1.25em;
+  font-size: 1.7em;
+  line-height: 1;
   color: var(--accent);
+  text-shadow: 0 0 20px rgba(232, 148, 62, 0.45);
 }
 
 .metodo-stage {
@@ -4150,9 +4190,9 @@ a.science-link:focus-visible .science-link-arrow {
   box-shadow: var(--shadow);
 }
 .sol-agents {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 14px;
   margin-top: auto;
 }
 .sol-agent-fn {
@@ -4210,7 +4250,7 @@ a.science-link:focus-visible .science-link-arrow {
   font-weight: 700;
   color: var(--text);
 }
-@media (max-width: 900px) {
+@media (max-width: 760px) {
   .sol-grid { grid-template-columns: 1fr; max-width: 640px; margin-left: auto; margin-right: auto; }
 }
 @media (max-width: 560px) {
