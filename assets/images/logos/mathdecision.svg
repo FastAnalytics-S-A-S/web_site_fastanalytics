@@ -36,7 +36,7 @@
   </g>
 
   <!-- Casa matriz -->
-  <text x="152" y="36" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#8888A0" letter-spacing="2.6">FASTANALYTICS S.A.S.</text>
+  <text x="152" y="45" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#8888A0" letter-spacing="2.6">FASTANALYTICS S.A.S.</text>
 
   <!-- Separador superior -->
   <line x1="152" y1="58" x2="384" y2="58" stroke="#006D6D" stroke-width="0.75" opacity="0.25"/>
