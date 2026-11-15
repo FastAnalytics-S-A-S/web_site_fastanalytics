@@ -88,6 +88,22 @@ h3{font-size:17px;font-weight:700}
 .proofrow .plabel .bdot{width:8px;height:8px;border-radius:50%;background:#10B981;animation:blink 1.6s infinite}
 .pitem{font-size:12px;color:#cfe8e2}
 .pitem b{color:#34d399;font-size:15px}
+/* Carrusel de noticias verificadas */
+.newscar{margin-top:12px}
+.newsstage{position:relative;min-height:96px}
+.newsslide{position:absolute;inset:0;display:flex;align-items:center;gap:22px;opacity:0;transform:translateX(24px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
+.newsslide.active{opacity:1;transform:none;pointer-events:auto}
+.newsnum{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:64px;line-height:1;color:#E8943E;min-width:110px;text-align:center}
+.newsbody{flex:1}
+.newstxt{margin:0 0 8px;font-size:16px;font-weight:700;color:#F5FCFA;line-height:1.45}
+.newssrc{font-size:13px;font-weight:600;color:#3FC1B4;text-decoration:none}
+.newssrc:hover{color:#E8943E;text-decoration:underline}
+.newsctrl{display:flex;align-items:center;gap:16px;margin-top:14px}
+.newsarrow{width:38px;height:38px;border-radius:50%;border:1px solid rgba(63,193,180,.4);background:transparent;color:#3FC1B4;font-size:1.2rem;cursor:pointer;transition:all .3s ease}
+.newsarrow:hover{background:#3FC1B4;color:#071418}
+.newsdots{display:flex;gap:9px}
+.newsdot{width:9px;height:9px;border-radius:50%;border:none;padding:0;background:rgba(63,193,180,.25);cursor:pointer;transition:all .3s ease}
+.newsdot.active{background:#E8943E;transform:scale(1.25)}
 .plinks{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .plinks a{font-size:11px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--mut);text-decoration:none;transition:.15s}
 .plinks a:hover{color:#34d399;border-color:rgba(16,185,129,.5)}
@@ -452,13 +468,45 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:26px 0 40px;margin-top
       <div class="proofstrip">
         <div class="proofrow">
           <span class="plabel"><span class="bdot"></span><span data-i18n="proofT">Esto ya pasó — verifíquelo — </span></span>
-          <span class="pitem"><b>772</b> <span data-i18n="proof1">municipios sin un solo homicidio · dic-2021</span></span>
-          <span class="pitem"><b>19</b> <span data-i18n="proof2">años sin un diciembre tan seguro</span></span>
-          <span class="pitem"><b>18</b> <span data-i18n="proof3">años — mínimo de homicidios en Bogotá</span></span>
-          <span class="pitem"><b>29</b> <span data-i18n="proof4">años — récord en Cali</span></span>
+        </div>
+        <div class="newscar" id="newscar">
+          <div class="newsstage">
+            <div class="newsslide">
+              <div class="newsnum">772</div>
+              <div class="newsbody">
+                <p class="newstxt" data-i18n="proof1">municipios sin un solo homicidio · dic-2021</p>
+                <a class="newssrc" href="https://www.semana.com/nacion/articulo/colombia-vivio-el-diciembre-mas-seguro-de-los-ultimos-19-anos-policia/202226/" target="_blank" rel="noopener">Semana · 1 ene 2022 ↗</a>
+              </div>
+            </div>
+            <div class="newsslide">
+              <div class="newsnum">19</div>
+              <div class="newsbody">
+                <p class="newstxt" data-i18n="proof2">años sin un diciembre tan seguro</p>
+                <a class="newssrc" href="https://www.radionacional.co/actualidad/diciembre-2021-el-mas-seguro-ultimos-19-anos" target="_blank" rel="noopener">Radio Nacional · 1 ene 2022 ↗</a>
+              </div>
+            </div>
+            <div class="newsslide">
+              <div class="newsnum">18</div>
+              <div class="newsbody">
+                <p class="newstxt" data-i18n="proof3">años — mínimo de homicidios en Bogotá</p>
+                <a class="newssrc" href="https://www.semana.com/nacion/articulo/en-diciembre-los-homicidios-en-bogota-cayeron-a-su-nivel-mas-bajo-en-los-ultimos-18-anos/202206/" target="_blank" rel="noopener">Semana · 4 ene 2022 ↗</a>
+              </div>
+            </div>
+            <div class="newsslide">
+              <div class="newsnum">29</div>
+              <div class="newsbody">
+                <p class="newstxt" data-i18n="proof4">años — récord en Cali</p>
+                <a class="newssrc" href="https://www.elpais.com.co/judicial/cali-registra-por-primera-vez-en-29-anos-dos-dias-consecutivos-sin-homicidios-en-diciembre.html" target="_blank" rel="noopener">El País Cali · 20 dic 2024 ↗</a>
+              </div>
+            </div>
+          </div>
+          <div class="newsctrl">
+            <button type="button" class="newsarrow" id="newsPrev" aria-label="Noticia anterior">‹</button>
+            <div class="newsdots" id="newsDots"></div>
+            <button type="button" class="newsarrow" id="newsNext" aria-label="Noticia siguiente">›</button>
+          </div>
         </div>
         <div class="plinks mt8">
-          <a href="https://www.semana.com/nacion/articulo/colombia-vivio-el-diciembre-mas-seguro-de-los-ultimos-19-anos-policia/202226/" target="_blank" rel="noopener">Semana ↗</a>
           <a href="https://www.eltiempo.com/bogota/balance-de-seguridad-de-2021-en-bogota-homicidio-y-hurto-bajaron-642871" target="_blank" rel="noopener">El Tiempo ↗</a>
           <a href="https://bogota.gov.co/mi-ciudad/seguridad/bogota-rompio-la-tendencia-del-delito-y-redujo-el-hurto-en-bogota" target="_blank" rel="noopener">Bogotá.gov.co ↗</a>
           <a href="https://www.cali.gov.co/seguridad/publicaciones/170504/cali-registro-reduccion-historica-en-el-numero-de-homicidios/" target="_blank" rel="noopener">Cali.gov.co ↗</a>
@@ -988,6 +1036,36 @@ document.addEventListener('DOMContentLoaded',function(){
   var vt=document.getElementById('voiceToggle');if(vt){var t0=voiceMuted?TT('voiceOn','Activar narración'):TT('voiceOff','Silenciar narración');vt.title=t0;vt.setAttribute('aria-label',t0)}
   if(REDUCED){document.querySelectorAll('svg').forEach(function(s){try{s.pauseAnimations()}catch(e){}})}
 });
+</script>
+<script>
+/* Carrusel de noticias verificadas */
+(function(){
+  var car=document.getElementById('newscar');
+  if(!car)return;
+  var slides=car.querySelectorAll('.newsslide');
+  var dotsBox=document.getElementById('newsDots');
+  var idx=0,timer=null;
+  var dots=[];
+  slides.forEach(function(_,i){
+    var d=document.createElement('button');
+    d.type='button';
+    d.className='newsdot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Noticia '+(i+1));
+    d.addEventListener('click',function(){go(i);restart()});
+    dotsBox.appendChild(d);dots.push(d);
+  });
+  function go(i){
+    idx=(i+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle('active',k===idx)});
+    dots.forEach(function(d,k){d.classList.toggle('active',k===idx)});
+  }
+  function restart(){if(timer)clearInterval(timer);timer=setInterval(function(){go(idx+1)},5000)}
+  document.getElementById('newsPrev').addEventListener('click',function(){go(idx-1);restart()});
+  document.getElementById('newsNext').addEventListener('click',function(){go(idx+1);restart()});
+  car.addEventListener('mouseenter',function(){if(timer)clearInterval(timer)});
+  car.addEventListener('mouseleave',restart);
+  restart();
+})();
 </script>
 </body>
 </html>
