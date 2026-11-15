@@ -410,6 +410,21 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !presModal.hidden) closePresModal();
     });
+    // Mientras el video corporativo no esté publicado, avisar con elegancia
+    presVideo.addEventListener('error', function () {
+      var dialog = presVideo.closest('.pres-dialog');
+      if (dialog && !dialog.querySelector('.pres-soon')) {
+        var msg = document.createElement('p');
+        msg.className = 'pres-soon';
+        msg.setAttribute('data-es', 'La presentación corporativa estará disponible muy pronto.');
+        msg.setAttribute('data-en', 'The corporate presentation will be available very soon.');
+        msg.setAttribute('data-fr', 'La présentation d&#8217;entreprise sera très bientôt disponible.');
+        var lang = document.documentElement.lang === 'en' ? 'data-en' : (document.documentElement.lang === 'fr' ? 'data-fr' : 'data-es');
+        msg.textContent = msg.getAttribute(lang);
+        presVideo.style.display = 'none';
+        dialog.appendChild(msg);
+      }
+    });
   }
 
 })();

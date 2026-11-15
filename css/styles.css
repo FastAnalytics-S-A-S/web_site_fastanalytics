@@ -4627,6 +4627,14 @@ a.science-link:focus-visible .science-link-arrow {
 body.pres-open {
   overflow: hidden;
 }
+.pres-soon {
+  margin: 0;
+  padding: 72px 28px;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(245, 252, 250, 0.85);
+}
 @media (max-width: 760px) {
   .acad-band {
     grid-template-columns: 1fr;
