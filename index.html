@@ -237,6 +237,7 @@
       <p class="hero-subtitle animate-on-scroll" data-es="FastAnalytics es una empresa de investigación, ciencia y tecnología que combina el <strong class=&quot;hero-hl&quot;>modelado matemático</strong>, la <strong class=&quot;hero-hl&quot;>analítica de datos</strong> y la <strong class=&quot;hero-hl&quot;>inteligencia artificial</strong> para generar <strong class=&quot;hero-hl hero-hl--accent&quot;>predicción estratégica</strong>." data-en="FastAnalytics is a research, science and technology company that combines <strong class=&quot;hero-hl&quot;>mathematical modeling</strong>, <strong class=&quot;hero-hl&quot;>data analytics</strong> and <strong class=&quot;hero-hl&quot;>artificial intelligence</strong> to generate <strong class=&quot;hero-hl hero-hl--accent&quot;>strategic foresight</strong>." data-fr="FastAnalytics est une entreprise de recherche, de science et de technologie qui combine la <strong class=&quot;hero-hl&quot;>modélisation mathématique</strong>, l&#8217;<strong class=&quot;hero-hl&quot;>analytique des données</strong> et l&#8217;<strong class=&quot;hero-hl&quot;>intelligence artificielle</strong> pour générer de la <strong class=&quot;hero-hl hero-hl--accent&quot;>prédiction stratégique</strong>.">FastAnalytics es una empresa de investigación, ciencia y tecnología que combina el <strong class="hero-hl">modelado matemático</strong>, la <strong class="hero-hl">analítica de datos</strong> y la <strong class="hero-hl">inteligencia artificial</strong> para generar <strong class="hero-hl hero-hl--accent">predicción estratégica</strong>.</p>
       <div class="hero-cta hero-cta--solo animate-on-scroll">
         <a href="#agenda" class="btn btn-primary btn-lg" data-es="Hablemos de su proyecto" data-en="Let&#8217;s talk about your project" data-fr="Parlons de votre projet">Hablemos de su proyecto</a>
+        <button type="button" class="btn btn-outline btn-lg" id="openPres" data-es="▶ Ver la presentación" data-en="▶ Watch the presentation" data-fr="▶ Voir la présentation">▶ Ver la presentación</button>
       </div>
     </div>
   </section>
@@ -597,6 +598,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- ========== MODAL: PRESENTACIÓN DE LA EMPRESA ========== -->
+  <div class="pres-modal" id="presModal" role="dialog" aria-modal="true" aria-label="Presentación de FastAnalytics" hidden>
+    <div class="pres-backdrop" data-close></div>
+    <div class="pres-dialog">
+      <button type="button" class="pres-close" data-close aria-label="Cerrar presentación">×</button>
+      <video id="presVideo" src="assets/demo/00-intro.mp4" poster="assets/demo/poster-00-intro.jpg" controls playsinline preload="metadata"></video>
+    </div>
+  </div>
 
   <!-- ========== MODAL: AGENDA TU DEMO ========== -->
   <div class="agenda-modal" id="agendaModal" role="dialog" aria-modal="true" aria-hidden="true">

@@ -386,4 +386,30 @@
     });
   }
 
+  // ========== MODAL: PRESENTACIÓN DE LA EMPRESA ==========
+  var presModal = document.getElementById('presModal');
+  var presVideo = document.getElementById('presVideo');
+  var openPres = document.getElementById('openPres');
+
+  if (presModal && presVideo && openPres) {
+    function openPresModal() {
+      presModal.hidden = false;
+      document.body.classList.add('pres-open');
+      presVideo.play().catch(function () {});
+    }
+    function closePresModal() {
+      presVideo.pause();
+      presVideo.currentTime = 0;
+      presModal.hidden = true;
+      document.body.classList.remove('pres-open');
+    }
+    openPres.addEventListener('click', openPresModal);
+    presModal.querySelectorAll('[data-close]').forEach(function (el) {
+      el.addEventListener('click', closePresModal);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !presModal.hidden) closePresModal();
+    });
+  }
+
 })();

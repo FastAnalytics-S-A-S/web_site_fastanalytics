@@ -4573,6 +4573,60 @@ a.science-link:focus-visible .science-link-arrow {
   font-weight: 700;
   color: var(--accent);
 }
+
+/* Modal de la presentación de la empresa (video maestro) */
+.pres-modal[hidden] {
+  display: none;
+}
+.pres-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.pres-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 20, 24, 0.82);
+}
+.pres-dialog {
+  position: relative;
+  width: min(960px, 100%);
+  background: #071418;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+.pres-dialog video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.pres-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(7, 20, 24, 0.65);
+  color: #F5FCFA;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.pres-close:hover {
+  background: #E8943E;
+}
+body.pres-open {
+  overflow: hidden;
+}
 @media (max-width: 760px) {
   .acad-band {
     grid-template-columns: 1fr;
