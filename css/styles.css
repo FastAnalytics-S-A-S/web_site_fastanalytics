@@ -1983,6 +1983,15 @@ ul {
   color: var(--text-muted);
 }
 
+.footer-lema .lema-a {
+  color: var(--primary);
+  font-weight: 700;
+}
+.footer-lema .lema-b {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .footer-founder {
   color: var(--text-muted);
   text-decoration: none;
