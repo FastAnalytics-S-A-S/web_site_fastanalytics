@@ -4422,6 +4422,17 @@ a.science-link:focus-visible .science-link-arrow {
   font-size: 1.3rem;
   font-style: normal;
 }
+.aliado-img {
+  max-width: 210px;
+  max-height: 84px;
+  object-fit: contain;
+}
+.acad-logo {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 .aliado-name {
   display: block;
   font-size: 0.78rem;
