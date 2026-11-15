@@ -88,6 +88,17 @@ h3{font-size:17px;font-weight:700}
 .proofrow .plabel .bdot{width:8px;height:8px;border-radius:50%;background:#10B981;animation:blink 1.6s infinite}
 .pitem{font-size:12px;color:#cfe8e2}
 .pitem b{color:#34d399;font-size:15px}
+/* Banda de la fórmula del método — acento naranja para diferenciar */
+.fh-strip{margin:26px auto 0;max-width:860px;text-align:center;background:rgba(232,148,62,.07);border:1px solid rgba(232,148,62,.35);border-left:4px solid #E8943E;border-radius:14px;padding:22px 26px}
+.fh-label{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#E8943E;margin-bottom:10px}
+.fh-formula{margin:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;font-weight:800}
+.fh-out{color:#F5FCFA;font-size:1.15rem}
+.fh-eq{color:rgba(245,252,250,.6);font-size:1.15rem}
+.fh-f{color:#3FC1B4;font-size:1.05rem}
+.fh-f em{font-family:Georgia,'Times New Roman',serif;font-style:italic}
+.fh-plus{color:rgba(245,252,250,.6);font-size:1.15rem}
+.fh-eps{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:2.1rem;line-height:1;color:#E8943E;text-shadow:0 0 22px rgba(232,148,62,.5)}
+.fh-note{margin:12px 0 0;font-size:12.5px;color:rgba(245,252,250,.65);line-height:1.55}
 /* Carrusel de noticias verificadas */
 .newscar{margin-top:12px}
 .newsstage{position:relative;min-height:96px}
@@ -439,6 +450,17 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:26px 0 40px;margin-top
       </div>
       <div class="vcap" data-i18n="vidCap">Video institucional · seguridad, defensa y gestión de riesgos</div>
       <p class="center small mt14" style="max-width:780px;margin-left:auto;margin-right:auto;color:var(--teal)"><span data-i18n="introBenef">Su institución se lleva — reportes ciudadanos convertidos en datos accionables, evidencia procesada en segundos, respuesta coordinada en minutos y decisiones tomadas antes de que el riesgo ocurra.</span></p>
+      <div class="fh-strip">
+        <span class="fh-label" data-i18n="fhLabel">El método en una fórmula</span>
+        <p class="fh-formula">
+          <span class="fh-out" data-i18n="fhOut">Predicción estratégica</span>
+          <span class="fh-eq">=</span>
+          <span class="fh-f"><em>f</em><span data-i18n="fhArgs">(modelado matemático, analítica de datos, inteligencia artificial)</span></span>
+          <span class="fh-plus">+</span>
+          <span class="fh-eps">ε</span>
+        </p>
+        <p class="fh-note" data-i18n="fhNote">ε es la incertidumbre que ningún modelo elimina solo; reducirla es tarea del criterio humano.</p>
+      </div>
     </div>
 
     <div class="mt30" id="lineas">
@@ -579,7 +601,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:26px 0 40px;margin-top
 </footer>
 
 <!-- Volver arriba -->
-<button type="button" id="backTop" data-i18n="backTop">↑ Volver arriba</button>
+<a href="index.html" id="backTop" data-i18n="backTop">← Volver al inicio</a>
 
 <!-- Caption de narración -->
 <div id="narrCaption" role="status" aria-live="polite"><div class="nc-in"><span class="nc-ic">🔊</span><span id="narrCaptionText"></span></div></div>
@@ -715,7 +737,7 @@ var I18N={"en":{"st":{
 "statsNote":"* Sample figures to illustrate the pilot. Verifiable results are cited with press sources.",
 "vReady":"🔊 Narration","vMuted":"🔇 Muted","vSpeaking":"🔊 Narrating…","voiceOn":"Enable narration","voiceOff":"Mute narration",
 "mf1t":"Understand the territory","mf1d":"What is happening, where and who is behind it.","mf2t":"Decide the operation","mf2d":"The models predict the next strike and you approve the plan.","mf3t":"Act and learn","mf3d":"The order goes out with a date and time; every result feeds the institutional memory.",
-"heroExpl":"A platform of AI agents that listens to citizens, investigates the evidence, commands the response and anticipates risk, in a single flow — from the street to the decision.","hdrAgenda2":"Book your demo","heroSeeLines":"See the 4 lines in action ↓","introBenef":"Your institution gets — citizen reports turned into actionable data, evidence processed in seconds, response coordinated in minutes and decisions made before the risk happens.","lineTitle2":"Four lines, one intelligence flow","cardGo":"Watch video →","lineVerb1":"Listens — AlejoSeguro + CatheAsiste","lineVerb2":"Investigates — MileInvestiga","lineVerb3":"Coordinates — GusCoordina","lineVerb4":"Predicts — GabyPredice","benef1":"Receive reports from the territory with no friction — every citizen reports via Telegram or a phone call, and your team gets structured data with evidence and location, 24/7.","benef2":"Process evidence in seconds, not weeks — people, vehicles and criminal networks identified before the case goes cold.","benef3":"Coordinate every agency on one real-time board — multi-incident, no chasing emails or conflicting versions.","benef4":"Anticipate where and when crime will strike — predictive hotspots and 72-hour scenarios to deploy resources ahead of the risk.","lmWhat":"What your institution gets","lmWatch":"Watch what it does","lmClose":"Close","backTop":"Back to top","lmBack":"← Back to the start of the demo",
+"heroExpl":"A platform of AI agents that listens to citizens, investigates the evidence, commands the response and anticipates risk, in a single flow — from the street to the decision.","hdrAgenda2":"Book your demo","heroSeeLines":"See the 4 lines in action ↓","introBenef":"Your institution gets — citizen reports turned into actionable data, evidence processed in seconds, response coordinated in minutes and decisions made before the risk happens.","fhLabel":"The method in one formula","fhOut":"Strategic foresight","fhArgs":"(mathematical modeling, data analytics, artificial intelligence)","fhNote":"ε is the uncertainty no model removes on its own; reducing it is the work of human judgment.","lineTitle2":"Four lines, one intelligence flow","cardGo":"Watch video →","lineVerb1":"Listens — AlejoSeguro + CatheAsiste","lineVerb2":"Investigates — MileInvestiga","lineVerb3":"Coordinates — GusCoordina","lineVerb4":"Predicts — GabyPredice","benef1":"Receive reports from the territory with no friction — every citizen reports via Telegram or a phone call, and your team gets structured data with evidence and location, 24/7.","benef2":"Process evidence in seconds, not weeks — people, vehicles and criminal networks identified before the case goes cold.","benef3":"Coordinate every agency on one real-time board — multi-incident, no chasing emails or conflicting versions.","benef4":"Anticipate where and when crime will strike — predictive hotspots and 72-hour scenarios to deploy resources ahead of the risk.","lmWhat":"What your institution gets","lmWatch":"Watch what it does","lmClose":"Close","backTop":"← Back to home","lmBack":"← Back to the start of the demo",
 "fb_s0":"Back to the start of the case — AlejoSeguro listens to the citizen on Telegram, and CatheAsiste routes voice, text, video and image into structured data.",
 "fb_scene1":"Scene one — a shopkeeper in the southwest of the city receives an extortion leaflet and reports it from his phone through AlejoSeguro, all geolocated. And if he has no app or data, CatheAsiste routes reports of voice, text, video and image — it answers his call, transcribes his voice live and turns it into structured data. MileInvestiga supports the investigation, processing the evidence with more than twenty AI models in seconds, and immediately activates the Unified Command Post.",
 "fb_mile":"MileInvestiga supports the investigation — more than twenty AI models process image, video, audio and text in under two seconds. It identifies the suspect's face — alias El Flaco — and the motorcycle plate; and through criminal network analysis it reveals the full structure — five linked actors and their central node. The same network engine dismantles organized crime structures and threats to territorial defense.",
@@ -821,7 +843,7 @@ var I18N={"en":{"st":{
 "statsNote":"* Chiffres d'exemple pour illustrer le pilote. Les résultats vérifiables sont cités avec sources de presse.",
 "vReady":"🔊 Narration","vMuted":"🔇 Coupée","vSpeaking":"🔊 Lecture…","voiceOn":"Activer la narration","voiceOff":"Couper la narration",
 "mf1t":"Comprendre le territoire","mf1d":"Ce qui se passe, où et qui est derrière.","mf2t":"Décider l'opération","mf2d":"Les modèles prédisent le prochain coup et vous approuvez le plan.","mf3t":"Agir et apprendre","mf3d":"L'ordre part avec date et heure ; chaque résultat nourrit la mémoire institutionnelle.",
-"heroExpl":"Une plateforme d'agents d'intelligence artificielle qui écoutent le citoyen, investiguent les preuves, commandent la réponse et anticipent le risque, en un seul flux — de la rue à la décision.","hdrAgenda2":"Réserver une démo","heroSeeLines":"Voir les 4 lignes en action ↓","introBenef":"Votre institution obtient — des signalements citoyens transformés en données actionnables, des preuves traitées en secondes, une réponse coordonnée en minutes et des décisions prises avant que le risque ne survienne.","lineTitle2":"Quatre lignes, un seul flux d'intelligence","cardGo":"Voir la vidéo →","lineVerb1":"Écoute — AlejoSeguro + CatheAsiste","lineVerb2":"Enquête — MileInvestiga","lineVerb3":"Coordonne — GusCoordina","lineVerb4":"Prédit — GabyPredice","benef1":"Recevez les signalements du territoire sans friction — chaque citoyen signale par Telegram ou appel, et votre équipe reçoit des données structurées avec preuves et localisation, 24h/24.","benef2":"Traitez les preuves en secondes, pas en semaines — personnes, véhicules et réseaux criminels identifiés avant que l'affaire ne refroidisse.","benef3":"Coordonnez toutes les institutions sur un seul tableau en temps réel — multi-incidents, sans courir après les e-mails ni les versions contradictoires.","benef4":"Anticipez où et quand le crime frappera — hotspots prédictifs et scénarios à 72 heures pour déployer les ressources avant le risque.","lmWhat":"Ce que votre institution obtient","lmWatch":"Regarder ce qu'elle fait","lmClose":"Fermer","backTop":"Retour en haut","lmBack":"← Retour au début de la démo",
+"heroExpl":"Une plateforme d'agents d'intelligence artificielle qui écoutent le citoyen, investiguent les preuves, commandent la réponse et anticipent le risque, en un seul flux — de la rue à la décision.","hdrAgenda2":"Réserver une démo","heroSeeLines":"Voir les 4 lignes en action ↓","introBenef":"Votre institution obtient — des signalements citoyens transformés en données actionnables, des preuves traitées en secondes, une réponse coordonnée en minutes et des décisions prises avant que le risque ne survienne.","fhLabel":"La méthode en une formule","fhOut":"Prédiction stratégique","fhArgs":"(modélisation mathématique, analytique des données, intelligence artificielle)","fhNote":"ε est l&#8217;incertitude qu&#8217;aucun modèle ne supprime seul ; la réduire relève du discernement humain.","lineTitle2":"Quatre lignes, un seul flux d'intelligence","cardGo":"Voir la vidéo →","lineVerb1":"Écoute — AlejoSeguro + CatheAsiste","lineVerb2":"Enquête — MileInvestiga","lineVerb3":"Coordonne — GusCoordina","lineVerb4":"Prédit — GabyPredice","benef1":"Recevez les signalements du territoire sans friction — chaque citoyen signale par Telegram ou appel, et votre équipe reçoit des données structurées avec preuves et localisation, 24h/24.","benef2":"Traitez les preuves en secondes, pas en semaines — personnes, véhicules et réseaux criminels identifiés avant que l'affaire ne refroidisse.","benef3":"Coordonnez toutes les institutions sur un seul tableau en temps réel — multi-incidents, sans courir après les e-mails ni les versions contradictoires.","benef4":"Anticipez où et quand le crime frappera — hotspots prédictifs et scénarios à 72 heures pour déployer les ressources avant le risque.","lmWhat":"Ce que votre institution obtient","lmWatch":"Regarder ce qu'elle fait","lmClose":"Fermer","backTop":"← Retour à l&#8217;accueil","lmBack":"← Retour au début de la démo",
 "fb_s0":"Retour au début du cas — AlejoSeguro écoute le citoyen sur Telegram, et CatheAsiste achemine voix, texte, vidéo et image en données structurées.",
 "fb_scene1":"Scène un — un commerçant du sud-ouest de la ville reçoit un tract d'extorsion et le signale depuis son téléphone via AlejoSeguro, le tout géolocalisé. Et sans application ni données, CatheAsiste achemine les signalements de voix, texte, vidéo et image — elle prend son appel, transcrit sa voix en direct et la convertit en donnée structurée. MileInvestiga apporte son appui à l'investigation, traitant les preuves avec plus de vingt modèles d'IA en quelques secondes, et active immédiatement le Poste de Commandement Unifié.",
 "fb_mile":"MileInvestiga apporte son appui à l'investigation — plus de vingt modèles d'IA traitent image, vidéo, audio et texte en moins de deux secondes. Il identifie le visage du suspect — alias El Flaco — et la plaque de la moto ; et par l'analyse de réseaux criminels, il révèle toute la structure — cinq acteurs liés et leur nœud central. Le même moteur de réseaux démantèle les structures du crime organisé et les menaces à la défense territoriale.",
@@ -971,7 +993,6 @@ var backTop=document.getElementById('backTop');
 if(backTop){
   var onScroll=function(){backTop.classList.toggle('show',(window.scrollY||window.pageYOffset)>600)};
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-  backTop.addEventListener('click',function(){var h=document.getElementById('inicio');if(h)h.scrollIntoView({block:'start'})});
 }
 
 /* Videos con velo: click-to-play */
