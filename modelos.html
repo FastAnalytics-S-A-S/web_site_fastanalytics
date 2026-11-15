@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FastAnalytics | Tipos de modelos</title>
+  <meta name="description" content="Los tipos de modelos que usa FastAnalytics, explicados sin tecnicismos: series de tiempo, modelos espacio-temporales, detección de atípicos, análisis de redes, lenguaje natural y modelos no paramétricos.">
+  <meta name="author" content="FastAnalytics S.A.S.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FastAnalytics | Tipos de modelos">
+  <meta property="og:description" content="Qué hace cada tipo de modelo y para qué sirve, explicado sin tecnicismos.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fastanalytics.co/modelos">
+  <meta property="og:image" content="https://fastanalytics.co/assets/images/og-image.png">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+  <!-- Canonical & hreflang -->
+  <link rel="canonical" href="https://fastanalytics.co/modelos">
+  <link rel="alternate" hreflang="es" href="https://fastanalytics.co/modelos">
+  <link rel="alternate" hreflang="x-default" href="https://fastanalytics.co/modelos">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css?v=17">
+
+  <style>
+    .mod-hero {
+      background: linear-gradient(160deg, #FFFFFF 0%, #F2F8F7 55%, #E6F1EF 100%);
+      color: var(--text);
+      padding: calc(var(--nav-height) + 48px) 0 52px;
+      text-align: center;
+    }
+    .mod-hero .section-tag {
+      background: rgba(212, 136, 58, 0.12);
+      color: #B45309;
+      border: 1px solid rgba(212, 136, 58, 0.45);
+    }
+    .mod-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 18px auto 12px;
+      max-width: 780px;
+    }
+    .mod-hero .lead {
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      max-width: 660px;
+      margin: 0 auto;
+    }
+    .mod-back {
+      display: inline-block;
+      margin-top: 26px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+    .mod-back:hover { color: var(--primary); }
+    .mod-section { padding: 64px 0 88px; }
+    .mod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .mod-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition);
+    }
+    .mod-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+      transform: translateY(-4px);
+    }
+    .mod-num {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .mod-card h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+    .mod-row {
+      font-size: 0.93rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+    .mod-row strong {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+    .mod-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+    .mod-cta p {
+      color: var(--text-secondary);
+      margin: 0 0 18px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo-nav.svg" alt="FastAnalytics" class="logo-img">
+      </a>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Cambiar idioma">
+          <span class="lang-option active" data-lang="es">ES</span>
+          <span class="lang-separator">|</span>
+          <span class="lang-option" data-lang="en">EN</span>
+          <span class="lang-separator">|</span>
+          <span class="lang-option" data-lang="fr">FR</span>
+        </button>
+        <a href="index.html#agenda" class="btn btn-primary btn-nav" data-es="Hablemos de su proyecto" data-en="Let&#8217;s talk about your project" data-fr="Parlons de votre projet">Hablemos de su proyecto</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="mod-hero">
+      <div class="container">
+        <span class="section-tag" data-es="Modelado matemático" data-en="Mathematical modeling" data-fr="Modélisation mathématique">Modelado matemático</span>
+        <h1 data-es="Los modelos que usamos, explicados en simple" data-en="The models we use, explained simply" data-fr="Les modèles que nous utilisons, expliqués simplement">Los modelos que usamos, explicados en simple</h1>
+        <p class="lead" data-es="Sin fórmulas ni tecnicismos: qué hace cada tipo de modelo y qué decisiones le ayuda a tomar a su organización." data-en="No formulas or jargon: what each model type does and which decisions it helps your organization make." data-fr="Sans formules ni jargon : ce que chaque type de modèle fait et quelles décisions il aide votre organisation à prendre.">Sin fórmulas ni tecnicismos: qué hace cada tipo de modelo y qué decisiones le ayuda a tomar a su organización.</p>
+      </div>
+    </section>
+
+    <section class="mod-section">
+      <div class="container">
+        <div class="mod-grid">
+
+          <article class="mod-card animate-on-scroll">
+            <div class="mod-num">01</div>
+            <h2 data-es="Series de tiempo" data-en="Time series" data-fr="Séries temporelles">Series de tiempo</h2>
+            <p class="mod-row">
+              <strong data-es="Qué hace" data-en="What it does" data-fr="Ce qu&#8217;il fait">Qué hace</strong>
+              <span data-es="Analiza cómo cambia una variable —ventas, eventos, demanda— a lo largo del tiempo y proyecta su comportamiento futuro." data-en="Analyzes how a variable —sales, events, demand— changes over time and projects its future behavior." data-fr="Analyse comment une variable —ventes, événements, demande— évolue dans le temps et projette son comportement futur.">Analiza cómo cambia una variable —ventas, eventos, demanda— a lo largo del tiempo y proyecta su comportamiento futuro.</span>
+            </p>
+            <p class="mod-row">
+              <strong data-es="Para qué sirve" data-en="What it&#8217;s for" data-fr="À quoi ça sert">Para qué sirve</strong>
+              <span data-es="Anticipar necesidades de personal, inventario, recursos o intervenciones antes de que el momento crítico llegue." data-en="Anticipating staffing, inventory, resource or intervention needs before the critical moment arrives." data-fr="Anticiper les besoins en personnel, stocks, ressources ou interventions avant que le moment critique n&#8217;arrive.">Anticipar necesidades de personal, inventario, recursos o intervenciones antes de que el momento crítico llegue.</span>
+            </p>
+          </article>
+
+          <article class="mod-card animate-on-scroll">
+            <div class="mod-num">02</div>
+            <h2 data-es="Modelos espacio-temporales" data-en="Spatio-temporal models" data-fr="Modèles spatio-temporels">Modelos espacio-temporales</h2>
+            <p class="mod-row">
+              <strong data-es="Qué hace" data-en="What it does" data-fr="Ce qu&#8217;il fait">Qué hace</strong>
+              <span data-es="Combina el «dónde» con el «cuándo»: muestra cómo un fenómeno se mueve por el territorio y cuándo concentrarse en cada zona." data-en="Combines the &#8216;where&#8217; with the &#8216;when&#8217;: shows how a phenomenon moves across the territory and when to focus on each area." data-fr="Combine le « où » avec le « quand » : montre comment un phénomène se déplace sur le territoire et quand se concentrer sur chaque zone.">Combina el «dónde» con el «cuándo»: muestra cómo un fenómeno se mueve por el territorio y cuándo concentrarse en cada zona.</span>
+            </p>
+            <p class="mod-row">
+              <strong data-es="Para qué sirve" data-en="What it&#8217;s for" data-fr="À quoi ça sert">Para qué sirve</strong>
+              <span data-es="Focalizar recursos donde y cuando más se necesitan: riesgo, cobertura, despliegue de equipos o servicios." data-en="Focusing resources where and when they are most needed: risk, coverage, deployment of teams or services." data-fr="Concentrer les ressources où et quand elles sont le plus nécessaires : risque, couverture, déploiement d&#8217;équipes ou de services.">Focalizar recursos donde y cuando más se necesitan: riesgo, cobertura, despliegue de equipos o servicios.</span>
+            </p>
+          </article>
+
+          <article class="mod-card animate-on-scroll">
+            <div class="mod-num">03</div>
+            <h2 data-es="Detección de atípicos" data-en="Anomaly detection" data-fr="Détection d&#8217;anomalies">Detección de atípicos</h2>
+            <p class="mod-row">
+              <strong data-es="Qué hace" data-en="What it does" data-fr="Ce qu&#8217;il fait">Qué hace</strong>
+              <span data-es="Señala comportamientos fuera de lo normal: en una sola variable (univariante) o en varias a la vez (multivariante), como transacciones inusuales combinadas con horarios y lugares raros." data-en="Flags behavior outside the norm: in a single variable (univariate) or several at once (multivariate), such as unusual transactions combined with odd times and places." data-fr="Signale les comportements hors norme : dans une seule variable (univarié) ou plusieurs à la fois (multivarié), comme des transactions inhabituelles combinées à des horaires et lieux étranges.">Señala comportamientos fuera de lo normal: en una sola variable (univariante) o en varias a la vez (multivariante), como transacciones inusuales combinadas con horarios y lugares raros.</span>
+            </p>
+            <p class="mod-row">
+              <strong data-es="Para qué sirve" data-en="What it&#8217;s for" data-fr="À quoi ça sert">Para qué sirve</strong>
+              <span data-es="Alertas tempranas de fraude, errores, fugas o riesgos operativos, antes de que se conviertan en pérdidas grandes." data-en="Early warnings of fraud, errors, leaks or operational risks, before they become large losses." data-fr="Alertes précoces de fraude, d&#8217;erreurs, de fuites ou de risques opérationnels, avant qu&#8217;ils ne deviennent de grosses pertes.">Alertas tempranas de fraude, errores, fugas o riesgos operativos, antes de que se conviertan en pérdidas grandes.</span>
+            </p>
+          </article>
+
+          <article class="mod-card animate-on-scroll">
+            <div class="mod-num">04</div>
+            <h2 data-es="Análisis de redes (grafos)" data-en="Network analysis (graphs)" data-fr="Analyse de réseaux (graphes)">Análisis de redes (grafos)</h2>
+            <p class="mod-row">
+              <strong data-es="Qué hace" data-en="What it does" data-fr="Ce qu&#8217;il fait">Qué hace</strong>
+              <span data-es="Representa relaciones entre personas, cuentas, empresas o eventos como una red, y mide quién conecta, quién concentra y quién influye (centralidad)." data-en="Represents relationships between people, accounts, companies or events as a network, and measures who connects, who concentrates and who influences (centrality)." data-fr="Représente les relations entre personnes, comptes, entreprises ou événements comme un réseau, et mesure qui connecte, qui concentre et qui influence (centralité).">Representa relaciones entre personas, cuentas, empresas o eventos como una red, y mide quién conecta, quién concentra y quién influye (centralidad).</span>
+            </p>
+            <p class="mod-row">
+              <strong data-es="Para qué sirve" data-en="What it&#8217;s for" data-fr="À quoi ça sert">Para qué sirve</strong>
+              <span data-es="Entender ecosistemas de negocio o clientes, y desarticular redes ilícitas atacando sus eslabones clave." data-en="Understanding business or customer ecosystems, and dismantling illicit networks by targeting their key links." data-fr="Comprendre les écosystèmes d&#8217;affaires ou de clients, et démanteler les réseaux illicites en ciblant leurs maillons clés.">Entender ecosistemas de negocio o clientes, y desarticular redes ilícitas atacando sus eslabones clave.</span>
+            </p>
+          </article>
+
+          <article class="mod-card animate-on-scroll">
+            <div class="mod-num">05</div>
+            <h2 data-es="Procesamiento de lenguaje natural" data-en="Natural language processing" data-fr="Traitement du langage naturel">Procesamiento de lenguaje natural</h2>
+            <p class="mod-row">
+              <strong data-es="Qué hace" data-en="What it does" data-fr="Ce qu&#8217;il fait">Qué hace</strong>
+              <span data-es="Lee y entiende lo que las personas escriben o dicen: extrae temas, sentimientos, urgencias y responde en lenguaje cotidiano." data-en="Reads and understands what people write or say: extracts topics, feelings, urgency and responds in everyday language." data-fr="Lit et comprend ce que les gens écrivent ou disent : extrait les sujets, les sentiments, l&#8217;urgence et répond en langage courant.">Lee y entiende lo que las personas escriben o dicen: extrae temas, sentimientos, urgencias y responde en lenguaje cotidiano.</span>
+            </p>
+            <p class="mod-row">
+              <strong data-es="Para qué sirve" data-en="What it&#8217;s for" data-fr="À quoi ça sert">Para qué sirve</strong>
+              <span data-es="Escuchar a clientes, ciudadanía o equipos a escala: clasificar reportes, responder preguntas y detectar señales débiles en el lenguaje." data-en="Listening to customers, citizens or teams at scale: classifying reports, answering questions and detecting weak signals in language." data-fr="Écouter clients, citoyens ou équipes à grande échelle : classer les signalements, répondre aux questions et détecter les signaux faibles dans le langage.">Escuchar a clientes, ciudadanía o equipos a escala: clasificar reportes, responder preguntas y detectar señales débiles en el lenguaje.</span>
+            </p>
+          </article>
+
+          <article class="mod-card animate-on-scroll">
+            <div class="mod-num">06</div>
+            <h2 data-es="Modelos no paramétricos" data-en="Non-parametric models" data-fr="Modèles non paramétriques">Modelos no paramétricos</h2>
+            <p class="mod-row">
+              <strong data-es="Qué hace" data-en="What it does" data-fr="Ce qu&#8217;il fait">Qué hace</strong>
+              <span data-es="Buscan patrones sin suponer una forma matemática rígida de antemano: aprenden directamente de los datos, por complejos que sean." data-en="Find patterns without assuming a rigid mathematical shape upfront: they learn directly from the data, however complex it is." data-fr="Cherchent des motifs sans supposer une forme mathématique rigide au départ : ils apprennent directement des données, si complexes soient-elles.">Buscan patrones sin suponer una forma matemática rígida de antemano: aprenden directamente de los datos, por complejos que sean.</span>
+            </p>
+            <p class="mod-row">
+              <strong data-es="Para qué sirve" data-en="What it&#8217;s for" data-fr="À quoi ça sert">Para qué sirve</strong>
+              <span data-es="Problemas donde las relaciones cambian o son demasiado complejas para una fórmula fija: clasificación, estimación y segmentación flexibles." data-en="Problems where relationships change or are too complex for a fixed formula: flexible classification, estimation and segmentation." data-fr="Problèmes où les relations changent ou sont trop complexes pour une formule fixe : classification, estimation et segmentation flexibles.">Problemas donde las relaciones cambian o son demasiado complejas para una fórmula fija: clasificación, estimación y segmentación flexibles.</span>
+            </p>
+          </article>
+
+        </div>
+
+        <div class="mod-cta animate-on-scroll">
+          <p data-es="¿No sabe qué modelo necesita? Eso lo resolvemos juntos en la primera sesión." data-en="Not sure which model you need? We solve that together in the first session." data-fr="Vous ne savez pas quel modèle il vous faut ? Nous le résolvons ensemble lors de la première séance.">¿No sabe qué modelo necesita? Eso lo resolvemos juntos en la primera sesión.</p>
+          <a href="index.html#agenda" class="btn btn-primary btn-lg" data-es="Hablemos de su proyecto" data-en="Let&#8217;s talk about your project" data-fr="Parlons de votre projet">Hablemos de su proyecto</a>
+          <div><a class="mod-back" href="index.html#soluciones" data-es="← Volver al inicio" data-en="← Back to home" data-fr="← Retour à l&#8217;accueil">← Volver al inicio</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 32px;">
+        <p data-es="© 2026 FastAnalytics S.A.S. Todos los derechos reservados."
+           data-en="© 2026 FastAnalytics S.A.S. All rights reserved."
+           data-fr="© 2026 FastAnalytics S.A.S. Tous droits réservés.">© 2026 FastAnalytics S.A.S. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var currentLang = 'es';
+      var langToggle = document.getElementById('langToggle');
+      var langOptions = langToggle.querySelectorAll('.lang-option');
+      var titles = {
+        es: 'FastAnalytics | Tipos de modelos',
+        en: 'FastAnalytics | Model types',
+        fr: 'FastAnalytics | Types de modèles'
+      };
+
+      function decodeEntities(text) {
+        var ta = document.createElement('textarea');
+        ta.innerHTML = text;
+        return ta.value;
+      }
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        langOptions.forEach(function (opt) {
+          opt.classList.toggle('active', opt.dataset.lang === lang);
+        });
+        document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+          var text = el.getAttribute('data-' + lang);
+          if (text) el.innerHTML = decodeEntities(text);
+        });
+        document.title = titles[lang] || titles.es;
+      }
+
+      var langCycle = ['es', 'en', 'fr'];
+      langToggle.addEventListener('click', function (e) {
+        var option = e.target.closest('.lang-option');
+        if (option) {
+          setLanguage(option.dataset.lang);
+        } else {
+          var idx = langCycle.indexOf(currentLang);
+          setLanguage(langCycle[(idx + 1) % langCycle.length]);
+        }
+      });
+
+      // Scroll reveal (mismo efecto que js/main.js: .animate-on-scroll -> .visible)
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.animate-on-scroll').forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>

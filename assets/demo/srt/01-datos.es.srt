@@ -1,19 +1,15 @@
 1
-00:00:00,500 --> 00:00:05,016
-AlejoSeguro: el ciudadano reporta por Telegram o aplicación — foto, video, audio y ubicación,
+00:00:00,500 --> 00:00:07,000
+AlejoSeguro convierte cada celular del territorio en un sensor de seguridad.
 
 2
-00:00:05,016 --> 00:00:09,531
-georreferenciados al instante.
+00:00:07,800 --> 00:00:16,000
+El reconocimiento facial y de placas se integra a la recolección, junto con las cámaras de videovigilancia existentes.
 
 3
-00:00:09,931 --> 00:00:14,387
-CatheAsiste: ¿sin datos ni smartphone? Atiende la llamada, conversa con naturalidad y convierte
+00:00:16,800 --> 00:00:26,000
+¿Sin datos ni smartphone? CatheAsiste atiende la llamada y convierte la voz en el mismo dato estructurado. También funciona offline.
 
 4
-00:00:14,387 --> 00:00:18,842
-la voz en el mismo dato estructurado.
-
-5
-00:00:19,042 --> 00:00:22,509
-Dos canales, un mismo dato. Nadie queda por fuera.
+00:00:26,800 --> 00:00:35,000
+Documentos, imágenes, audios y videos, todo alimenta las otras tres líneas del ecosistema.

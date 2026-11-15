@@ -41,7 +41,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <link rel="stylesheet" href="css/styles.css?v=17">
 
   <!-- Structured Data: Organization -->
   <script type="application/ld+json">
@@ -187,8 +187,8 @@
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a class="nav-link--capacidades" href="#capacidades" data-es="Qué hacemos" data-en="What we do" data-fr="Ce que nous faisons">Qué hacemos</a></li>
-        <li><a class="nav-link--productos" href="#productos" data-es="Productos" data-en="Products" data-fr="Produits">Productos</a></li>
-        <li><a class="nav-link--ciencia" href="#ciencia" data-es="Ciencia" data-en="Science" data-fr="Science">Ciencia</a></li>
+        <li><a class="nav-link--productos" href="#soluciones" data-es="Soluciones" data-en="Solutions" data-fr="Solutions">Soluciones</a></li>
+        <li><a class="nav-link--ciencia" href="#ciencia" data-es="Laboratorio" data-en="Laboratory" data-fr="Laboratoire">Laboratorio</a></li>
         <li><a class="nav-link--formaciones" href="#eventos" data-es="Eventos" data-en="Events" data-fr="Événements">Eventos</a></li>
         <li><a href="#contacto" data-es="Contacto" data-en="Contact" data-fr="Contact">Contacto</a></li>
       </ul>
@@ -214,17 +214,24 @@
   <!-- ========== S1 · HERO (una idea por pantalla) ========== -->
   <section class="hero" id="hero">
     <div class="hero-bg">
+      <div class="hero-bg-image" aria-hidden="true"></div>
+      <div class="hero-bg-veil" aria-hidden="true"></div>
       <canvas id="heroCanvas" aria-hidden="true"></canvas>
       <div class="hero-glow"></div>
     </div>
     <div class="container hero-content hero-content--solo">
       <h1 class="hero-title animate-on-scroll">
         <span data-es="El futuro habla en datos." data-en="The future speaks in data." data-fr="Le futur parle en données.">El futuro habla en datos.</span><br>
-        <span class="text-gradient--warm" data-es="¡Lo anticipamos con decisiones!" data-en="We anticipate it with decisions!" data-fr="Nous l&#8217;anticipons avec des décisions !">¡Lo anticipamos con decisiones!</span>
+        <span class="text-brand-orange" data-es="¡Lo anticipamos con decisiones!" data-en="We anticipate it with decisions!" data-fr="Nous l&#8217;anticipons avec des décisions !">¡Lo anticipamos con decisiones!</span>
       </h1>
       <p class="hero-subtitle animate-on-scroll" data-es="FastAnalytics es una empresa de investigación, ciencia y tecnología que combina el modelado matemático, la analítica de datos y la inteligencia artificial para generar predicción estratégica." data-en="FastAnalytics is a research, science and technology company that combines mathematical modeling, data analytics and artificial intelligence to generate strategic foresight." data-fr="FastAnalytics est une entreprise de recherche, de science et de technologie qui combine la modélisation mathématique, l&#8217;analytique des données et l&#8217;intelligence artificielle pour générer de la prédiction stratégique.">FastAnalytics es una empresa de investigación, ciencia y tecnología que combina el modelado matemático, la analítica de datos y la inteligencia artificial para generar predicción estratégica.</p>
       <div class="hero-cta hero-cta--solo animate-on-scroll">
         <a href="#agenda" class="btn btn-primary btn-lg" data-es="Hablemos de su proyecto" data-en="Let&#8217;s talk about your project" data-fr="Parlons de votre projet">Hablemos de su proyecto</a>
+      </div>
+      <div class="eneagono-hero animate-on-scroll" role="img" aria-label="Eneágono Decisional: ciclo de las nueve fases del método, de F0 Postura a F8 Órdenes">
+        <canvas id="eneagonoCanvas" aria-hidden="true"></canvas>
+        <div class="eneagono-label" aria-hidden="true"><span class="eneagono-code" id="eneagonoCode">F0</span> · <span class="eneagono-name" id="eneagonoName">Postura</span></div>
+        <div class="eneagono-dots" id="eneagonoDots" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -259,252 +266,144 @@
     </div>
   </section>
 
-  <!-- ========== S3 · PRODUCTOS Y DEMOS (segmentado por problema) ========== -->
-  <section class="section cases" id="productos" aria-labelledby="productos-title">
+  <!-- ========== S3 · SOLUCIONES (tres soluciones, un solo método) ========== -->
+  <section class="section cases" id="soluciones" aria-labelledby="soluciones-title">
+    <span id="productos" class="legacy-anchor" aria-hidden="true"></span>
     <span id="casos" class="legacy-anchor" aria-hidden="true"></span>
     <div class="container">
       <div class="section-header animate-on-scroll">
-        <span class="section-tag" data-es="Productos y demos" data-en="Products &amp; demos" data-fr="Produits et démos">Productos y demos</span>
-        <h2 class="section-title" id="productos-title" data-es="Productos que ya operan" data-en="Products already operating" data-fr="Des produits déjà en opération">Productos que ya operan</h2>
-        <p class="section-subtitle" data-es="Un producto por problema. Pruébelos o pida acceso." data-en="One product per problem. Try them or request access." data-fr="Un produit par problème. Essayez-les ou demandez l&#8217;accès.">Un producto por problema. Pruébelos o pida acceso.</p>
+        <span class="section-tag" data-es="Soluciones" data-en="Solutions" data-fr="Solutions">Soluciones</span>
+        <h2 class="section-title" id="soluciones-title" data-es="Tres soluciones para decidir antes" data-en="Three solutions to decide ahead" data-fr="Trois solutions pour décider en amont">Tres soluciones para decidir antes</h2>
+        <p class="section-subtitle" data-es="Del dato crudo a la decisión anticipada, para empresas de todo sector." data-en="From raw data to the early decision, for companies in every industry." data-fr="De la donnée brute à la décision anticipée, pour des entreprises de tous les secteurs.">Del dato crudo a la decisión anticipada, para empresas de todo sector.</p>
       </div>
-      <div class="cases-grid">
-        <div class="pc-group animate-on-scroll"><span data-es="Seguridad ciudadana" data-en="Citizen security" data-fr="Sécurité citoyenne">Seguridad ciudadana</span></div>
-        <a class="pc-card animate-on-scroll" href="https://t.me/AlejoSeguro_bot" target="_blank" rel="noopener">
-          <span class="pc-badge pc-badge-live" data-es="En producción" data-en="Live" data-fr="En production">En producción</span>
-          <img class="pc-logo" src="assets/images/logos/alejoseguro-v8.png" alt="AlejoSeguro - Logo" loading="lazy">
-          <div class="pc-name">AlejoSeguro</div>
-          <div class="pc-desc" data-es="Percepción de seguridad desde Telegram. Anónimo, 2 minutos." data-en="Safety perception via Telegram. Anonymous, 2 minutes." data-fr="Perception de la sécurité via Telegram. Anonyme, 2 minutes.">Percepción de seguridad desde Telegram. Anónimo, 2 minutos.</div>
-        </a>
-        <a class="pc-card animate-on-scroll" href="#agenda">
-          <span class="pc-badge pc-badge-req" data-es="Acceso privado" data-en="Private access" data-fr="Accès privé">Acceso privado</span>
-          <img class="pc-logo" src="assets/images/logos/catheastiste-v8.png" alt="CatheAsiste - Logo" loading="lazy">
-          <div class="pc-name">CatheAsiste</div>
-          <div class="pc-desc" data-es="Todo empieza con Cathe: escucha a la ciudadanía por chat y voz, 24/7." data-en="It all starts with Cathe: she listens to citizens via chat and voice, 24/7." data-fr="Tout commence avec Cathe : elle écoute les citoyens par chat et voix, 24/7.">Todo empieza con Cathe: escucha a la ciudadanía por chat y voz, 24/7.</div>
-        </a>
-        <a class="pc-card animate-on-scroll" href="https://guscoordina.fastanalytics.co/" target="_blank" rel="noopener">
-          <span class="pc-badge pc-badge-live" data-es="En producción" data-en="Live" data-fr="En production">En producción</span>
-          <img class="pc-logo" src="assets/images/logos/guscoordina-v8.png" alt="GusCoordina - Logo" loading="lazy">
-          <div class="pc-name">GusCoordina</div>
-          <div class="pc-desc" data-es="Sala digital para Puestos de Mando Unificado." data-en="Digital room for Unified Command Posts." data-fr="Salle digitale pour Postes de Commandement Unifiés.">Sala digital para Puestos de Mando Unificado.</div>
-        </a>
-        <a class="pc-card animate-on-scroll" href="#agenda">
-          <span class="pc-badge pc-badge-req" data-es="Acceso privado" data-en="Private access" data-fr="Accès privé">Acceso privado</span>
-          <img class="pc-logo" src="assets/images/logos/gabypredice-v8.png" alt="GabyPredice - Logo" loading="lazy">
-          <div class="pc-name">GabyPredice</div>
-          <div class="pc-desc" data-es="Decisiones predictivas: dónde y cuándo actuar." data-en="Predictive decisions: where and when to act." data-fr="Décisions prédictives : où et quand agir.">Decisiones predictivas: dónde y cuándo actuar.</div>
-        </a>
-        <a class="pc-card animate-on-scroll" href="demo-seguridad-urbana.html">
-          <span class="pc-badge pc-badge-demo" data-es="Demo" data-en="Demo" data-fr="Démo">Demo</span>
-          <img class="pc-logo pc-logo-svg" src="assets/images/favicon.svg" alt="Demo seguridad urbana - Logo" loading="lazy">
-          <div class="pc-name" data-es="Demo seguridad urbana" data-en="Urban safety demo" data-fr="Démo de sécurité urbaine">Demo seguridad urbana</div>
-          <div class="pc-desc" data-es="Recorrido inmersivo: del reporte ciudadano a la acción en terreno." data-en="Immersive walkthrough: from citizen report to field action." data-fr="Parcours immersif : du signalement citoyen à l&#8217;action sur le terrain.">Recorrido inmersivo: del reporte ciudadano a la acción en terreno.</div>
-        </a>
-        <div class="pc-group animate-on-scroll"><span data-es="Fraude y empresas" data-en="Fraud &amp; business" data-fr="Fraude et entreprises">Fraude y empresas</span></div>
-        <a class="pc-card animate-on-scroll" href="https://mile-ia.fastanalytics.co/chat" target="_blank" rel="noopener">
-          <span class="pc-badge pc-badge-live" data-es="En producción" data-en="Live" data-fr="En production">En producción</span>
-          <img class="pc-logo" src="assets/images/logos/mileinvestiga-v8.png" alt="Mile-IA - Logo" loading="lazy">
-          <div class="pc-name">Mile-IA</div>
-          <div class="pc-desc" data-es="Investigación de fraude bancario con IA." data-en="AI-powered banking fraud investigation." data-fr="Investigation de fraude bancaire par IA.">Investigación de fraude bancario con IA.</div>
-        </a>
-        <div class="pc-group animate-on-scroll"><span data-es="Gobierno y legislativo" data-en="Government &amp; legislative" data-fr="Gouvernement et législatif">Gobierno y legislativo</span></div>
-        <a class="pc-card animate-on-scroll" href="#agenda">
-          <span class="pc-badge pc-badge-req" data-es="Acceso privado" data-en="Private access" data-fr="Accès privé">Acceso privado</span>
-          <img class="pc-logo" src="assets/images/logos/tavo-v9.png" alt="TavoDebate - Logo" loading="lazy">
-          <div class="pc-name">TavoDebate</div>
-          <div class="pc-desc" data-es="Sesiones legislativas con 10 IAs en paralelo." data-en="Legislative sessions with 10 parallel AIs." data-fr="Sessions législatives avec 10 IA en parallèle.">Sesiones legislativas con 10 IAs en paralelo.</div>
-        </a>
+      <div class="sol-grid">
+
+        <article class="sol-card animate-on-scroll">
+          <div class="sol-num">01</div>
+          <h3 class="sol-title" data-es="Modelado matemático" data-en="Mathematical modeling" data-fr="Modélisation mathématique">Modelado matemático</h3>
+          <p class="sol-desc" data-es="Del problema a la ecuación: construimos modelos a la medida que representan su operación y anticipan escenarios antes de que ocurran." data-en="From problem to equation: we build tailored models that represent your operation and anticipate scenarios before they happen." data-fr="Du problème à l&#8217;équation : nous construisons des modèles sur mesure qui représentent votre opération et anticipent les scénarios avant qu&#8217;ils ne surviennent.">Del problema a la ecuación: construimos modelos a la medida que representan su operación y anticipan escenarios antes de que ocurran.</p>
+          <div class="sol-links">
+            <a class="cap-link" href="https://andrego50.github.io" target="_blank" rel="noopener" data-es="Repositorio del fundador →" data-en="Founder&#8217;s repository →" data-fr="Dépôt du fondateur →">Repositorio del fundador →</a>
+            <a class="cap-link" href="modelos.html" data-es="Tipos de modelos →" data-en="Model types →" data-fr="Types de modèles →">Tipos de modelos →</a>
+          </div>
+        </article>
+
+        <article class="sol-card animate-on-scroll">
+          <div class="sol-num">02</div>
+          <h3 class="sol-title" data-es="Analítica de datos" data-en="Data analytics" data-fr="Analytique des données">Analítica de datos</h3>
+          <p class="sol-desc" data-es="Tableros y mapas que se entienden a la primera: recolección, visualización y lectura del territorio o del negocio." data-en="Dashboards and maps understood at a glance: collection, visualization and reading of your territory or business." data-fr="Tableaux de bord et cartes compréhensibles du premier coup : collecte, visualisation et lecture du territoire ou de l&#8217;entreprise.">Tableros y mapas que se entienden a la primera: recolección, visualización y lectura del territorio o del negocio.</p>
+          <div class="sol-media">
+            <img src="assets/demo/mapa-tactico.webp" alt="Mapa técnico de resultados: lectura territorial por zonas" loading="lazy">
+            <img src="assets/demo/predice-ciudad.webp" alt="Mapa predictivo de resultados sobre una ciudad" loading="lazy">
+          </div>
+        </article>
+
+        <article class="sol-card sol-card--wide animate-on-scroll">
+          <div class="sol-num">03</div>
+          <h3 class="sol-title" data-es="Inteligencia artificial" data-en="Artificial intelligence" data-fr="Intelligence artificielle">Inteligencia artificial</h3>
+          <p class="sol-desc" data-es="Agentes de IA organizados por la función de valor que aportan a su organización —escuchar, analizar, coordinar, anticipar, aprender— para empresas de todo sector." data-en="AI agents organized by the value they bring to your organization —listen, analyze, coordinate, anticipate, learn— for companies in every industry." data-fr="Des agents IA organisés selon la valeur qu&#8217;ils apportent à votre organisation —écouter, analyser, coordonner, anticiper, apprendre— pour des entreprises de tous les secteurs.">Agentes de IA organizados por la función de valor que aportan a su organización —escuchar, analizar, coordinar, anticipar, aprender— para empresas de todo sector.</p>
+          <div class="sol-agents">
+            <div class="sol-agent-group">
+              <span class="sol-agent-fn" data-es="Escuchar" data-en="Listen" data-fr="Écouter">Escuchar</span>
+              <div class="sol-agent-list">
+                <a class="sol-agent" href="https://t.me/AlejoSeguro_bot" target="_blank" rel="noopener">
+                  <img class="sol-agent-logo" src="assets/demo/logo-alejoseguro.webp" alt="AlejoSeguro" loading="lazy">
+                  <span class="sol-agent-name">AlejoSeguro</span>
+                </a>
+                <a class="sol-agent" href="#agenda">
+                  <img class="sol-agent-logo" src="assets/demo/logo-catheastiste.webp" alt="CatheAsiste" loading="lazy">
+                  <span class="sol-agent-name">CatheAsiste</span>
+                </a>
+              </div>
+            </div>
+            <div class="sol-agent-group">
+              <span class="sol-agent-fn" data-es="Analizar" data-en="Analyze" data-fr="Analyser">Analizar</span>
+              <div class="sol-agent-list">
+                <a class="sol-agent" href="https://mile-ia.fastanalytics.co/chat" target="_blank" rel="noopener">
+                  <img class="sol-agent-logo" src="assets/demo/logo-mileinvestiga.webp" alt="MileInvestiga" loading="lazy">
+                  <span class="sol-agent-name">MileInvestiga</span>
+                </a>
+                <a class="sol-agent" href="#agenda">
+                  <span class="sol-agent-logo sol-agent-logo--initials" aria-hidden="true">S</span>
+                  <span class="sol-agent-name">Sara</span>
+                </a>
+              </div>
+            </div>
+            <div class="sol-agent-group">
+              <span class="sol-agent-fn" data-es="Coordinar" data-en="Coordinate" data-fr="Coordonner">Coordinar</span>
+              <div class="sol-agent-list">
+                <a class="sol-agent" href="https://guscoordina.fastanalytics.co/" target="_blank" rel="noopener">
+                  <img class="sol-agent-logo" src="assets/demo/logo-guscoordina.webp" alt="GusCoordina" loading="lazy">
+                  <span class="sol-agent-name">GusCoordina</span>
+                </a>
+                <a class="sol-agent" href="#agenda">
+                  <img class="sol-agent-logo" src="assets/images/logos/tavo-v9.png" alt="TavoDebate" loading="lazy">
+                  <span class="sol-agent-name">TavoDebate</span>
+                </a>
+              </div>
+            </div>
+            <div class="sol-agent-group">
+              <span class="sol-agent-fn" data-es="Anticipar" data-en="Anticipate" data-fr="Anticiper">Anticipar</span>
+              <div class="sol-agent-list">
+                <a class="sol-agent" href="#agenda">
+                  <img class="sol-agent-logo" src="assets/demo/logo-gabypredice.webp" alt="GabyPredice" loading="lazy">
+                  <span class="sol-agent-name">GabyPredice</span>
+                </a>
+                <a class="sol-agent" href="#agenda">
+                  <span class="sol-agent-logo sol-agent-logo--initials" aria-hidden="true">AG</span>
+                  <span class="sol-agent-name">AlejoGeo</span>
+                </a>
+              </div>
+            </div>
+            <div class="sol-agent-group">
+              <span class="sol-agent-fn" data-es="Aprender" data-en="Learn" data-fr="Apprendre">Aprender</span>
+              <div class="sol-agent-list">
+                <a class="sol-agent" href="https://t.me/Ceci_Teaches_bot" target="_blank" rel="noopener">
+                  <img class="sol-agent-logo" src="assets/images/logos/ceci-v9.png" alt="CeciTeaches" loading="lazy">
+                  <span class="sol-agent-name">CeciTeaches</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- ========== S3.5 · INVESTIGACIÓN Y CIENCIA (bases conceptuales) ========== -->
+  <!-- ========== S3.5 · LABORATORIO (MathDecision + Publicaciones) ========== -->
   <section class="section" id="ciencia" aria-labelledby="ciencia-title">
     <div class="container">
       <div class="section-header animate-on-scroll">
-        <span class="section-tag" data-es="Bases conceptuales" data-en="Conceptual foundations" data-fr="Fondements conceptuels">Bases conceptuales</span>
-        <h2 class="section-title" id="ciencia-title" data-es="Investigación científica" data-en="Scientific research" data-fr="Recherche scientifique">Investigación científica</h2>
-        <p class="section-subtitle" data-es="La investigación es la base de cada producto que construimos. Estas son las publicaciones que la sustentan." data-en="Research is the foundation of every product we build. These are the publications behind it." data-fr="La recherche est la base de chaque produit que nous construisons. Voici les publications qui la soutiennent.">La investigación es la base de cada producto que construimos. Estas son las publicaciones que la sustentan.</p>
+        <span class="section-tag" data-es="Laboratorio" data-en="Laboratory" data-fr="Laboratoire">Laboratorio</span>
+        <h2 class="section-title" id="ciencia-title" data-es="Investigación que sostiene cada producto" data-en="Research behind every product" data-fr="La recherche derrière chaque produit">Investigación que sostiene cada producto</h2>
+        <p class="section-subtitle" data-es="La investigación es la base de cada producto que construimos." data-en="Research is the foundation of every product we build." data-fr="La recherche est la base de chaque produit que nous construisons.">La investigación es la base de cada producto que construimos.</p>
       </div>
-      <div class="training-grid">
-        <article class="training-card science-card animate-on-scroll">
-          <div class="training-card-media training-card-media--logo">
-            <img src="assets/images/papers/dengue.jpg" alt="Portada: Identification of Hazard and Socio-Demographic Patterns of Dengue Infections" class="training-card-image" loading="lazy">
+      <div class="lab-grid">
+        <article class="lab-card lab-card--featured animate-on-scroll">
+          <div class="lab-card-media">
+            <img src="assets/images/logos/mathdecision.svg" alt="Logotipo de MathDecision, grupo de investigación" class="lab-card-logo" loading="lazy" width="400" height="160">
           </div>
-          <div class="training-card-body">
-            <span class="science-tag" data-es="2 artículos" data-en="2 articles" data-fr="2 articles">2 artículos</span>
-            <h3 class="training-card-title" data-es="Artículos revisados por pares" data-en="Peer-reviewed articles" data-fr="Articles évalués par les pairs">Artículos revisados por pares</h3>
-            <p class="training-card-description" data-es="Artículos validados por revisión experta: transmisión de dengue en una región subtropical colombiana y anticipación de problemáticas de convivencia mediante inteligencia colectiva." data-en="Peer-reviewed articles: dengue transmission in a Colombian subtropical region and short-term anticipation of coexistence issues through collective intelligence." data-fr="Articles évalués par les pairs : transmission de la dengue dans une région subtropicale colombienne et anticipation à court terme des problèmes de coexistence par l&#8217;intelligence collective.">Artículos validados por revisión experta: transmisión de dengue en una región subtropical colombiana y anticipación de problemáticas de convivencia mediante inteligencia colectiva.</p>
-            <ul class="science-links">
-              <li>
-                <a class="science-link" href="assets/documents/papers/dengue.pdf" target="_blank" rel="noopener" download>
-                  <img class="science-link-thumb" src="assets/images/papers/dengue.jpg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Identification of Hazard and Socio-Demographic Patterns of Dengue Infections in a Colombian Subtropical Region (2015–2020): Cox Regression Models</span>
-                    <span class="science-link-venue">Tropical Medicine and Infectious Disease, 8(1): 30 · 2023</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-              <li>
-                <a class="science-link" href="assets/documents/papers/inteligencia-colectiva.pdf" target="_blank" rel="noopener" download>
-                  <img class="science-link-thumb" src="assets/images/papers/inteligencia-colectiva.jpg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Inteligencia colectiva: anticipación a corto plazo de las problemáticas de convivencia</span>
-                    <span class="science-link-venue">Revista Criminalidad, 58(2): 223–240 · 2016</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-            </ul>
+          <div class="lab-card-body">
+            <span class="science-tag" data-es="Grupo de investigación" data-en="Research group" data-fr="Groupe de recherche">Grupo de investigación</span>
+            <h3 class="lab-card-title">MathDecision</h3>
+            <p class="lab-card-description" data-es="Grupo de investigación aplicada en modelado matemático: convertimos problemas reales de decisión en modelos que pueden calcularse, probarse y mejorarse." data-en="Applied mathematical modeling research group: we turn real decision problems into models that can be computed, tested and improved." data-fr="Groupe de recherche en modélisation mathématique appliquée : nous transformons de vrais problèmes de décision en modèles calculables, testables et améliorables.">Grupo de investigación aplicada en modelado matemático: convertimos problemas reales de decisión en modelos que pueden calcularse, probarse y mejorarse.</p>
+            <a class="btn btn-primary lab-card-cta" href="mailto:hola@fastanalytics.co" data-es="Conocer el grupo →" data-en="Meet the group →" data-fr="Découvrir le groupe →">Conocer el grupo →</a>
           </div>
         </article>
 
-        <article class="training-card science-card animate-on-scroll">
-          <div class="training-card-media training-card-media--logo">
-            <img src="assets/images/papers/indicadores-medidas-sanitarias.svg" alt="Portada: Evolución de los indicadores de seguridad ciudadana en consecuencia de las medidas sanitarias" class="training-card-image" loading="lazy">
+        <article class="lab-card animate-on-scroll">
+          <div class="lab-card-media">
+            <img src="assets/images/papers/libro-analitica.jpg" alt="Portada del libro Analítica de datos para la seguridad ciudadana" class="lab-card-img" loading="lazy">
           </div>
-          <div class="training-card-body">
-            <span class="science-tag" data-es="1 capítulo" data-en="1 chapter" data-fr="1 chapitre">1 capítulo</span>
-            <h3 class="training-card-title" data-es="Capítulos de libro" data-en="Book chapters" data-fr="Chapitres d&#8217;ouvrage">Capítulos de libro</h3>
-            <p class="training-card-description" data-es="Capítulos que documentan método y resultados: evolución de los indicadores de seguridad ciudadana en consecuencia de las medidas sanitarias." data-en="Chapters documenting method and results: evolution of citizen security indicators as a consequence of sanitary measures." data-fr="Chapitres documentant méthode et résultats : évolution des indicateurs de sécurité citoyenne en conséquence des mesures sanitaires.">Capítulos que documentan método y resultados: evolución de los indicadores de seguridad ciudadana en consecuencia de las medidas sanitarias.</p>
-            <ul class="science-links">
-              <li>
-                <a class="science-link" href="assets/documents/papers/evolucion-indicadores-seguridad-medidas-sanitarias.pdf" target="_blank" rel="noopener" download>
-                  <img class="science-link-thumb" src="assets/images/papers/indicadores-medidas-sanitarias.svg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Evolución de los indicadores de seguridad ciudadana en consecuencia de las medidas sanitarias</span>
-                    <span class="science-link-venue" data-es="Capítulo de libro: Aprovechamiento de datos para la toma de decisiones en el sector público" data-en="Book chapter: Aprovechamiento de datos para la toma de decisiones en el sector público" data-fr="Chapitre d&#8217;ouvrage : Aprovechamiento de datos para la toma de decisiones en el sector público">Capítulo de libro: Aprovechamiento de datos para la toma de decisiones en el sector público</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="training-card science-card animate-on-scroll">
-          <div class="training-card-media training-card-media--logo">
-            <img src="assets/images/papers/libro-analitica.jpg" alt="Portada: Analítica de datos para la seguridad ciudadana" class="training-card-image" loading="lazy">
-          </div>
-          <div class="training-card-body">
-            <span class="science-tag" data-es="2 libros" data-en="2 books" data-fr="2 livres">2 libros</span>
-            <h3 class="training-card-title" data-es="Libros" data-en="Books" data-fr="Livres">Libros</h3>
-            <p class="training-card-description" data-es="Libros que sistematizan el método: analítica de datos aplicada a la seguridad ciudadana y el modelo de Policía para el Desarrollo Humano." data-en="Books that systematize the method: data analytics applied to citizen security and the Police for Human Development model." data-fr="Livres qui systématisent la méthode : analytique des données appliquée à la sécurité citoyenne et le modèle de Police pour le Développement Humain.">Libros que sistematizan el método: analítica de datos aplicada a la seguridad ciudadana y el modelo de Policía para el Desarrollo Humano.</p>
-            <ul class="science-links">
-              <li>
-                <a class="science-link" href="https://www.academia.edu/180079915/Anal%C3%ADtica_de_datos_para_la_seguridad_ciudadana_Modelos_matem%C3%A1ticos_para_la_anticipaci%C3%B3n_de_respuestas_orientadas_a_la_convivencia" target="_blank" rel="noopener">
-                  <img class="science-link-thumb" src="assets/images/papers/libro-analitica.jpg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Analítica de datos para la seguridad ciudadana: modelos matemáticos para la anticipación de respuestas orientadas a la convivencia</span>
-                    <span class="science-link-venue">Editorial Logos, Policía Nacional de Colombia · 2024</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-              <li>
-                <div class="science-link science-link--static">
-                  <img class="science-link-thumb" src="assets/images/papers/policia-desarrollo-humano.svg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Policía para el Desarrollo Humano</span>
-                    <span class="science-link-venue">2021</span>
-                  </span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="training-card science-card animate-on-scroll">
-          <div class="training-card-media training-card-media--logo">
-            <img src="assets/images/papers/risque-numerique.svg" alt="Portada: Anticipation et gestion du risque numérique" class="training-card-image" loading="lazy">
-          </div>
-          <div class="training-card-body">
-            <span class="science-tag" data-es="2 tesis y trabajos de grado" data-en="2 theses and graduate works" data-fr="2 thèses et mémoires">2 tesis y trabajos de grado</span>
-            <h3 class="training-card-title" data-es="Tesis y trabajos de grado" data-en="Theses and graduate works" data-fr="Thèses et travaux de fin d&#8217;études">Tesis y trabajos de grado</h3>
-            <p class="training-card-description" data-es="Trabajos de investigación formativa: gestión del riesgo numérico (tesis de especialización, en francés) y evolución de los sistemas de información de la Policía Nacional de Colombia." data-en="Graduate research: digital risk management (specialization thesis, in French) and evolution of the information systems of the Colombian National Police." data-fr="Recherches de fin d&#8217;études : gestion du risque numérique (mémoire de spécialisation, en français) et évolution des systèmes d&#8217;information de la Police nationale colombienne.">Trabajos de investigación formativa: gestión del riesgo numérico (tesis de especialización, en francés) y evolución de los sistemas de información de la Policía Nacional de Colombia.</p>
-            <ul class="science-links">
-              <li>
-                <a class="science-link" href="https://www.academia.edu/27054920/Anticipation_et_gestion_du_risque_num%C3%A9rique_Proposition_dun_guide_de_travail_pour_les_Equipes_de_R%C3%A9ponse_aux_Incidents_de_s%C3%A9curit%C3%A9_Pr%C3%A9sent%C3%A9_par_Andres_PEREZ" target="_blank" rel="noopener">
-                  <img class="science-link-thumb" src="assets/images/papers/risque-numerique.svg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Anticipation et gestion du risque numérique: guide de travail pour les équipes de réponse aux incidents de sécurité</span>
-                    <span class="science-link-venue" data-es="Tesis de especialización en gestión del riesgo informático" data-en="Graduate thesis on IT risk management" data-fr="Mémoire de spécialisation en gestion du risque informatique">Tesis de especialización en gestión del riesgo informático</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-              <li>
-                <a class="science-link" href="https://www.academia.edu/27054919/Perspectivas_y_evoluci%C3%B3n_de_los_sistemas_de_informaci%C3%B3n_caso_Polic%C3%ADa_Nacional_de_Colombia" target="_blank" rel="noopener">
-                  <img class="science-link-thumb" src="assets/images/papers/sistemas-informacion-policia.svg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Perspectivas y evolución de los sistemas de información: caso Policía Nacional de Colombia</span>
-                    <span class="science-link-venue" data-es="Trabajo de grado de pregrado" data-en="Undergraduate thesis" data-fr="Mémoire de licence">Trabajo de grado de pregrado</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="training-card science-card animate-on-scroll">
-          <div class="training-card-media training-card-media--logo">
-            <img src="assets/images/papers/comites-decisionales.svg" alt="Portada: Comités decisionales anticipativos para la seguridad humana" class="training-card-image" loading="lazy">
-          </div>
-          <div class="training-card-body">
-            <span class="science-tag" data-es="3 publicaciones" data-en="3 publications" data-fr="3 publications">3 publicaciones</span>
-            <h3 class="training-card-title" data-es="Publicaciones académicas" data-en="Academic publications" data-fr="Publications académiques">Publicaciones académicas</h3>
-            <p class="training-card-description" data-es="Artículos y documentos académicos sin revisión por pares: comités decisionales anticipativos, caracterización del hurto a motos en Medellín e innovación social con el Convicubo." data-en="Academic articles and documents without peer review: anticipatory decisional committees, characterization of motorcycle theft in Medellín and social innovation with the Convicubo." data-fr="Articles et documents académiques sans évaluation par les pairs : comités décisionnels anticipatifs, caractérisation du vol de motos à Medellín et innovation sociale avec le Convicubo.">Artículos y documentos académicos sin revisión por pares: comités decisionales anticipativos, caracterización del hurto a motos en Medellín e innovación social con el Convicubo.</p>
-            <ul class="science-links">
-              <li>
-                <a class="science-link" href="assets/documents/papers/comites-decisionales.pdf" target="_blank" rel="noopener" download>
-                  <img class="science-link-thumb" src="assets/images/papers/comites-decisionales.svg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Comités decisionales anticipativos para la seguridad humana</span>
-                    <span class="science-link-venue">Artículo de divulgación · Revista Industria y Organizaciones, UNAL · 2023</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-              <li>
-                <a class="science-link" href="assets/documents/papers/hurto-motos-medellin.pdf" target="_blank" rel="noopener" download>
-                  <img class="science-link-thumb" src="assets/images/papers/hurto-motos-medellin.svg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Caracterización del hurto a motos en Medellín: ¿por qué roban en unas zonas más que en otras?</span>
-                    <span class="science-link-venue">Taller de datos «Decodificando la seguridad», Edgelands Institute</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-              <li>
-                <a class="science-link" href="https://www.academia.edu/33597230/Innovaci%C3%B3n_social_para_mejorar_la_convivencia" target="_blank" rel="noopener">
-                  <img class="science-link-thumb" src="assets/images/papers/innovacion-social-convicubo.svg" alt="" loading="lazy">
-                  <span class="science-link-body">
-                    <span class="science-link-title">Innovación social para mejorar la convivencia: el Convicubo</span>
-                    <span class="science-link-venue" data-es="Documento académico disponible en Academia.edu" data-en="Academic document available on Academia.edu" data-fr="Document académique disponible sur Academia.edu">Documento académico disponible en Academia.edu</span>
-                  </span>
-                  <span class="science-link-arrow" aria-hidden="true">→</span>
-                </a>
-              </li>
-            </ul>
+          <div class="lab-card-body">
+            <span class="science-tag" data-es="Artículos, capítulos y libros" data-en="Articles, chapters and books" data-fr="Articles, chapitres et livres">Artículos, capítulos y libros</span>
+            <h3 class="lab-card-title" data-es="Publicaciones" data-en="Publications" data-fr="Publications">Publicaciones</h3>
+            <p class="lab-card-description" data-es="La producción científica que sustenta el método: artículos revisados por pares, capítulos de libro, libros y trabajos de grado del fundador." data-en="The scientific output behind the method: peer-reviewed articles, book chapters, books and the founder's graduate work." data-fr="La production scientifique qui soutient la méthode : articles évalués par les pairs, chapitres d&#8217;ouvrage, livres et travaux de fin d&#8217;études du fondateur.">La producción científica que sustenta el método: artículos revisados por pares, capítulos de libro, libros y trabajos de grado del fundador.</p>
+            <a class="btn btn-primary lab-card-cta" href="publicaciones.html" data-es="Ver publicaciones →" data-en="See publications →" data-fr="Voir les publications →">Ver publicaciones →</a>
           </div>
         </article>
       </div>
-
-      <article class="science-group animate-on-scroll">
-        <div class="science-group-media">
-          <img src="assets/images/logos/mathdecision.svg" alt="Logotipo de MathDecision, grupo de investigación" class="science-group-logo" loading="lazy" width="400" height="160">
-        </div>
-        <div class="science-group-body">
-          <span class="science-tag" data-es="Grupo de investigación" data-en="Research group" data-fr="Groupe de recherche">Grupo de investigación</span>
-          <h3 class="science-group-title">MathDecision</h3>
-          <p class="science-group-description" data-es="Investigación aplicada en modelado matemático, analítica de datos e inteligencia artificial para decisiones estratégicas." data-en="Applied research in mathematical modeling, data analytics and artificial intelligence for strategic decision-making." data-fr="Recherche appliquée en modélisation mathématique, analyse de données et intelligence artificielle pour la décision stratégique.">Investigación aplicada en modelado matemático, analítica de datos e inteligencia artificial para decisiones estratégicas.</p>
-          <a class="btn btn-primary science-group-cta" href="mailto:hola@fastanalytics.co" data-es="Conocer el grupo →" data-en="Meet the group →" data-fr="Découvrir le groupe →">Conocer el grupo →</a>
-        </div>
-      </article>
-
-      <p class="science-more animate-on-scroll"><a href="https://independent.academia.edu/Andr%C3%A9sP%C3%A9rezCoronado" target="_blank" rel="noopener" data-es="Ver el perfil completo en Academia.edu →" data-en="See the full profile on Academia.edu →" data-fr="Voir le profil complet sur Academia.edu →">Ver el perfil completo en Academia.edu →</a></p>
     </div>
   </section>
 
@@ -553,6 +452,25 @@
             <span class="training-card-link btn btn-primary" data-es="Ver curso →" data-en="View course →" data-fr="Voir le cours →">Ver curso →</span>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ALIADOS ========== -->
+  <section class="section aliados" id="aliados" aria-labelledby="aliados-title">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title aliados-title" id="aliados-title" data-es="Confían en nosotros" data-en="They trust us" data-fr="Ils nous font confiance">Confían en nosotros</h2>
+      </div>
+      <div class="aliados-track" id="aliadosTrack" tabindex="0" aria-label="Aliados de FastAnalytics">
+        <div class="aliado-card">
+          <img class="aliado-logo" src="assets/images/logo-interamericana.svg" alt="Interamericana" loading="lazy" onerror="this.closest('.aliado-card').classList.add('aliado-card--text'); this.remove();">
+          <span class="aliado-name">Interamericana</span>
+        </div>
+        <div class="aliado-card">
+          <img class="aliado-logo" src="assets/images/logo-smartech.svg" alt="Smartech" loading="lazy" onerror="this.closest('.aliado-card').classList.add('aliado-card--text'); this.remove();">
+          <span class="aliado-name">Smartech</span>
+        </div>
       </div>
     </div>
   </section>
@@ -691,5 +609,7 @@
 
   <script src="js/main.js?v=3"></script>
   <script src="js/hero-network.js?v=2"></script>
+  <script src="js/eneagono-hero.js?v=1"></script>
+  <script src="js/aliados.js?v=1"></script>
 </body>
 </html>

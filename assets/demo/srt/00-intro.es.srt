@@ -1,27 +1,39 @@
 1
-00:00:00,500 --> 00:00:03,745
-El territorio reporta. La inteligencia artificial analiza. El mando coordina. Usted decide antes
+00:00:00,500 --> 00:00:07,500
+El futuro habla en datos. Lo anticipamos con decisiones. FastAnalytics es investigación, ciencia y tecnología.
 
 2
-00:00:03,745 --> 00:00:06,990
-del riesgo.
+00:00:08,500 --> 00:00:21,800
+Una plataforma que une modelado matemático, analítica de datos e inteligencia artificial, para anticipar amenazas de seguridad, crimen organizado, lavado de activos y riesgos de desastre.
 
 3
-00:00:07,390 --> 00:00:10,436
-El ecosistema de seguridad, defensa y riesgos de FastAnalytics: datos, análisis, mando y
+00:00:22,900 --> 00:00:36,200
+Datos. El territorio reporta por todos los canales, con reconocimiento facial y de placas integrados. Ojos en todos los celulares y en las cámaras de videovigilancia, de forma anónima y también offline.
 
 4
-00:00:10,436 --> 00:00:13,481
-anticipación. Y con CeciTeaches, todo lo que su institución aprende queda disponible
+00:00:37,000 --> 00:00:47,800
+Análisis. La inteligencia artificial y el criterio de los analistas convierten esos datos en información útil para decidir, en segundos, no en semanas.
 
 5
-00:00:13,481 --> 00:00:16,527
-veinticuatro siete: procedimientos, casos y decisiones, consultables por cualquier miembro del
+00:00:48,000 --> 00:00:58,500
+Mando. Las organizaciones coordinan la respuesta en un solo tablero, con reportes y trazabilidad en tiempo real. Todos notificados, todos activos.
 
 6
-00:00:16,527 --> 00:00:19,573
-equipo.
+00:00:59,300 --> 00:01:08,300
+Anticipación. El Eneágono Decisional convierte la señal débil en la decisión de mañana, cada día y en cada crisis.
 
 7
-00:00:19,773 --> 00:00:22,231
+00:01:09,100 --> 00:01:21,400
+Menos afectación a su gente sobre el terreno, manejo de los medios, protección de la reputación e información inmediata para sus decisores, todos los días y en crisis.
+
+8
+00:01:22,400 --> 00:01:30,400
+Y con CeciTeaches, todo lo aprendido queda disponible veinticuatro siete, para cualquier duda de la plataforma o de lo técnico.
+
+9
+00:01:31,200 --> 00:01:55,400
+Esto ya pasó, y tiene método. Dos mil veintiuno, homicidio, detección de datos atípicos univariantes. Ibagué dos mil veintidós, varios delitos, modelos estadísticos no paramétricos espacio temporales. Diciembre dos mil veinticuatro, varios delitos, datos atípicos multivariantes.
+
+10
+00:01:56,200 --> 00:01:58,700
 FastAnalytics. Agende una demostración.

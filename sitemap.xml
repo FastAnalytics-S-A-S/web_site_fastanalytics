@@ -37,6 +37,18 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://fastanalytics.co/modelos</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fastanalytics.co/publicaciones</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://fastanalytics.co/chronnet/</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>

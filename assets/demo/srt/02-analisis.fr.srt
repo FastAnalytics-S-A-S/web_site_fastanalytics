@@ -1,19 +1,15 @@
 1
-00:00:00,500 --> 00:00:06,405
-MileInvestiga : plus de vingt modeles d'analytique et d'apprentissage automatique traitent la preuve
+00:00:00,500 --> 00:00:09,000
+MileInvestiga applique plus de vingt modèles d'intelligence artificielle sur les preuves, en moins de deux secondes.
 
 2
-00:00:06,405 --> 00:00:12,311
-en quelques secondes — visages, plaques, transcription et graphes de reseaux criminels.
+00:00:09,800 --> 00:00:20,000
+Visages, plaques et scènes identifiés en temps réel. Voix transcrite et traduite. Texte analysé avec traitement du langage naturel.
 
 3
-00:00:12,711 --> 00:00:16,395
-AlejoGeo : il georeference la preuve multimodale et la croise
+00:00:20,800 --> 00:00:30,000
+Le graphe du réseau criminel se révèle par l'analyse de centralité, et les motifs spatio-temporels montrent qui opère, où et à quelle fréquence.
 
 4
-00:00:16,395 --> 00:00:20,080
-avec des sources ouvertes et les bases de donnees du client.
-
-5
-00:00:20,280 --> 00:00:24,449
-Qui, ou, quand et avec qui. Des preuves pretes a l'action.
+00:00:30,800 --> 00:00:40,000
+AlejoGeo géoréférence tout et le croise avec des sources ouvertes et les données du client. L'analyste humain interprète le résultat avec discernement.

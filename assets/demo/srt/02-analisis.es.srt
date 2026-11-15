@@ -1,19 +1,15 @@
 1
-00:00:00,500 --> 00:00:06,405
-MileInvestiga: más de veinte modelos de analítica y aprendizaje automático procesan la evidencia
+00:00:00,500 --> 00:00:09,000
+MileInvestiga aplica más de veinte modelos de inteligencia artificial sobre la evidencia, en menos de dos segundos.
 
 2
-00:00:06,405 --> 00:00:12,311
-en segundos — rostros, placas, transcripción y grafos de redes criminales.
+00:00:09,800 --> 00:00:20,000
+Rostros, placas y escenas identificados en tiempo real. Voz transcrita y traducida. Texto analizado con procesamiento de lenguaje natural.
 
 3
-00:00:12,711 --> 00:00:16,395
-AlejoGeo: georreferencia la evidencia multimodal y la cruza con fuentes abiertas y las bases de
+00:00:20,800 --> 00:00:30,000
+El grafo de la red criminal se revela con análisis de centralidad, y los patrones espacio temporales muestran quién opera, dónde y cada cuánto.
 
 4
-00:00:16,395 --> 00:00:20,080
-datos del cliente.
-
-5
-00:00:20,280 --> 00:00:24,449
-Quién, dónde, cuándo y con quién. Evidencia lista para actuar.
+00:00:30,800 --> 00:00:40,000
+AlejoGeo georreferencia todo y lo cruza con fuentes abiertas y las bases del cliente. El analista humano interpreta el resultado con criterio.

@@ -1,15 +1,15 @@
 1
-00:00:00,500 --> 00:00:06,297
-GusCoordina: cada reporte activa un puesto de mando unificado — seis agentes especializados
+00:00:00,500 --> 00:00:06,000
+El modelo viejo. Funcionarios detrás de una pantalla, esperando instrucciones.
 
 2
-00:00:06,297 --> 00:00:12,095
-articulan a las instituciones mientras el incidente está en curso.
+00:00:06,800 --> 00:00:16,000
+El nuevo mando. Personas activas, integrando su conocimiento a la solución, coordinando recursos desde el puesto de mando.
 
 3
-00:00:12,495 --> 00:00:16,910
-Tablero web, pantalla de proyección y geodashboard: todos miran la misma situación y deciden
+00:00:16,800 --> 00:00:26,000
+GusCoordina articula instituciones en tiempo real. Seis agentes especializados por incidente, reportes y trazabilidad permanente.
 
 4
-00:00:16,910 --> 00:00:21,326
-juntos. La respuesta pasa de horas a minutos.
+00:00:26,800 --> 00:00:35,000
+Todos quedan notificados al instante. La información se trata y se articula de forma permanente, en operación diaria y en crisis.

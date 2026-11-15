@@ -411,13 +411,13 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:26px 0 40px;margin-top
     </div>
 
     <div class="mt30">
-      <span class="vlabel" data-i18n="vidH">El ecosistema en 110 segundos</span>
+      <span class="vlabel" data-i18n="vidH">El ecosistema en 2 minutos</span>
       <div class="videoblock">
         <video id="videoIntro" poster="assets/demo/poster-00-intro.jpg" preload="metadata" playsinline aria-label="Video institucional del ecosistema FastAnalytics de seguridad, defensa y riesgos">
           <source src="assets/demo/00-intro.mp4" type="video/mp4">
-          <track kind="subtitles" srclang="es" label="Español" src="assets/demo/srt/00-intro.es.srt">
-          <track kind="subtitles" srclang="en" label="English" src="assets/demo/srt/00-intro.en.srt">
-          <track kind="subtitles" srclang="fr" label="Français" src="assets/demo/srt/00-intro.fr.srt">
+          <track kind="subtitles" srclang="es" label="Español" src="assets/demo/srt/00-intro.es.vtt">
+          <track kind="subtitles" srclang="en" label="English" src="assets/demo/srt/00-intro.en.vtt">
+          <track kind="subtitles" srclang="fr" label="Français" src="assets/demo/srt/00-intro.fr.vtt">
         </video>
         <div class="veil" id="veilIntro"><div class="play"></div></div>
       </div>
@@ -530,6 +530,9 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:26px 0 40px;margin-top
   </div>
 </footer>
 
+<!-- Volver arriba -->
+<button type="button" id="backTop" data-i18n="backTop">↑ Volver arriba</button>
+
 <!-- Caption de narración -->
 <div id="narrCaption" role="status" aria-live="polite"><div class="nc-in"><span class="nc-ic">🔊</span><span id="narrCaptionText"></span></div></div>
 <audio id="bgMusic" src="assets/demo/cinematic-theme.mp3" loop preload="none"></audio>
@@ -547,6 +550,12 @@ dialog::backdrop{background:rgba(4,12,15,.88);backdrop-filter:blur(6px)}
 .lm-benef b{color:var(--teal)}
 .lm-desc{margin-top:10px;font-size:13px;color:var(--mut);line-height:1.5}
 .lm-hear{margin-top:12px;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--teal);background:rgba(63,193,180,.08);border:1px solid rgba(63,193,180,.35);border-radius:999px;padding:8px 16px;cursor:pointer}
+.lm-back{margin-top:12px;margin-left:8px;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--txt);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 16px;cursor:pointer;font-family:inherit;transition:.15s}
+.lm-back:hover{border-color:var(--orange);color:#fff}
+#backTop{position:fixed;right:18px;bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--txt);background:rgba(7,20,24,.88);border:1px solid rgba(63,193,180,.4);border-radius:999px;padding:9px 15px;cursor:pointer;backdrop-filter:blur(10px);box-shadow:0 8px 26px rgba(0,0,0,.4);opacity:0;visibility:hidden;transform:translateY(10px);transition:.25s;font-family:inherit}
+#backTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+#backTop:hover{border-color:var(--teal);color:#fff}
+@media (prefers-reduced-motion:reduce){#backTop{transition:none}}
 .lc-go{display:inline-block;margin-top:10px;font-size:11px;font-weight:800;color:var(--orange);letter-spacing:.06em;text-transform:uppercase}
 </style>
 <dialog id="lineModal" aria-labelledby="lmTitle">
@@ -557,6 +566,7 @@ dialog::backdrop{background:rgba(4,12,15,.88);backdrop-filter:blur(6px)}
     <div class="lm-benef"><b data-i18n="lmWhat">Lo que se lleva su institución</b><br><span id="lmBenef"></span></div>
     <p class="lm-desc" id="lmDesc"></p>
     <button type="button" class="lm-hear" id="lmHear">🔊 <span data-i18n="lmHearT">Escuchar lo que obtiene</span></button>
+    <button type="button" class="lm-back" id="lmBack" data-i18n="lmBack">← Volver al inicio del demo</button>
   </div>
 </dialog>
 <script>
@@ -576,8 +586,8 @@ var I18N={"en":{"st":{
 "line4b":"Tells you where and when crime will strike next week.",
 "proofT":"This already happened — verify it — ","proof1":"municipalities with zero homicides · Dec 2021","proof2":"years without such a safe December","proof3":"years — Bogotá's homicide low","proof4":"years — record in Cali",
 "proofAttr":"Results from our founder's track record as Director of Analytics of the National Police of Colombia.",
-"vidH":"The ecosystem in 110 seconds","vidCap":"Institutional video · security, defense and risk management",
-"dVid":"The data line in 23 seconds","aVid":"The analysis line in 25 seconds","mVid":"The command line in 22 seconds","pVid":"The anticipation line in 24 seconds",
+"vidH":"The ecosystem in 2 minutes","vidCap":"Institutional video · security, defense and risk management",
+"dVid":"The data line in 35 seconds","aVid":"The analysis line in 40 seconds","mVid":"The command line in 35 seconds","pVid":"The anticipation line in 27 seconds",
 "tb1":"Data","ts1":"The territory reports","tb2":"Analysis","ts2":"AI processes the evidence","tb3":"Command","ts3":"Real-time coordination","tb4":"Foresight","ts4":"Decide before risk",
 "d_as":"Citizens report via Telegram or app — photo, video, audio and location, georeferenced instantly.",
 "d_ca":"No data or smartphone? It answers the call, converses naturally and turns voice into structured data.",
@@ -657,7 +667,7 @@ var I18N={"en":{"st":{
 "statsNote":"* Sample figures to illustrate the pilot. Verifiable results are cited with press sources.",
 "vReady":"🔊 Narration","vMuted":"🔇 Muted","vSpeaking":"🔊 Narrating…","voiceOn":"Enable narration","voiceOff":"Mute narration",
 "mf1t":"Understand the territory","mf1d":"What is happening, where and who is behind it.","mf2t":"Decide the operation","mf2d":"The models predict the next strike and you approve the plan.","mf3t":"Act and learn","mf3d":"The order goes out with a date and time; every result feeds the institutional memory.",
-"heroExpl":"A platform of AI agents that listens to citizens, investigates the evidence, commands the response and anticipates risk, in a single flow — from the street to the decision.","hdrAgenda2":"Book your demo","heroSeeLines":"See the 4 lines in action ↓","introBenef":"Your institution gets — citizen reports turned into actionable data, evidence processed in seconds, response coordinated in minutes and decisions made before the risk happens.","lineTitle2":"Four lines, one intelligence flow","cardGo":"Watch video →","lineVerb1":"Listens — AlejoSeguro + CatheAsiste","lineVerb2":"Investigates — MileInvestiga","lineVerb3":"Coordinates — GusCoordina","lineVerb4":"Predicts — GabyPredice","benef1":"Receive reports from the territory with no friction — every citizen reports via Telegram or a phone call, and your team gets structured data with evidence and location, 24/7.","benef2":"Process evidence in seconds, not weeks — people, vehicles and criminal networks identified before the case goes cold.","benef3":"Coordinate every agency on one real-time board — multi-incident, no chasing emails or conflicting versions.","benef4":"Anticipate where and when crime will strike — predictive hotspots and 72-hour scenarios to deploy resources ahead of the risk.","lmWhat":"What your institution gets","lmWatch":"Watch what it does","lmClose":"Close",
+"heroExpl":"A platform of AI agents that listens to citizens, investigates the evidence, commands the response and anticipates risk, in a single flow — from the street to the decision.","hdrAgenda2":"Book your demo","heroSeeLines":"See the 4 lines in action ↓","introBenef":"Your institution gets — citizen reports turned into actionable data, evidence processed in seconds, response coordinated in minutes and decisions made before the risk happens.","lineTitle2":"Four lines, one intelligence flow","cardGo":"Watch video →","lineVerb1":"Listens — AlejoSeguro + CatheAsiste","lineVerb2":"Investigates — MileInvestiga","lineVerb3":"Coordinates — GusCoordina","lineVerb4":"Predicts — GabyPredice","benef1":"Receive reports from the territory with no friction — every citizen reports via Telegram or a phone call, and your team gets structured data with evidence and location, 24/7.","benef2":"Process evidence in seconds, not weeks — people, vehicles and criminal networks identified before the case goes cold.","benef3":"Coordinate every agency on one real-time board — multi-incident, no chasing emails or conflicting versions.","benef4":"Anticipate where and when crime will strike — predictive hotspots and 72-hour scenarios to deploy resources ahead of the risk.","lmWhat":"What your institution gets","lmWatch":"Watch what it does","lmClose":"Close","backTop":"Back to top","lmBack":"← Back to the start of the demo",
 "fb_s0":"Back to the start of the case — AlejoSeguro listens to the citizen on Telegram, and CatheAsiste routes voice, text, video and image into structured data.",
 "fb_scene1":"Scene one — a shopkeeper in the southwest of the city receives an extortion leaflet and reports it from his phone through AlejoSeguro, all geolocated. And if he has no app or data, CatheAsiste routes reports of voice, text, video and image — it answers his call, transcribes his voice live and turns it into structured data. MileInvestiga supports the investigation, processing the evidence with more than twenty AI models in seconds, and immediately activates the Unified Command Post.",
 "fb_mile":"MileInvestiga supports the investigation — more than twenty AI models process image, video, audio and text in under two seconds. It identifies the suspect's face — alias El Flaco — and the motorcycle plate; and through criminal network analysis it reveals the full structure — five linked actors and their central node. The same network engine dismantles organized crime structures and threats to territorial defense.",
@@ -682,8 +692,8 @@ var I18N={"en":{"st":{
 "line4b":"Vous dit où et quand le crime frappera la semaine prochaine.",
 "proofT":"Cela s'est déjà produit — vérifiez-le  — ","proof1":"municipalités sans un seul homicide · déc. 2021","proof2":"ans sans un décembre aussi sûr","proof3":"ans — plus bas niveau d'homicides à Bogotá","proof4":"ans — record à Cali",
 "proofAttr":"Résultats issus du parcours de notre fondateur comme Directeur de l'Analytique de la Police Nationale de Colombie.",
-"vidH":"L'écosystème en 110 secondes","vidCap":"Vidéo institutionnelle · sécurité, défense et gestion des risques",
-"dVid":"La ligne de données en 23 secondes","aVid":"La ligne d'analyse en 25 secondes","mVid":"La ligne de commandement en 22 secondes","pVid":"La ligne d'anticipation en 24 secondes",
+"vidH":"L'écosystème en 2 minutes","vidCap":"Vidéo institutionnelle · sécurité, défense et gestion des risques",
+"dVid":"La ligne de données en 35 secondes","aVid":"La ligne d'analyse en 40 secondes","mVid":"La ligne de commandement en 35 secondes","pVid":"La ligne d'anticipation en 27 secondes",
 "tb1":"Données","ts1":"Le territoire signale","tb2":"Analyse","ts2":"L'IA traite les preuves","tb3":"Commandement","ts3":"Coordination en temps réel","tb4":"Anticipation","ts4":"Décider avant le risque",
 "d_as":"Les citoyens signalent via Telegram ou l'app — photo, vidéo, audio et localisation, géoréférencés instantanément.",
 "d_ca":"Sans données ni smartphone ? Elle répond à l'appel, converse naturellement et transforme la voix en donnée structurée.",
@@ -763,7 +773,7 @@ var I18N={"en":{"st":{
 "statsNote":"* Chiffres d'exemple pour illustrer le pilote. Les résultats vérifiables sont cités avec sources de presse.",
 "vReady":"🔊 Narration","vMuted":"🔇 Coupée","vSpeaking":"🔊 Lecture…","voiceOn":"Activer la narration","voiceOff":"Couper la narration",
 "mf1t":"Comprendre le territoire","mf1d":"Ce qui se passe, où et qui est derrière.","mf2t":"Décider l'opération","mf2d":"Les modèles prédisent le prochain coup et vous approuvez le plan.","mf3t":"Agir et apprendre","mf3d":"L'ordre part avec date et heure ; chaque résultat nourrit la mémoire institutionnelle.",
-"heroExpl":"Une plateforme d'agents d'intelligence artificielle qui écoutent le citoyen, investiguent les preuves, commandent la réponse et anticipent le risque, en un seul flux — de la rue à la décision.","hdrAgenda2":"Réserver une démo","heroSeeLines":"Voir les 4 lignes en action ↓","introBenef":"Votre institution obtient — des signalements citoyens transformés en données actionnables, des preuves traitées en secondes, une réponse coordonnée en minutes et des décisions prises avant que le risque ne survienne.","lineTitle2":"Quatre lignes, un seul flux d'intelligence","cardGo":"Voir la vidéo →","lineVerb1":"Écoute — AlejoSeguro + CatheAsiste","lineVerb2":"Enquête — MileInvestiga","lineVerb3":"Coordonne — GusCoordina","lineVerb4":"Prédit — GabyPredice","benef1":"Recevez les signalements du territoire sans friction — chaque citoyen signale par Telegram ou appel, et votre équipe reçoit des données structurées avec preuves et localisation, 24h/24.","benef2":"Traitez les preuves en secondes, pas en semaines — personnes, véhicules et réseaux criminels identifiés avant que l'affaire ne refroidisse.","benef3":"Coordonnez toutes les institutions sur un seul tableau en temps réel — multi-incidents, sans courir après les e-mails ni les versions contradictoires.","benef4":"Anticipez où et quand le crime frappera — hotspots prédictifs et scénarios à 72 heures pour déployer les ressources avant le risque.","lmWhat":"Ce que votre institution obtient","lmWatch":"Regarder ce qu'elle fait","lmClose":"Fermer",
+"heroExpl":"Une plateforme d'agents d'intelligence artificielle qui écoutent le citoyen, investiguent les preuves, commandent la réponse et anticipent le risque, en un seul flux — de la rue à la décision.","hdrAgenda2":"Réserver une démo","heroSeeLines":"Voir les 4 lignes en action ↓","introBenef":"Votre institution obtient — des signalements citoyens transformés en données actionnables, des preuves traitées en secondes, une réponse coordonnée en minutes et des décisions prises avant que le risque ne survienne.","lineTitle2":"Quatre lignes, un seul flux d'intelligence","cardGo":"Voir la vidéo →","lineVerb1":"Écoute — AlejoSeguro + CatheAsiste","lineVerb2":"Enquête — MileInvestiga","lineVerb3":"Coordonne — GusCoordina","lineVerb4":"Prédit — GabyPredice","benef1":"Recevez les signalements du territoire sans friction — chaque citoyen signale par Telegram ou appel, et votre équipe reçoit des données structurées avec preuves et localisation, 24h/24.","benef2":"Traitez les preuves en secondes, pas en semaines — personnes, véhicules et réseaux criminels identifiés avant que l'affaire ne refroidisse.","benef3":"Coordonnez toutes les institutions sur un seul tableau en temps réel — multi-incidents, sans courir après les e-mails ni les versions contradictoires.","benef4":"Anticipez où et quand le crime frappera — hotspots prédictifs et scénarios à 72 heures pour déployer les ressources avant le risque.","lmWhat":"Ce que votre institution obtient","lmWatch":"Regarder ce qu'elle fait","lmClose":"Fermer","backTop":"Retour en haut","lmBack":"← Retour au début de la démo",
 "fb_s0":"Retour au début du cas — AlejoSeguro écoute le citoyen sur Telegram, et CatheAsiste achemine voix, texte, vidéo et image en données structurées.",
 "fb_scene1":"Scène un — un commerçant du sud-ouest de la ville reçoit un tract d'extorsion et le signale depuis son téléphone via AlejoSeguro, le tout géolocalisé. Et sans application ni données, CatheAsiste achemine les signalements de voix, texte, vidéo et image — elle prend son appel, transcrit sa voix en direct et la convertit en donnée structurée. MileInvestiga apporte son appui à l'investigation, traitant les preuves avec plus de vingt modèles d'IA en quelques secondes, et active immédiatement le Poste de Commandement Unifié.",
 "fb_mile":"MileInvestiga apporte son appui à l'investigation — plus de vingt modèles d'IA traitent image, vidéo, audio et texte en moins de deux secondes. Il identifie le visage du suspect — alias El Flaco — et la plaque de la moto ; et par l'analyse de réseaux criminels, il révèle toute la structure — cinq acteurs liés et leur nœud central. Le même moteur de réseaux démantèle les structures du crime organisé et les menaces à la défense territoriale.",
@@ -884,17 +894,17 @@ function openLine(key){
   document.getElementById('lmVerb').textContent=LANG==='es'?L.verbEs:TT(L.verb,L.verbEs);
   document.getElementById('lmDesc').textContent=LANG==='es'?L.descEs:TT(L.desc,L.descEs);
   document.getElementById('lmBenef').textContent=LANG==='es'?L.benefEs:TT(L.benef,L.benefEs);
-  lmVideo.pause();lmVideo.innerHTML='';
+  lmVideo.pause();lmVideo.innerHTML='';try{lmVideo.currentTime=0}catch(e){}
   var src=document.createElement('source');src.src=L.video;src.type='video/mp4';lmVideo.appendChild(src);
   [['es','Español'],['en','English'],['fr','Français']].forEach(function(t){
-    var tr=document.createElement('track');tr.kind='subtitles';tr.srclang=t[0];tr.label=t[1];tr.src='assets/demo/srt/'+L.srt+'.'+t[0]+'.srt';lmVideo.appendChild(tr);
+    var tr=document.createElement('track');tr.kind='subtitles';tr.srclang=t[0];tr.label=t[1];tr.src='assets/demo/srt/'+L.srt+'.'+t[0]+'.vtt';lmVideo.appendChild(tr);
   });
   lmVideo.poster=L.poster;lmVideo.load();syncTracks();
   if(!voiceMuted){}
   modal.showModal();
   document.getElementById('lmClose').focus();
 }
-function closeLine(){if(!modal)return;lmVideo.pause();modal.close();if(lastCard)lastCard.focus()}
+function closeLine(){if(!modal)return;lmVideo.pause();try{lmVideo.currentTime=0}catch(e){}modal.close();if(lastCard)lastCard.focus()}
 var lastCard=null;
 document.querySelectorAll('[data-line]').forEach(function(b){
   b.addEventListener('click',function(){lastCard=b;openLine(b.getAttribute('data-line'))});
@@ -906,6 +916,15 @@ document.getElementById('lmHear').addEventListener('click',function(){
   var txt=document.getElementById('lmBenef').textContent+' '+document.getElementById('lmDesc').textContent;
   speakSeq++;synth.cancel();narrAudio.pause();ttsSpeak(txt);
 });
+/* Volver al inicio del demo: cierra el modal y hace scroll al hero */
+document.getElementById('lmBack').addEventListener('click',function(){closeLine();var h=document.getElementById('inicio');if(h)h.scrollIntoView({block:'start'})});
+/* Botón flotante volver arriba: visible tras 600px de scroll */
+var backTop=document.getElementById('backTop');
+if(backTop){
+  var onScroll=function(){backTop.classList.toggle('show',(window.scrollY||window.pageYOffset)>600)};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  backTop.addEventListener('click',function(){var h=document.getElementById('inicio');if(h)h.scrollIntoView({block:'start'})});
+}
 
 /* Videos con velo: click-to-play */
 document.querySelectorAll('.videoblock').forEach(function(w){
@@ -928,6 +947,7 @@ function setLang(l){
     el.innerHTML=(l==='es'||!D||!D.st[k])?el.dataset.es:D.st[k];
   });
   document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-lang')===l)});
+  var lc=document.getElementById('lmClose');if(lc)lc.setAttribute('aria-label',TT('lmClose','Cerrar'));
   syncTracks();setVoiceUI(voiceMuted?'muted':'ready');
 }
 document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'))})});

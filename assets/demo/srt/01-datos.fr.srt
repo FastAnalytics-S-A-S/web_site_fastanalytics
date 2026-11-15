@@ -1,19 +1,15 @@
 1
-00:00:00,500 --> 00:00:05,016
-AlejoSeguro : le citoyen signale via Telegram ou l'application — photo,
+00:00:00,500 --> 00:00:07,000
+AlejoSeguro transforme chaque téléphone du territoire en un capteur de sécurité.
 
 2
-00:00:05,016 --> 00:00:09,531
-video, audio et localisation, georeferences instantanement.
+00:00:07,800 --> 00:00:16,000
+La reconnaissance faciale et des plaques s'intègre à la collecte, avec les caméras de vidéosurveillance existantes.
 
 3
-00:00:09,931 --> 00:00:14,387
-CatheAsiste : sans donnees ni smartphone ? Elle repond a l'appel, converse
+00:00:16,800 --> 00:00:26,000
+Sans données ni smartphone ? CatheAsiste répond à l'appel et transforme la voix en la même donnée structurée. Elle fonctionne aussi hors ligne.
 
 4
-00:00:14,387 --> 00:00:18,842
-naturellement et transforme la voix en la meme donnee structuree.
-
-5
-00:00:19,042 --> 00:00:22,509
-Deux canaux, la meme donnee. Personne n'est laisse de cote.
+00:00:26,800 --> 00:00:35,000
+Documents, images, audios et vidéos — tout alimente les trois autres lignes de l'écosystème.
