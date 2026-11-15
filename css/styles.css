@@ -4360,6 +4360,7 @@ a.science-link:focus-visible .science-link-arrow {
 .aliados-track {
   display: flex;
   gap: 24px;
+  justify-content: safe center;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 8px 24px 20px;
