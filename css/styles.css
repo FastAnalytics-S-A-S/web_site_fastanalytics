@@ -4433,6 +4433,69 @@ a.science-link:focus-visible .science-link-arrow {
   height: auto;
   display: block;
 }
+
+/* Banda de entrada al ecosistema (bajo los tres pilares) */
+.eco-band {
+  display: grid;
+  grid-template-columns: 280px 1fr auto;
+  gap: 30px;
+  align-items: center;
+  margin-top: 26px;
+  padding: 30px 36px;
+  background: linear-gradient(160deg, #0B1E22 0%, #071418 100%);
+  color: #F5FCFA;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.eco-band:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.eco-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3FC1B4;
+  border: 1px solid rgba(63, 193, 180, 0.4);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.eco-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #F5FCFA;
+}
+.eco-desc {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(245, 252, 250, 0.78);
+}
+.eco-cta {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #E8943E;
+  white-space: nowrap;
+}
+.eco-band:hover .eco-cta {
+  color: #3FC1B4;
+}
+@media (max-width: 860px) {
+  .eco-band {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 26px 24px;
+  }
+  .eco-cta {
+    white-space: normal;
+  }
+}
 .aliado-name {
   display: block;
   font-size: 0.78rem;
