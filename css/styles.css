@@ -4387,19 +4387,31 @@ a.science-link:focus-visible .science-link-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 700;
-  font-size: 1.7rem;
+  font-family: Inter, sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
   color: var(--primary);
   background: rgba(0, 109, 109, 0.07);
   border: 1px solid rgba(0, 109, 109, 0.3);
   flex-shrink: 0;
 }
-.aliado-mono--orange {
-  color: #D4883A;
-  background: rgba(212, 136, 58, 0.1);
-  border-color: rgba(212, 136, 58, 0.4);
+/* Interamericana: azul oscuro con letras blancas */
+.aliado-mono--inter {
+  color: #FFFFFF;
+  background: #16265C;
+  border-color: #0E1A45;
+}
+/* Smartechs: fondo blanco con letras rojas */
+.aliado-mono--smart {
+  color: #D2202F;
+  background: #FFFFFF;
+  border-color: #D2202F;
+}
+.acad-mono {
+  width: 56px;
+  height: 56px;
+  font-size: 1.3rem;
+  font-style: normal;
 }
 .aliado-name {
   display: block;
@@ -4449,14 +4461,6 @@ a.science-link:focus-visible .science-link-arrow {
   display: flex;
   align-items: center;
   gap: 14px;
-}
-.acad-mono {
-  width: 56px;
-  height: 56px;
-  font-size: 1.3rem;
-  font-style: normal;
-  font-family: Inter, sans-serif;
-  font-weight: 800;
 }
 .acad-uni-name {
   font-size: 1.05rem;
