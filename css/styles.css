@@ -4359,17 +4359,20 @@ a.science-link:focus-visible .science-link-arrow {
   -webkit-overflow-scrolling: touch;
 }
 .aliado-card {
-  flex: 0 0 250px;
-  height: 130px;
+  flex: 0 0 280px;
+  min-height: 170px;
   scroll-snap-align: center;
   display: flex;
+  flex-direction: column;
+  gap: 14px;
   align-items: center;
   justify-content: center;
+  text-align: center;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  padding: 24px;
+  padding: 22px 20px;
   transition: all var(--transition);
 }
 .aliado-card:hover {
@@ -4377,18 +4380,112 @@ a.science-link:focus-visible .science-link-arrow {
   box-shadow: var(--shadow);
   transform: translateY(-3px);
 }
-.aliado-logo {
-  max-width: 100%;
-  max-height: 72px;
-  object-fit: contain;
+.aliado-mono {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--primary);
+  background: rgba(0, 109, 109, 0.07);
+  border: 1px solid rgba(0, 109, 109, 0.3);
+  flex-shrink: 0;
+}
+.aliado-mono--orange {
+  color: #D4883A;
+  background: rgba(212, 136, 58, 0.1);
+  border-color: rgba(212, 136, 58, 0.4);
 }
 .aliado-name {
-  display: none;
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 230px;
+}
+
+/* Alianza académica: bloque separado del carrusel de clientes (estándar de la industria) */
+.acad-band {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 34px;
+  align-items: center;
+  margin-top: 28px;
+  padding: 30px 34px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+}
+.acad-band:hover {
+  border-color: var(--primary);
+  border-left-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.acad-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0F766E;
+  background: rgba(13, 148, 136, 0.08);
+  border: 1px solid rgba(13, 148, 136, 0.3);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.acad-uni {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.acad-mono {
+  width: 56px;
+  height: 56px;
+  font-size: 1.3rem;
+  font-style: normal;
+  font-family: Inter, sans-serif;
+  font-weight: 800;
+}
+.acad-uni-name {
   font-size: 1.05rem;
   font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+.acad-course {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+.acad-desc {
+  margin: 0 0 12px;
+  font-size: 0.98rem;
+  line-height: 1.65;
   color: var(--text-secondary);
 }
-/* Fallback a texto si el SVG aún no existe (lo crea otro agente) */
-.aliado-card--text .aliado-name {
-  display: block;
+.acad-tagline {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+@media (max-width: 760px) {
+  .acad-band {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 22px;
+  }
 }

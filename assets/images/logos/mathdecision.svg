@@ -36,16 +36,19 @@
   </g>
 
   <!-- Casa matriz -->
-  <text x="152" y="54" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#8888A0" letter-spacing="2.6">FASTANALYTICS S.A.S.</text>
+  <text x="152" y="36" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#8888A0" letter-spacing="2.6">FASTANALYTICS S.A.S.</text>
+
+  <!-- Separador superior -->
+  <line x1="152" y1="58" x2="384" y2="58" stroke="#006D6D" stroke-width="0.75" opacity="0.25"/>
 
   <!-- Nombre del grupo -->
-  <text x="152" y="88" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="36" font-weight="800" letter-spacing="-0.8">
+  <text x="152" y="98" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="36" font-weight="800" letter-spacing="-0.8">
     <tspan fill="#006D6D">Math</tspan><tspan fill="#1A1A2E">Decision</tspan>
   </text>
 
   <!-- Separador -->
-  <line x1="152" y1="106" x2="384" y2="106" stroke="#006D6D" stroke-width="0.75" opacity="0.25"/>
+  <line x1="152" y1="112" x2="384" y2="112" stroke="#006D6D" stroke-width="0.75" opacity="0.25"/>
 
   <!-- Subtítulo -->
-  <text x="152" y="128" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#8888A0" letter-spacing="2.6">GRUPO DE INVESTIGACIÓN</text>
+  <text x="152" y="134" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#8888A0" letter-spacing="2.6">GRUPO DE INVESTIGACIÓN</text>
 </svg>
