@@ -37,9 +37,9 @@
   var PHASES = [
     {
       code: 'F0', short: 'Postura',
-      es: { name: 'Postura Estratégica', desc: 'El decisor escribe su compromiso de liderazgo.' },
-      en: { name: 'Strategic Posture', desc: 'The decision-maker writes their leadership commitment.' },
-      fr: { name: 'Posture Stratégique', desc: 'Le décideur écrit son engagement de leadership.' }
+      es: { name: 'Postura Estratégica', desc: 'El decisor describe su compromiso de liderazgo.' },
+      en: { name: 'Strategic Posture', desc: 'The decision-maker describes their leadership commitment.' },
+      fr: { name: 'Posture Stratégique', desc: 'Le décideur décrit son engagement de leadership.' }
     },
     {
       code: 'F1', short: 'Entorno',
@@ -48,46 +48,46 @@
       fr: { name: 'Analyse de l\u2019Environnement', desc: 'Croise des données spatio-temporelles et non structurées pour détecter les tendances avec rigueur statistique.' }
     },
     {
-      code: 'F2', short: 'Decisión',
-      es: { name: 'Qué se va a decidir', desc: 'Clasifica la decisión y define el alcance: local, subnacional o nacional.' },
-      en: { name: 'What is to be decided', desc: 'Classifies the decision and defines its scope: local, subnational or national.' },
-      fr: { name: 'Ce qui va être décidé', desc: 'Classe la décision et définit sa portée : locale, infranationale ou nationale.' }
+      code: 'F2', short: 'Asunto',
+      es: { name: 'Asunto Decisional', desc: 'Define la gestión a realizar, los impactos esperados y el alcance espacio-temporal.' },
+      en: { name: 'Decision Issue', desc: 'Defines the action to be taken, the expected impacts and the spatio-temporal scope.' },
+      fr: { name: 'Objet Décisionnel', desc: 'Définit l\u2019action à mener, les impacts attendus et la portée spatio-temporelle.' }
     },
     {
       code: 'F3', short: 'Actores',
-      es: { name: 'Enfocar Actores y Temas', desc: 'El grafo actor-tema con centralidad revela quién es el nodo clave de la red.' },
-      en: { name: 'Focus Actors and Issues', desc: 'The actor-issue graph with centrality reveals who is the key node of the network.' },
-      fr: { name: 'Focaliser Acteurs et Sujets', desc: 'Le graphe acteur-sujet avec centralité révèle qui est le nœud clé du réseau.' }
+      es: { name: 'Enfocar Actores y Temas', desc: 'El grafo actor-tema revela quién es el nodo clave de la decisión.' },
+      en: { name: 'Focus Actors and Issues', desc: 'The actor-issue graph reveals who is the key node of the decision.' },
+      fr: { name: 'Focaliser Acteurs et Sujets', desc: 'Le graphe acteur-sujet révèle qui est le nœud clé de la décision.' }
     },
     {
-      code: 'F4', short: 'Articular',
-      es: { name: 'Articular Información', desc: 'Punto de control: el decisor aprueba, pide una revisión o emite una orden directa.' },
-      en: { name: 'Articulate Information', desc: 'Checkpoint: the decision-maker approves, requests a review or issues a direct order.' },
-      fr: { name: 'Articuler l\u2019Information', desc: 'Point de contrôle : le décideur approuve, demande une révision ou émet un ordre direct.' }
+      code: 'F4', short: 'Recolección',
+      es: { name: 'Recolección de información', desc: 'Recolecta información sobre los temas y actores focalizados, relevante para la toma de decisiones gerenciales.' },
+      en: { name: 'Information Collection', desc: 'Collects information on the focused issues and actors that is relevant for managerial decision-making.' },
+      fr: { name: 'Collecte d\u2019Information', desc: 'Collecte des informations sur les sujets et acteurs focalisés, pertinentes pour la prise de décision managériale.' }
     },
     {
       code: 'F5', short: 'Señales',
-      es: { name: 'Señales Predictivas', desc: 'El cerebro del Eneágono: los modelos predicen dónde y cuándo golpeará la red.' },
-      en: { name: 'Predictive Signals', desc: 'The brain of the Enneagon: the models predict where and when the network will strike.' },
-      fr: { name: 'Signaux Prédictifs', desc: 'Le cerveau de l\u2019Ennéagone : les modèles prédisent où et quand le réseau frappera.' }
+      es: { name: 'Señales Predictivas', desc: 'Las predicciones de los modelos matemáticos que podrían convertirse en señales débiles.' },
+      en: { name: 'Predictive Signals', desc: 'Predictions from the mathematical models that could become weak signals.' },
+      fr: { name: 'Signaux Prédictifs', desc: 'Les prédictions des modèles mathématiques qui pourraient devenir des signaux faibles.' }
     },
     {
       code: 'F6', short: 'Memoria',
-      es: { name: 'Memoria Institucional', desc: 'Memoria transversal: qué funcionó antes y qué no, siempre antes de decidir.' },
-      en: { name: 'Institutional Memory', desc: 'Cross-cutting memory: what worked before and what didn\u2019t, always before deciding.' },
-      fr: { name: 'Mémoire Institutionnelle', desc: 'Mémoire transversale : ce qui a fonctionné avant et ce qui n\u2019a pas marché, toujours avant de décider.' }
+      es: { name: 'Memoria a largo plazo', desc: 'Guarda la trazabilidad de todo el Eneágono y compara eventos pasados similares y sus resultados para asesorar la decisión presente.' },
+      en: { name: 'Long-term Memory', desc: 'Keeps traceability of the entire Enneagon and compares similar past events and their results to advise the present decision.' },
+      fr: { name: 'Mémoire à long terme', desc: 'Conserve la traçabilité de tout l\u2019Ennéagone et compare des événements passés similaires et leurs résultats pour éclairer la décision présente.' }
     },
     {
-      code: 'F7', short: 'Comité',
-      es: { name: 'Comité de decisión', desc: 'El comité delibera con señales cualificadas y decide: aprobar, pedir más info o refocalizar.' },
-      en: { name: 'Decision committee', desc: 'The committee deliberates with qualified signals and decides: approve, request more info or refocus.' },
-      fr: { name: 'Comité de décision', desc: 'Le comité délibère avec des signaux qualifiés et décide : approuver, demander plus d\u2019info ou refocaliser.' }
+      code: 'F7', short: 'Sentido',
+      es: { name: 'Creación de sentido', desc: 'Con el método Puzzle —confirmación, contradicción, consecuencia— se interpretan los fragmentos de información que probablemente son señales débiles anticipativas.' },
+      en: { name: 'Sense-making', desc: 'Through the Puzzle method —confirmation, contradiction, consequence— fragments of information that are likely anticipatory weak signals are interpreted.' },
+      fr: { name: 'Création de sens', desc: 'Grâce à la méthode Puzzle —confirmation, contradiction, conséquence— les fragments d\u2019information qui constituent probablement des signaux faibles anticipatifs sont interprétés.' }
     },
     {
-      code: 'F8', short: 'Órdenes',
-      es: { name: 'Difusión y Acción', desc: 'La orden formal con plan de acción y semáforo de impacto en desarrollo humano.' },
-      en: { name: 'Dissemination and Action', desc: 'The formal order with an action plan and a human-development impact traffic light.' },
-      fr: { name: 'Diffusion et Action', desc: 'L\u2019ordre formel avec plan d\u2019action et feu tricolore d\u2019impact sur le développement humain.' }
+      code: 'F8', short: 'Acción',
+      es: { name: 'Difusión y Acción', desc: 'Se comunican las señales débiles, las decisiones sobre ellas y los indicadores predictivos de medición con distribuciones de probabilidad.' },
+      en: { name: 'Dissemination and Action', desc: 'Weak signals, the decisions on them and predictive measurement indicators are communicated with probability distributions.' },
+      fr: { name: 'Diffusion et Action', desc: 'Les signaux faibles, les décisions qui les concernent et les indicateurs prédictifs de mesure sont communiqués avec des distributions de probabilité.' }
     }
   ];
 
