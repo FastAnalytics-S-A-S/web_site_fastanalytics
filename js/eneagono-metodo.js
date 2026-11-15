@@ -318,57 +318,98 @@
       ctx.fillText('temas', lx, ly + 66);
     },
 
-    // F4 · Articular: piezas de rompecabezas que se articulan
+    // F4 · Recolección: integra texto, imágenes, audio, video y predicciones
+    // desde fuentes distintas hacia una sola ficha de información
     f4: function (t) {
-      function piece(x, y, s, tabTop, tabRight, color) {
-        ctx.save();
-        ctx.translate(x, y);
+      var coreX = 190, coreY = 96;
+
+      function gTexto(x, y) {
+        drawDocument(x - 9, y - 12, 18, 24, TEAL);
+      }
+      function gImagen(x, y) {
+        stroke(TEAL, 1.2);
+        ctx.strokeRect(x - 12, y - 9, 24, 18);
+        circle(x - 6, y - 3, 2.2, TEAL, 1);
+        line(x - 12, y + 8, x - 3, y - 1, TEAL, 1);
+        line(x - 3, y - 1, x + 4, y + 4, TEAL, 1);
+        line(x + 4, y + 4, x + 12, y - 2, TEAL, 1);
+      }
+      function gAudio(x, y) {
+        var hs = [5, 10, 14, 9, 4];
+        for (var i = 0; i < hs.length; i++) {
+          line(x - 10 + i * 5, y - hs[i] / 2, x - 10 + i * 5, y + hs[i] / 2, TEAL, 1.6);
+        }
+      }
+      function gVideo(x, y) {
+        stroke(TEAL, 1.2);
+        ctx.strokeRect(x - 12, y - 9, 24, 18);
         ctx.beginPath();
-        ctx.moveTo(0, 0);
-        if (tabTop) {
-          ctx.lineTo(s * 0.32, 0);
-          ctx.arc(s * 0.5, 0, s * 0.18, Math.PI, 0, false);
-          ctx.lineTo(s, 0);
-        } else {
-          ctx.lineTo(s * 0.32, 0);
-          ctx.arc(s * 0.5, 0, s * 0.18, Math.PI, 0, true);
-          ctx.lineTo(s, 0);
-        }
-        ctx.lineTo(s, s * 0.32);
-        if (tabRight) {
-          ctx.lineTo(s, s * 0.5 - s * 0.18);
-          ctx.arc(s, s * 0.5, s * 0.18, -Math.PI / 2, Math.PI / 2, false);
-        } else {
-          ctx.lineTo(s, s * 0.5 - s * 0.18);
-          ctx.arc(s, s * 0.5, s * 0.18, -Math.PI / 2, Math.PI / 2, true);
-        }
-        ctx.lineTo(s, s);
-        ctx.lineTo(0, s);
+        ctx.moveTo(x - 3, y - 5); ctx.lineTo(x + 6, y); ctx.lineTo(x - 3, y + 5);
         ctx.closePath();
-        stroke(color, 1.5);
-        ctx.stroke();
-        ctx.restore();
+        stroke(ORANGE, 1.4); ctx.stroke();
       }
-      var p = ease(clamp01(t / 0.8));
-      var s = 42;
-      var gx = 118, gy = 52;
-      var offs = [
-        [-70 * (1 - p), -44 * (1 - p), true, false, TEAL],
-        [70 * (1 - p), -50 * (1 - p), false, true, TEAL],
-        [-64 * (1 - p), 52 * (1 - p), true, true, ORANGE],
-        [66 * (1 - p), 46 * (1 - p), false, false, ORANGE]
+      function gPrediccion(x, y) {
+        line(x - 11, y + 8, x - 11, y - 8, MUTED, 1);
+        line(x - 11, y + 8, x + 12, y + 8, MUTED, 1);
+        polyline([[x - 9, y + 4], [x - 3, y], [x + 2, y + 3], [x + 9, y - 6]], ORANGE, 1.4);
+        line(x + 9, y - 6, x + 4, y - 5, ORANGE, 1.2);
+        line(x + 9, y - 6, x + 7, y - 1, ORANGE, 1.2);
+      }
+
+      var sources = [
+        { y: 26, draw: gTexto },
+        { y: 61, draw: gImagen },
+        { y: 96, draw: gAudio },
+        { y: 131, draw: gVideo },
+        { y: 166, draw: gPrediccion }
       ];
-      for (var i = 0; i < 4; i++) {
-        var px = gx + (i % 2) * s + offs[i][0];
-        var py = gy + Math.floor(i / 2) * s + offs[i][1];
-        piece(px, py, s, offs[i][2], offs[i][3], offs[i][4]);
+
+      for (var i = 0; i < sources.length; i++) {
+        var sy = sources[i].y;
+        var ap = clamp01((t - i * 0.07) / 0.18);
+        if (ap <= 0) continue;
+        ctx.save();
+        ctx.globalAlpha = ap;
+        sources[i].draw(38, sy);
+        ctx.restore();
+        // flujo desde la fuente hacia el núcleo integrador
+        var fp = clamp01((t - 0.22 - i * 0.05) / 0.42);
+        if (fp > 0) {
+          var tx = coreX - 16;
+          var ty = coreY + (sy - coreY) * 0.18;
+          var mx = lerp(50, tx, fp);
+          var my = lerp(sy, ty, fp);
+          line(50, sy, mx, my, 'rgba(63, 193, 180, ' + (0.5 * fp) + ')', 1.3);
+          dot(mx, my, 2.2, ORANGE);
+        }
       }
-      if (p > 0.9) {
-        circle(gx + s, gy + s, 34 + (p - 0.9) * 30, 'rgba(232, 148, 62, 0.4)', 1);
+
+      // núcleo que integra todo
+      var coreGrow = ease(clamp01((t - 0.2) / 0.3));
+      circle(coreX, coreY, 12 + coreGrow * 4, TEAL, 1.6);
+      circle(coreX, coreY, 5, ORANGE, 1.2);
+      if (t > 0.55) {
+        var pu = clamp01((t - 0.55) / 0.45);
+        circle(coreX, coreY, 16 + pu * 14, 'rgba(63, 193, 180, ' + (0.4 * (1 - pu)) + ')', 1.2);
+      }
+
+      // ficha integrada con mini-predicción
+      var op = ease(clamp01((t - 0.66) / 0.34));
+      if (op > 0) {
+        ctx.save();
+        ctx.globalAlpha = op;
+        ctx.translate(0, (1 - op) * 8);
+        drawDocument(238, 66, 58, 60, ORANGE);
+        line(244, 78, 290, 78, MUTED, 1);
+        line(244, 88, 290, 88, MUTED, 1);
+        line(244, 98, 276, 98, MUTED, 1);
+        polyline([[246, 116], [256, 110], [264, 114], [276, 104]], TEAL, 1.5);
+        ctx.restore();
       }
     },
 
-    // F5 · Señales: ondas / señales débiles que se amplifican
+    // F5 · Señales: ondas / señales débiles que se amplifican y van
+    // dejando fórmulas matemáticas a su paso
     f5: function (t) {
       var ax = 60, ay = 120;
       dot(ax, ay, 2.4, ORANGE);
@@ -388,6 +429,26 @@
         pts.push([x, 92 + Math.sin(k * Math.PI * 3 + t * Math.PI * 2) * amp * k]);
       }
       polyline(pts, TEAL, 1.6);
+      // fórmulas que la señal va revelando al amplificarse
+      var formulas = [
+        { x: 138, txt: 'ŷ = Xβ + ε', c: ORANGE, d: 0.12 },
+        { x: 170, txt: 'P(x|μ,σ)', c: TEAL, d: 0.26 },
+        { x: 202, txt: 'e^{−λt}', c: TEAL, d: 0.40 },
+        { x: 234, txt: 'R²', c: ORANGE, d: 0.54 },
+        { x: 264, txt: 'IC 95%', c: TEAL, d: 0.68 }
+      ];
+      for (var fi = 0; fi < formulas.length; fi++) {
+        var Fo = formulas[fi];
+        var fa = clamp01((t - Fo.d) / 0.18);
+        if (fa <= 0) continue;
+        ctx.save();
+        ctx.globalAlpha = fa * 0.92;
+        ctx.font = 'italic 11px Georgia, serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = Fo.c;
+        ctx.fillText(Fo.txt, Fo.x, 50 + (fi % 2) * 9);
+        ctx.restore();
+      }
       if (t > 0.7) {
         var bl = clamp01((t - 0.7) / 0.3);
         circle(292, 92, 5 + bl * 5, ORANGE, 1.3);
@@ -426,35 +487,77 @@
       }
     },
 
-    // F7 · Comité: mesa deliberante
+    // F7 · Creación de sentido: personas que arman el puzzle (método Puzzle:
+    // confirmación, contradicción, consecuencia)
     f7: function (t) {
-      var cx = 160, cy = 92;
-      var seats = [
-        [cx - 72, cy - 30, 1.0], [cx, cy - 48, 1.05], [cx + 72, cy - 30, 1.0],
-        [cx - 72, cy + 34, 1.0], [cx + 72, cy + 34, 1.0]
+      function piece(x, y, s, tabTop, tabRight, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        if (tabTop) {
+          ctx.lineTo(s * 0.32, 0);
+          ctx.arc(s * 0.5, 0, s * 0.18, Math.PI, 0, false);
+          ctx.lineTo(s, 0);
+        } else {
+          ctx.lineTo(s * 0.32, 0);
+          ctx.arc(s * 0.5, 0, s * 0.18, Math.PI, 0, true);
+          ctx.lineTo(s, 0);
+        }
+        ctx.lineTo(s, s * 0.32);
+        if (tabRight) {
+          ctx.lineTo(s, s * 0.5 - s * 0.18);
+          ctx.arc(s, s * 0.5, s * 0.18, -Math.PI / 2, Math.PI / 2, false);
+        } else {
+          ctx.lineTo(s, s * 0.5 - s * 0.18);
+          ctx.arc(s, s * 0.5, s * 0.18, -Math.PI / 2, Math.PI / 2, true);
+        }
+        ctx.lineTo(s, s);
+        ctx.lineTo(0, s);
+        ctx.closePath();
+        stroke(color, 1.5);
+        ctx.stroke();
+        ctx.restore();
+      }
+      var p = ease(clamp01(t / 0.75));
+      var s = 32;
+      var gx = 128, gy = 62;
+      var offs = [
+        [-64 * (1 - p), -42 * (1 - p), true, false, TEAL],
+        [64 * (1 - p), -46 * (1 - p), false, true, TEAL],
+        [-58 * (1 - p), 46 * (1 - p), true, true, ORANGE],
+        [60 * (1 - p), 42 * (1 - p), false, false, ORANGE]
       ];
-      for (var i = 0; i < seats.length; i++) {
-        figure(seats[i][0], seats[i][1], seats[i][2], TEAL);
+      for (var i = 0; i < 4; i++) {
+        var px = gx + (i % 2) * s + offs[i][0];
+        var py = gy + Math.floor(i / 2) * s + offs[i][1];
+        piece(px, py, s, offs[i][2], offs[i][3], offs[i][4]);
       }
-      ctx.beginPath();
-      ctx.ellipse(cx, cy + 4, 66, 26, 0, 0, Math.PI * 2);
-      stroke(ORANGE, 1.5); ctx.stroke();
-      ctx.beginPath();
-      ctx.ellipse(cx, cy + 4, 40, 14, 0, 0, Math.PI * 2);
-      stroke('rgba(232, 148, 62, 0.5)', 1.1); ctx.stroke();
-      for (var d = 0; d < 3; d++) {
-        var ph = clamp01(t * 1.6 - d * 0.3);
-        var bx = cx - 20 + d * 22;
-        var by = cy - 62 - ph * 10;
-        ctx.globalAlpha = 1 - ph * 0.7;
-        dot(bx, by, 2, ORANGE);
-        dot(bx + 5, by, 2, ORANGE);
-        ctx.globalAlpha = 1;
+      // las personas que articulan el sentido alrededor del puzzle
+      figure(64, 104, 1.0, TEAL);
+      figure(256, 104, 1.0, TEAL);
+      figure(160, 34, 1.05, ORANGE);
+      // "clic" cuando el puzzle se articula
+      if (p > 0.9) {
+        circle(gx + s, gy + s, 28 + (p - 0.9) * 26, 'rgba(232, 148, 62, 0.35)', 1);
       }
-      drawDocument(cx - 14, cy - 6, 28, 18, TEAL);
+      // criterios del método Puzzle: confirmación ✓, contradicción ✗, consecuencia →
+      if (t > 0.72) {
+        var cp = ease(clamp01((t - 0.72) / 0.28));
+        ctx.save();
+        ctx.globalAlpha = cp;
+        polyline([[124, 146], [129, 151], [138, 140]], TEAL, 2);
+        line(150, 141, 158, 149, ORANGE, 1.8);
+        line(158, 141, 150, 149, ORANGE, 1.8);
+        line(170, 145, 186, 145, TEAL, 1.8);
+        line(186, 145, 181, 141, TEAL, 1.8);
+        line(186, 145, 181, 149, TEAL, 1.8);
+        ctx.restore();
+      }
     },
 
-    // F8 · Órdenes: briefing sellado y ejecutado
+    // F8 · Órdenes: briefing sellado y ejecutado; la flecha termina en una
+    // distribución de Poisson (los indicadores salen con probabilidad)
     f8: function (t) {
       drawDocument(70, 48, 84, 104, TEAL);
       var sx = 154, sy = 152;
@@ -475,6 +578,7 @@
           polyline([[88, 116], [96, 124], [112, 104]], TEAL, 2);
         }
       }
+      // ejecución: flecha de salida
       if (t > 0.65) {
         var ep = ease(clamp01((t - 0.65) / 0.35));
         var ex = lerp(190, 272, ep), ey = lerp(96, 96, ep);
@@ -483,10 +587,43 @@
         line(ex, ey, ex - 8, ey + 5, ORANGE, 1.8);
         if (ep > 0.9) dot(284, 96, 3.2, ORANGE);
       }
+      // distribución de Poisson en la punta de la flecha
+      if (t > 0.78) {
+        var dp = ease(clamp01((t - 0.78) / 0.22));
+        var lam = 1.6;
+        function pois(k) {
+          var p = Math.exp(-lam);
+          for (var j = 1; j <= k; j++) p *= lam / j;
+          return p;
+        }
+        var bx = 234;
+        for (var k = 0; k <= 4; k++) {
+          var h = pois(k) * 105 * dp;
+          var x0 = bx + k * 13;
+          stroke(k === 1 ? ORANGE : TEAL, 1.2);
+          if (h > 0.5) ctx.strokeRect(x0, 74 - h, 9, h);
+          // etiqueta k
+          ctx.font = '8px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = MUTED;
+          ctx.fillText(String(k), x0 + 4.5, 84);
+        }
+        // fórmula de la PMF
+        ctx.save();
+        ctx.globalAlpha = dp;
+        ctx.font = 'italic 10px Georgia, serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = ORANGE;
+        ctx.fillText('P(k) = λᵏ·e^(−λ) / k!', 262, 40);
+        ctx.restore();
+      }
     }
   };
 
-  var ORDER = ['f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8'];
+  // F0 y F2 intercambiaron escenas a pedido del autor del método:
+  // F0 Postura muestra al equipo caminando hacia el futuro y
+  // F2 Asunto Decisional muestra la serie que se vuelve flecha al blanco.
+  var ORDER = ['f2', 'f1', 'f0', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8'];
 
   // ---------- referencias de UI ----------
   var codeEl = document.getElementById('metodoCode');
@@ -677,7 +814,9 @@
   function render(i, local) {
     ctx.clearRect(0, 0, W, H);
     drawGraph(i, local);
-    var out = local > 0.9 ? (1 - local) / 0.1 : 1;
+    // el desvanecido final solo aplica en el ciclo automático (transición
+    // a la siguiente fase); en manual la escena repite sin apagarse
+    var out = (auto && local > 0.9) ? (1 - local) / 0.1 : 1;
     drawScene(i, local, Math.max(out, 0.001));
   }
 
@@ -700,8 +839,10 @@
       }
       render(idx, clamp01(local));
     } else {
-      // modo manual: la escena queda completa y visible, sin desvanecer
-      render(idx, clamp01(Math.min(local, 0.985)));
+      // modo manual: la escena de la fase actual repite en bucle
+      // mientras se explica, sin detenerse ni desaparecer
+      var m = ((now - phaseStart) % PHASE_MS) / PHASE_MS;
+      render(idx, m);
     }
 
     animId = requestAnimationFrame(frame);
