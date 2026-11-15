@@ -37,15 +37,15 @@
   var PHASES = [
     {
       code: 'F0', short: 'Postura',
-      es: { name: 'Postura Estratégica', desc: 'El decisor escribe su preocupación en texto libre; la IA extrae zona, actores, tema y restricciones.' },
-      en: { name: 'Strategic Posture', desc: 'The decision-maker writes the concern in free text; the AI extracts zone, actors, issue and constraints.' },
-      fr: { name: 'Posture Stratégique', desc: 'Le décideur écrit sa préoccupation en texte libre ; l\u2019IA extrait zone, acteurs, sujet et contraintes.' }
+      es: { name: 'Postura Estratégica', desc: 'El decisor escribe su compromiso de liderazgo.' },
+      en: { name: 'Strategic Posture', desc: 'The decision-maker writes their leadership commitment.' },
+      fr: { name: 'Posture Stratégique', desc: 'Le décideur écrit son engagement de leadership.' }
     },
     {
       code: 'F1', short: 'Entorno',
-      es: { name: 'Entorno y percepción', desc: 'Cruza cifras oficiales con la percepción ciudadana y detecta tendencias con rigor estadístico.' },
-      en: { name: 'Environment and perception', desc: 'Crosses official figures with citizen perception and detects trends with statistical rigor.' },
-      fr: { name: 'Environnement et perception', desc: 'Croise les chiffres officiels avec la perception citoyenne et détecte les tendances avec rigueur statistique.' }
+      es: { name: 'Análisis del Entorno', desc: 'Cruza datos espaciotemporales y no estructurados para detectar tendencias con rigor estadístico.' },
+      en: { name: 'Environment Analysis', desc: 'Crosses spatio-temporal and unstructured data to detect trends with statistical rigor.' },
+      fr: { name: 'Analyse de l\u2019Environnement', desc: 'Croise des données spatio-temporelles et non structurées pour détecter les tendances avec rigueur statistique.' }
     },
     {
       code: 'F2', short: 'Decisión',

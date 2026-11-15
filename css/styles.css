@@ -3903,6 +3903,14 @@ a.science-link:focus-visible .science-link-arrow {
   padding-right: 1px;
 }
 
+.metodo-fn-note {
+  margin: 12px auto 0;
+  max-width: 660px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
 .metodo-stage {
   display: flex;
   align-items: center;
