@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FastAnalytics | Grupo de investigación MathDecision</title>
+  <meta name="description" content="MathDecision, el grupo de investigación de FastAnalytics: modelado matemático, analítica espacio-temporal, redes complejas y señales débiles al servicio de la decisión anticipada.">
+  <meta name="author" content="FastAnalytics S.A.S.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FastAnalytics | Grupo de investigación MathDecision">
+  <meta property="og:description" content="Ciencia aplicada: del modelo matemático a la decisión anticipada.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fastanalytics.co/mathdecision">
+  <meta property="og:image" content="https://fastanalytics.co/assets/images/og-image.png">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+  <!-- Canonical & hreflang -->
+  <link rel="canonical" href="https://fastanalytics.co/mathdecision">
+  <link rel="alternate" hreflang="es" href="https://fastanalytics.co/mathdecision">
+  <link rel="alternate" hreflang="x-default" href="https://fastanalytics.co/mathdecision">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css?v=18">
+
+  <style>
+    .g-hero {
+      background: linear-gradient(160deg, #FFFFFF 0%, #F2F8F7 55%, #E6F1EF 100%);
+      color: var(--text);
+      padding: calc(var(--nav-height) + 48px) 0 56px;
+      text-align: center;
+    }
+    .g-hero .section-tag {
+      background: rgba(13, 148, 136, 0.08);
+      color: #0F766E;
+      border: 1px solid rgba(13, 148, 136, 0.3);
+    }
+    .g-hero-logo {
+      width: min(320px, 70vw);
+      height: auto;
+      margin: 0 auto 6px;
+      display: block;
+    }
+    .g-hero h1 {
+      font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.18;
+      margin: 16px auto 14px;
+      max-width: 820px;
+    }
+    .g-hero .lead {
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    .g-hero .g-sede {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+    .g-back {
+      display: inline-block;
+      margin-top: 22px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+    .g-back:hover { color: var(--primary); }
+    .g-section { padding: 60px 0 8px; }
+    .g-prose {
+      max-width: 780px;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+    .g-prose strong { color: var(--text); }
+
+    /* Preguntas de investigación (estilo ComplexDataLab: una gran pregunta por bloque) */
+    .g-question {
+      border-left: 4px solid var(--accent);
+      padding: 6px 0 6px 22px;
+      margin: 0 0 26px;
+      font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+    }
+    .g-question span {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    /* Integrantes (estilo ComplexDataLab: categoría + filas con enfoque y destino) */
+    .g-member-cat {
+      margin: 34px 0 14px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0F766E;
+    }
+    .g-member {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .g-member-name { font-weight: 700; color: var(--text); font-size: 1.02rem; }
+    .g-member-role { font-size: 0.9rem; color: var(--text-secondary); }
+    .g-member-since { font-size: 0.82rem; color: var(--text-muted); white-space: nowrap; }
+    .g-member-focus { flex-basis: 100%; font-size: 0.92rem; color: var(--text-secondary); }
+    .g-member-next {
+      flex-basis: 100%;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Líder destacado */
+    .g-leader {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 30px;
+      box-shadow: 0 10px 32px rgba(0, 109, 109, 0.08);
+    }
+    .g-leader-avatar {
+      flex-shrink: 0;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 1.7rem;
+      letter-spacing: 0.02em;
+    }
+    .g-leader-name { font-size: 1.3rem; font-weight: 800; color: var(--text); margin: 0 0 4px; }
+    .g-leader-role { font-size: 0.95rem; font-weight: 600; color: var(--accent); margin: 0 0 10px; }
+    .g-leader-bio { font-size: 0.97rem; line-height: 1.65; color: var(--text-secondary); margin: 0 0 12px; }
+    .g-leader-link {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .g-leader-link:hover { color: var(--primary); text-decoration: underline; }
+    @media (max-width: 640px) {
+      .g-leader { flex-direction: column; }
+    }
+
+    /* Ficha institucional (campos Hermes) */
+    .g-ficha {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 36px;
+      margin-top: 8px;
+    }
+    .g-ficha dt {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #0F766E;
+      margin-bottom: 4px;
+    }
+    .g-ficha dd {
+      margin: 0;
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    @media (max-width: 700px) {
+      .g-ficha { grid-template-columns: 1fr; }
+    }
+
+    /* Puente ciencia → producto */
+    .g-bridge {
+      background: linear-gradient(160deg, #0B1E22 0%, #071418 100%);
+      color: #F5FCFA;
+      border-radius: 20px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .g-bridge h3 { margin: 0 0 8px; font-size: 1.4rem; font-weight: 800; }
+    .g-bridge p { margin: 0 auto 22px; max-width: 560px; color: rgba(245, 252, 250, 0.75); line-height: 1.6; }
+    .g-bridge-logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 26px;
+      align-items: center;
+    }
+    .g-bridge-logos img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
+  </style>
+</head>
+<body>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo-nav.svg" alt="FastAnalytics" class="logo-img">
+      </a>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Cambiar idioma">
+          <span class="lang-option active" data-lang="es">ES</span>
+          <span class="lang-separator">|</span>
+          <span class="lang-option" data-lang="en">EN</span>
+          <span class="lang-separator">|</span>
+          <span class="lang-option" data-lang="fr">FR</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="g-hero">
+      <div class="container">
+        <img src="assets/images/logos/mathdecision.svg" alt="Logotipo de MathDecision" class="g-hero-logo">
+        <span class="section-tag" data-es="Grupo de investigación" data-en="Research group" data-fr="Groupe de recherche">Grupo de investigación</span>
+        <h1 data-es="¿Cómo anticipar el futuro con matemáticas y datos?" data-en="How can we anticipate the future with mathematics and data?" data-fr="Comment anticiper l&#8217;avenir avec les mathématiques et les données ?">¿Cómo anticipar el futuro con matemáticas y datos?</h1>
+        <p class="lead" data-es="MathDecision es el grupo de investigación de FastAnalytics: ciencia aplicada en modelado matemático, analítica de datos e inteligencia artificial para la toma de decisiones anticipadas." data-en="MathDecision is the FastAnalytics research group: applied science in mathematical modeling, data analytics and artificial intelligence for early decision-making." data-fr="MathDecision est le groupe de recherche de FastAnalytics : science appliquée en modélisation mathématique, analytique des données et intelligence artificielle pour la prise de décision anticipée.">MathDecision es el grupo de investigación de FastAnalytics: ciencia aplicada en modelado matemático, analítica de datos e inteligencia artificial para la toma de decisiones anticipadas.</p>
+        <span class="g-sede" data-es="Bogotá D.C., Colombia" data-en="Bogotá D.C., Colombia" data-fr="Bogotá D.C., Colombie">Bogotá D.C., Colombia</span>
+        <br>
+        <a class="g-back" href="index.html#ciencia" data-es="← Volver al Laboratorio" data-en="← Back to the Laboratory" data-fr="← Retour au Laboratoire">← Volver al Laboratorio</a>
+      </div>
+    </section>
+
+    <!-- ===== PRESENTACIÓN (campos: Presentación + Enfoque estratégico + Prioridades) ===== -->
+    <section class="g-section">
+      <div class="container">
+        <span class="section-tag" data-es="Presentación" data-en="About" data-fr="Présentation">Presentación</span>
+        <p class="g-prose" style="margin-top:16px" data-es="MathDecision realiza investigación aplicada donde los problemas de decisión se convierten en modelos que pueden calcularse, probarse y mejorarse. Su enfoque estratégico es la anticipación: descubrir las señales débiles del futuro y convertirlas en decisiones con rigor estadístico. Las innovaciones del grupo se integran en productos que agregan valor a clientes de todo sector." data-en="MathDecision conducts applied research where decision problems become models that can be computed, tested and improved. Its strategic focus is anticipation: uncovering the weak signals of the future and turning them into decisions with statistical rigor. The group's innovations are integrated into products that add value for clients in every industry." data-fr="MathDecision mène une recherche appliquée où les problèmes de décision deviennent des modèles calculables, testables et améliorables. Son orientation stratégique est l&#8217;anticipation : révéler les signaux faibles du futur et les transformer en décisions avec rigueur statistique. Les innovations du groupe sont intégrées dans des produits qui ajoutent de la valeur pour des clients de tous les secteurs.">MathDecision realiza investigación aplicada donde los problemas de decisión se convierten en modelos que pueden calcularse, probarse y mejorarse. Su enfoque estratégico es la anticipación: descubrir las señales débiles del futuro y convertirlas en decisiones con rigor estadístico. Las innovaciones del grupo se integran en productos que agregan valor a clientes de todo sector.</p>
+        <p class="g-prose" data-es="Prioridad de investigación: métodos de predicción estratégica y estadística espacio-temporal con impacto en seguridad, defensa, gestión de riesgos y sector privado." data-en="Research priority: strategic foresight methods and spatio-temporal statistics with impact in security, defense, risk management and the private sector." data-fr="Priorité de recherche : méthodes de prédiction stratégique et statistique spatio-temporelle avec impact sur la sécurité, la défense, la gestion des risques et le secteur privé.">Prioridad de investigación: métodos de predicción estratégica y estadística espacio-temporal con impacto en seguridad, defensa, gestión de riesgos y sector privado.</p>
+      </div>
+    </section>
+
+    <!-- ===== LÍNEAS DE INVESTIGACIÓN (campo: Líneas de investigación) ===== -->
+    <section class="g-section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag" data-es="Líneas de investigación" data-en="Research lines" data-fr="Axes de recherche">Líneas de investigación</span>
+          <h2 class="section-title" data-es="Cinco líneas, un mismo método" data-en="Five lines, one method" data-fr="Cinq axes, une même méthode">Cinco líneas, un mismo método</h2>
+        </div>
+        <div class="sol-grid">
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num">01</div>
+            <h3 class="sol-title" data-es="Modelado matemático" data-en="Mathematical modeling" data-fr="Modélisation mathématique">Modelado matemático</h3>
+            <p class="sol-desc" data-es="Del problema a la ecuación: modelos a la medida que representan operaciones reales y anticipan escenarios antes de que ocurran." data-en="From problem to equation: tailored models that represent real operations and anticipate scenarios before they happen." data-fr="Du problème à l&#8217;équation : des modèles sur mesure qui représentent des opérations réelles et anticipent les scénarios avant qu&#8217;ils ne surviennent.">Del problema a la ecuación: modelos a la medida que representan operaciones reales y anticipan escenarios antes de que ocurran.</p>
+          </article>
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num">02</div>
+            <h3 class="sol-title" data-es="Analítica espacio-temporal" data-en="Spatio-temporal analytics" data-fr="Analytique spatio-temporelle">Analítica espacio-temporal</h3>
+            <p class="sol-desc" data-es="Datos con coordenadas y tiempo: patrones, trayectorias y puntos calientes que se mueven por el territorio." data-en="Data with coordinates and time: patterns, trajectories and hot spots moving across the territory." data-fr="Données avec coordonnées et temps : motifs, trajectoires et points chauds qui se déplacent sur le territoire.">Datos con coordenadas y tiempo: patrones, trayectorias y puntos calientes que se mueven por el territorio.</p>
+          </article>
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num">03</div>
+            <h3 class="sol-title" data-es="Redes complejas" data-en="Complex networks" data-fr="Réseaux complexes">Redes complejas</h3>
+            <p class="sol-desc" data-es="Grafos actor-tema y redes criminales: centralidad, comunidades y fractura de estructuras que operan transnacionalmente." data-en="Actor-issue graphs and criminal networks: centrality, communities and disruption of structures operating across borders." data-fr="Graphes acteur-sujet et réseaux criminels : centralité, communautés et rupture de structures opérant à l&#8217;échelle transnationale.">Grafos actor-tema y redes criminales: centralidad, comunidades y fractura de estructuras que operan transnacionalmente.</p>
+          </article>
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num">04</div>
+            <h3 class="sol-title" data-es="Señales débiles" data-en="Weak signals" data-fr="Signaux faibles">Señales débiles</h3>
+            <p class="sol-desc" data-es="Detección temprana: anomalías univariantes y multivariantes que anuncian el próximo evento antes de que sea noticia." data-en="Early detection: univariate and multivariate anomalies that announce the next event before it makes the news." data-fr="Détection précoce : anomalies univariées et multivariées qui annoncent le prochain événement avant qu&#8217;il ne fasse la une.">Detección temprana: anomalías univariantes y multivariantes que anuncian el próximo evento antes de que sea noticia.</p>
+          </article>
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num">05</div>
+            <h3 class="sol-title" data-es="IA para la decisión" data-en="AI for decision" data-fr="IA pour la décision">IA para la decisión</h3>
+            <p class="sol-desc" data-es="Agentes y modelos que apoyan el juicio humano: la predicción es una función de la ciencia y del criterio — la ε solo se reduce con las personas." data-en="Agents and models that support human judgment: prediction is a function of science and criteria — ε is only reduced by people." data-fr="Agents et modèles qui soutiennent le jugement humain : la prédiction est une fonction de la science et du discernement — ε ne se réduit qu&#8217;avec les personnes.">Agentes y modelos que apoyan el juicio humano: la predicción es una función de la ciencia y del criterio — la ε solo se reduce con las personas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PREGUNTAS DE INVESTIGACIÓN (presentación tipo ComplexDataLab) ===== -->
+    <section class="g-section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag" data-es="Preguntas abiertas" data-en="Open questions" data-fr="Questions ouvertes">Preguntas abiertas</span>
+          <h2 class="section-title" data-es="Lo que nos mueve" data-en="What drives us" data-fr="Ce qui nous anime">Lo que nos mueve</h2>
+        </div>
+        <div style="max-width:820px">
+          <p class="g-question" data-es="¿Dónde y cuándo ocurrirá el próximo evento?" data-en="Where and when will the next event happen?" data-fr="Où et quand le prochain événement aura-t-il lieu ?">¿Dónde y cuándo ocurrirá el próximo evento?</p>
+          <p class="g-question" data-es="¿Quién es el nodo clave de la red?" data-en="Who is the key node of the network?" data-fr="Qui est le nœud clé du réseau ?">¿Quién es el nodo clave de la red?</p>
+          <p class="g-question" data-es="¿Qué señal débil de hoy será la crisis de mañana?" data-en="Which weak signal of today will be tomorrow's crisis?" data-fr="Quel signal faible d&#8217;aujourd&#8217;hui sera la crise de demain ?">¿Qué señal débil de hoy será la crisis de mañana?</p>
+          <p class="g-question" data-es="¿Cómo reducir la incertidumbre sin perder al humano en la decisión?" data-en="How to reduce uncertainty without losing the human in the decision?" data-fr="Comment réduire l&#8217;incertitude sans perdre l&#8217;humain dans la décision ?">¿Cómo reducir la incertidumbre sin perder al humano en la decisión?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LÍDER (campo: Líder) ===== -->
+    <section class="g-section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag" data-es="Líder" data-en="Leader" data-fr="Leader">Líder</span>
+          <h2 class="section-title" data-es="Quién dirige el grupo" data-en="Who leads the group" data-fr="Qui dirige le groupe">Quién dirige el grupo</h2>
+        </div>
+        <div class="g-leader animate-on-scroll" style="max-width:860px">
+          <div class="g-leader-avatar" aria-hidden="true">APC</div>
+          <div>
+            <p class="g-leader-name">Andrés Pérez Coronado</p>
+            <p class="g-leader-role" data-es="Fundador del grupo · PhD en Ingeniería Matemática" data-en="Group founder · PhD in Mathematical Engineering" data-fr="Fondateur du groupe · PhD en ingénierie mathématique">Fundador del grupo · PhD en Ingeniería Matemática</p>
+            <p class="g-leader-bio" data-es="PhD en Ingeniería Matemática (Universidad EAFIT, 2025). Exdirector de Analítica de la Policía Nacional de Colombia. Fulbright Scholar · Humphrey Fellow (University of Minnesota). Autor de los libros «Policía para el Desarrollo Humano» (2021) y «Analítica de datos para la seguridad ciudadana» (Editorial Logos, 2024), y de más de 7 artículos científicos aplicados a la seguridad y la salud pública." data-en="PhD in Mathematical Engineering (Universidad EAFIT, 2025). Former Director of Analytics at the Colombian National Police. Fulbright Scholar · Humphrey Fellow (University of Minnesota). Author of the books "Policía para el Desarrollo Humano" (2021) and "Analítica de datos para la seguridad ciudadana" (Logos, 2024), and of more than 7 scientific articles applied to security and public health." data-fr="PhD en ingénierie mathématique (Universidad EAFIT, 2025). Ancien directeur de l&#8217;analytique de la Police nationale de Colombie. Fulbright Scholar · Humphrey Fellow (University of Minnesota). Auteur des livres « Policía para el Desarrollo Humano » (2021) et « Analítica de datos para la seguridad ciudadana » (Logos, 2024), et de plus de 7 articles scientifiques appliqués à la sécurité et à la santé publique.">PhD en Ingeniería Matemática (Universidad EAFIT, 2025). Exdirector de Analítica de la Policía Nacional de Colombia. Fulbright Scholar · Humphrey Fellow (University of Minnesota). Autor de los libros «Policía para el Desarrollo Humano» (2021) y «Analítica de datos para la seguridad ciudadana» (Editorial Logos, 2024), y de más de 7 artículos científicos aplicados a la seguridad y la salud pública.</p>
+            <a class="g-leader-link" href="https://andrego50.github.io" target="_blank" rel="noopener" data-es="Sobre el fundador →" data-en="About the founder →" data-fr="À propos du fondateur →">Sobre el fundador →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INTEGRANTES (campo: Integrantes · presentación tipo ComplexDataLab) =====
+         PLANTILLA: sustituir las filas de ejemplo por los integrantes reales del grupo. -->
+    <section class="g-section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag" data-es="Integrantes" data-en="Members" data-fr="Membres">Integrantes</span>
+          <h2 class="section-title" data-es="El equipo detrás de la ciencia" data-en="The team behind the science" data-fr="L&#8217;équipe derrière la science">El equipo detrás de la ciencia</h2>
+        </div>
+        <div style="max-width:860px">
+          <p class="g-member-cat" data-es="Investigadores" data-en="Researchers" data-fr="Chercheurs">Investigadores</p>
+          <div class="g-member">
+            <span class="g-member-name" data-es="Investigador asociado" data-en="Associate researcher" data-fr="Chercheur associé">Investigador asociado</span>
+            <span class="g-member-role" data-es="Redes espacio-temporales" data-en="Spatio-temporal networks" data-fr="Réseaux spatio-temporels">Redes espacio-temporales</span>
+            <span class="g-member-focus" data-es="Enfoque: modelos no paramétricos para mapear y desarticular redes criminales (ChronNet)." data-en="Focus: non-parametric models to map and disrupt criminal networks (ChronNet)." data-fr="Focus : modèles non paramétriques pour cartographier et démanteler les réseaux criminels (ChronNet).">Enfoque: modelos no paramétricos para mapear y desarticular redes criminales (ChronNet).</span>
+          </div>
+          <!-- PLANTILLA: agregar aquí los investigadores reales -->
+
+          <p class="g-member-cat" data-es="Estudiantes" data-en="Students" data-fr="Étudiants">Estudiantes</p>
+          <div class="g-member">
+            <span class="g-member-name" data-es="Estudiante de maestría" data-en="Master's student" data-fr="Étudiant en maîtrise">Estudiante de maestría</span>
+            <span class="g-member-since" data-es="Dirigido por Andrés Pérez Coronado" data-en="Advised by Andrés Pérez Coronado" data-fr="Encadré par Andrés Pérez Coronado">Dirigido por Andrés Pérez Coronado</span>
+            <span class="g-member-focus" data-es="Tema: detección de señales débiles con datos atípicos multivariantes." data-en="Topic: weak-signal detection with multivariate outliers." data-fr="Sujet : détection de signaux faibles par anomalies multivariées.">Tema: detección de señales débiles con datos atípicos multivariantes.</span>
+          </div>
+          <!-- PLANTILLA: agregar aquí los estudiantes reales -->
+
+          <p class="g-member-cat" data-es="Alumni" data-en="Alumni" data-fr="Anciens">Alumni</p>
+          <div class="g-member">
+            <span class="g-member-name" data-es="Egresado del grupo" data-en="Group alumnus" data-fr="Ancien du groupe">Egresado del grupo</span>
+            <span class="g-member-next" data-es="→ Data Scientist en el sector analítico" data-en="→ Data Scientist in the analytics industry" data-fr="→ Data Scientist dans le secteur de l&#8217;analytique">→ Data Scientist en el sector analítico</span>
+          </div>
+          <!-- PLANTILLA: agregar aquí los egresados reales con su destino -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROYECTOS (campo: Proyectos) ===== -->
+    <section class="g-section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag" data-es="Proyectos" data-en="Projects" data-fr="Projets">Proyectos</span>
+          <h2 class="section-title" data-es="Investigación en curso y aplicada" data-en="Ongoing and applied research" data-fr="Recherche en cours et appliquée">Investigación en curso y aplicada</h2>
+        </div>
+        <div class="sol-grid">
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num" data-es="ACTIVO" data-en="ACTIVE" data-fr="ACTIF">ACTIVO</div>
+            <h3 class="sol-title" data-es="Eneágono Decisional" data-en="Decisional Enneagon" data-fr="Ennéagone Décisionnel">Eneágono Decisional</h3>
+            <p class="sol-desc" data-es="Método propio de nueve fases (F0–F8) que convierte datos en decisiones anticipadas; base conceptual y técnica de los productos de FastAnalytics." data-en="Proprietary nine-phase method (F0–F8) that turns data into early decisions; the conceptual and technical basis of FastAnalytics products." data-fr="Méthode propriétaire en neuf phases (F0–F8) qui transforme les données en décisions anticipées ; base conceptuelle et technique des produits FastAnalytics.">Método propio de nueve fases (F0–F8) que convierte datos en decisiones anticipadas; base conceptual y técnica de los productos de FastAnalytics.</p>
+          </article>
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num" data-es="ACTIVO" data-en="ACTIVE" data-fr="ACTIF">ACTIVO</div>
+            <h3 class="sol-title">ChronNet</h3>
+            <p class="sol-desc" data-es="Redes espacio-temporales para mapear y desarticular el crimen organizado transnacional; material de taller del IACP 2026." data-en="Spatio-temporal networks to map and disrupt transnational organized crime; IACP 2026 workshop material." data-fr="Réseaux spatio-temporels pour cartographier et démanteler le crime organisé transnational ; matériel de l&#8217;atelier IACP 2026.">Redes espacio-temporales para mapear y desarticular el crimen organizado transnacional; material de taller del IACP 2026.</p>
+          </article>
+          <article class="sol-card animate-on-scroll">
+            <div class="sol-num" data-es="ACTIVO" data-en="ACTIVE" data-fr="ACTIF">ACTIVO</div>
+            <h3 class="sol-title" data-es="Señales débiles multivariantes" data-en="Multivariate weak signals" data-fr="Signaux faibles multivariés">Señales débiles multivariantes</h3>
+            <p class="sol-desc" data-es="Detección de datos atípicos univariantes y multivariantes aplicada a la anticipación de eventos de seguridad y convivencia." data-en="Univariate and multivariate outlier detection applied to the anticipation of security and coexistence events." data-fr="Détection d&#8217;anomalies univariées et multivariées appliquée à l&#8217;anticipation d&#8217;événements de sécurité et de coexistence.">Detección de datos atípicos univariantes y multivariantes aplicada a la anticipación de eventos de seguridad y convivencia.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRODUCTOS CIENTÍFICOS (campo: Productos) ===== -->
+    <section class="g-section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag" data-es="Productos científicos" data-en="Scientific outputs" data-fr="Production scientifique">Productos científicos</span>
+          <h2 class="section-title" data-es="Lo que la investigación deja escrito" data-en="What the research leaves in writing" data-fr="Ce que la recherche laisse par écrit">Lo que la investigación deja escrito</h2>
+          <p class="section-subtitle" data-es="Libros, capítulos, artículos revisados por pares y trabajos de grado dirigidos." data-en="Books, book chapters, peer-reviewed articles and advised theses." data-fr="Livres, chapitres, articles évalués par les pairs et travaux de fin d&#8217;études dirigés.">Libros, capítulos, artículos revisados por pares y trabajos de grado dirigidos.</p>
+        </div>
+        <a class="btn btn-primary btn-lg" href="publicaciones.html" data-es="Ver publicaciones del grupo →" data-en="See the group's publications →" data-fr="Voir les publications du groupe →">Ver publicaciones del grupo →</a>
+      </div>
+    </section>
+
+    <!-- ===== DE LA CIENCIA AL PRODUCTO ===== -->
+    <section class="g-section">
+      <div class="container">
+        <div class="g-bridge animate-on-scroll">
+          <h3 data-es="De la ciencia al producto" data-en="From science to product" data-fr="De la science au produit">De la ciencia al producto</h3>
+          <p data-es="Cada producto de FastAnalytics nace de una fase del método que este grupo investiga, publica y mejora. La ciencia no se queda en el paper: llega al cliente." data-en="Every FastAnalytics product is born from a phase of the method this group researches, publishes and improves. Science does not stay in the paper: it reaches the client." data-fr="Chaque produit FastAnalytics naît d&#8217;une phase de la méthode que ce groupe recherche, publie et améliore. La science ne reste pas dans l&#8217;article : elle arrive jusqu&#8217;au client.">Cada producto de FastAnalytics nace de una fase del método que este grupo investiga, publica y mejora. La ciencia no se queda en el paper: llega al cliente.</p>
+          <div class="g-bridge-logos">
+            <a href="index.html#soluciones" aria-label="FastAnalytics"><img src="assets/demo/logo-alejoseguro.webp" alt="AlejoSeguro"></a>
+            <a href="index.html#soluciones" aria-label="MileInvestiga"><img src="assets/demo/logo-mileinvestiga.webp" alt="MileInvestiga"></a>
+            <a href="index.html#soluciones" aria-label="GusCoordina"><img src="assets/demo/logo-guscoordina.webp" alt="GusCoordina"></a>
+            <a href="index.html#soluciones" aria-label="GabyPredice"><img src="assets/demo/logo-gabypredice.webp" alt="GabyPredice"></a>
+          </div>
+          <a class="btn btn-primary btn-lg" style="margin-top:24px" href="index.html#metodo" data-es="Conocer el método →" data-en="Meet the method →" data-fr="Découvrir la méthode →">Conocer el método →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FICHA INSTITUCIONAL (campos Hermes: sede, dependencia, planes, agenda, OCDE) ===== -->
+    <section class="g-section" style="padding-bottom:72px">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag" data-es="Ficha institucional" data-en="Institutional record" data-fr="Fiche institutionnelle">Ficha institucional</span>
+        </div>
+        <dl class="g-ficha" style="max-width:860px">
+          <div>
+            <dt data-es="Sede" data-en="Campus" data-fr="Siège">Sede</dt>
+            <dd>Bogotá D.C., Colombia</dd>
+          </div>
+          <div>
+            <dt data-es="Dependencia" data-en="Affiliation" data-fr="Affiliation">Dependencia</dt>
+            <dd>FastAnalytics S.A.S. · Laboratorio de investigación aplicada</dd>
+          </div>
+          <div>
+            <dt data-es="Planes de estudio vinculados" data-en="Related study programs" data-fr="Programmes d&#8217;études liés">Planes de estudio vinculados</dt>
+            <dd data-es="Maestría y doctorado en ingeniería (convenios por definir)" data-en="Master's and PhD programs in engineering (agreements to be defined)" data-fr="Masters et doctorats en ingénierie (conventions à définir)">Maestría y doctorado en ingeniería (convenios por definir)</dd>
+          </div>
+          <div>
+            <dt data-es="Agenda de conocimiento" data-en="Knowledge agenda" data-fr="Agenda de connaissance">Agenda de conocimiento</dt>
+            <dd data-es="Tecnologías de la Información y las Comunicaciones" data-en="Information and Communication Technologies" data-fr="Technologies de l&#8217;information et de la communication">Tecnologías de la Información y las Comunicaciones</dd>
+          </div>
+          <div>
+            <dt data-es="Área OCDE" data-en="OECD field" data-fr="Domaine OCDE">Área OCDE</dt>
+            <dd data-es="Ingeniería y tecnología" data-en="Engineering and technology" data-fr="Ingénierie et technologie">Ingeniería y tecnología</dd>
+          </div>
+          <div>
+            <dt data-es="Perspectiva interdisciplinaria" data-en="Interdisciplinary perspective" data-fr="Perspective interdisciplinaire">Perspectiva interdisciplinaria</dt>
+            <dd data-es="La estadística y la IA del grupo se aplican con seguridad, salud pública, gestión de riesgos y sector privado." data-en="The group's statistics and AI are applied with security, public health, risk management and the private sector." data-fr="Les statistiques et l&#8217;IA du groupe sont appliquées avec la sécurité, la santé publique, la gestion des risques et le secteur privé.">La estadística y la IA del grupo se aplican con seguridad, salud pública, gestión de riesgos y sector privado.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 32px;">
+        <p data-es="© 2026 FastAnalytics S.A.S. Todos los derechos reservados."
+           data-en="© 2026 FastAnalytics S.A.S. All rights reserved."
+           data-fr="© 2026 FastAnalytics S.A.S. Tous droits réservés.">© 2026 FastAnalytics S.A.S. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ========== LANGUAGE TOGGLE (mismo comportamiento que js/main.js) ==========
+      var langToggle = document.getElementById('langToggle');
+      var langOptions = langToggle ? langToggle.querySelectorAll('.lang-option') : [];
+      var currentLang = 'es';
+      var titles = {
+        es: 'FastAnalytics | Grupo de investigación MathDecision',
+        en: "FastAnalytics | MathDecision Research Group",
+        fr: 'FastAnalytics | Groupe de recherche MathDecision'
+      };
+
+      function decodeEntities(text) {
+        var ta = document.createElement('textarea');
+        ta.innerHTML = text;
+        return ta.value;
+      }
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        langOptions.forEach(function (opt) {
+          opt.classList.toggle('active', opt.dataset.lang === lang);
+        });
+        document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+          var text = el.getAttribute('data-' + lang);
+          if (text) el.innerHTML = decodeEntities(text);
+        });
+        document.title = titles[lang] || titles.es;
+      }
+
+      var langCycle = ['es', 'en', 'fr'];
+      langToggle.addEventListener('click', function (e) {
+        var option = e.target.closest('.lang-option');
+        if (option) {
+          setLanguage(option.dataset.lang);
+        } else {
+          var idx = langCycle.indexOf(currentLang);
+          setLanguage(langCycle[(idx + 1) % langCycle.length]);
+        }
+      });
+
+      // Scroll reveal
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.animate-on-scroll').forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>

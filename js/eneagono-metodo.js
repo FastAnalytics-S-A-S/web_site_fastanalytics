@@ -91,7 +91,7 @@
     }
   ];
 
-  var PHASE_MS = 4200;   // duración por fase en el ciclo automático
+  var PHASE_MS = 5250;   // duración por fase en el ciclo automático (25% más lenta)
   var BIRTH = 0.30;      // fracción de la fase dedicada al nacimiento
 
   function vertex(i) {
