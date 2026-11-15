@@ -207,8 +207,8 @@
         },
         function (x, y) {
           circle(x, y, 7, TEAL, 1.2);
-          ctx.fillStyle = TEAL; ctx.font = '9px Inter, sans-serif'; ctx.textAlign = 'center';
-          ctx.fillText('$', x, y + 3);
+          ctx.fillStyle = TEAL; ctx.font = '16px Inter, sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText('$', x, y + 5);
         },
         function (x, y) {
           circle(x - 4, y - 3, 2.6, TEAL, 1.1); circle(x + 4, y - 3, 2.6, TEAL, 1.1);
@@ -313,9 +313,9 @@
       circle(lx, ly, 46, ORANGE, 1.6);
       line(lx + 33, ly + 33, lx + 56, ly + 56, ORANGE, 2.4);
       ctx.fillStyle = MUTED;
-      ctx.font = '8px Inter, sans-serif';
+      ctx.font = '15px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('temas', lx, ly + 64);
+      ctx.fillText('temas', lx, ly + 66);
     },
 
     // F4 · Articular: piezas de rompecabezas que se articulan
@@ -394,10 +394,10 @@
         dot(292, 92, 2, ORANGE);
       }
       ctx.fillStyle = MUTED;
-      ctx.font = '8px Inter, sans-serif';
+      ctx.font = '15px Inter, sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText('señal débil', 40, 148);
-      ctx.fillText('señal amplificada', 210, 148);
+      ctx.fillText('señal débil', 40, 150);
+      ctx.fillText('señal amplificada', 200, 150);
     },
 
     // F6 · Memoria: archivos que se consultan
@@ -539,12 +539,14 @@
   }
 
   // ---------- grafo de nueve lados ----------
-  // Aristas cruzadas del método: memoria que alimenta la acción (F6→F8)
-  // y comité que puede refocalizar actores o articulación (F7→F3, F7→F4).
+  // Aristas cruzadas del método: memoria que alimenta la acción (F6→F8),
+  // comité que puede refocalizar actores o articulación (F7→F3, F7→F4) y
+  // cierre del ciclo que lo reinicia (F8→F0).
   var CHORDS = [
     { from: 6, to: 8 },
     { from: 7, to: 3 },
-    { from: 7, to: 4 }
+    { from: 7, to: 4 },
+    { from: 8, to: 0 }
   ];
 
   function drawChord(from, to, active) {
@@ -603,7 +605,8 @@
       var la = -Math.PI / 2 + v * (Math.PI * 2 / N);
       var tx = p[0] + Math.cos(la) * 22;
       var ty = p[1] + Math.sin(la) * 22 + 4;
-      ctx.font = (active ? '700 14px' : '600 12px') + ' Inter, sans-serif';
+      // los textos van al doble porque el lienzo se encoge a la mitad
+      ctx.font = (active ? '700 26px' : '600 22px') + ' Inter, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillStyle = active ? ORANGE : 'rgba(0, 109, 109, 0.55)';
       ctx.fillText(PHASES[v].code, tx, ty);
@@ -656,9 +659,10 @@
 
   // ---------- ciclo de animación con control manual ----------
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = W * dpr;
-  canvas.height = H * dpr;
-  ctx.scale(dpr, dpr);
+  var S = 0.5;  // el eneágono se dibuja al 50%
+  canvas.width = W * S * dpr;
+  canvas.height = H * S * dpr;
+  ctx.scale(S * dpr, S * dpr);
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var animId = null;

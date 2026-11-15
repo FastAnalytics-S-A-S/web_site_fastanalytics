@@ -252,19 +252,23 @@
         <p class="metodo-rumbo" data-es="Del dato a la decisión · de la señal al acto" data-en="From data to decision · from signal to action" data-fr="De la donnée à la décision · du signal à l&#8217;action">Del dato a la decisión · de la señal al acto</p>
       </div>
       <div class="metodo-stage animate-on-scroll" role="group" aria-label="Eneágono Decisional interactivo: las nueve fases del método nacen del grafo de nueve lados. Use las flechas o los puntos para recorrerlas.">
-        <canvas id="metodoCanvas" aria-hidden="true"></canvas>
-        <div class="metodo-panel">
-          <div class="metodo-panel-id" id="metodoCode" aria-hidden="true">F0</div>
-          <div class="metodo-panel-body">
-            <span class="metodo-name" id="metodoName">Postura Estratégica</span>
-            <p class="metodo-phase-desc" id="metodoDesc">El decisor escribe su preocupación en texto libre; la IA extrae zona, actores, tema y restricciones.</p>
+        <div class="metodo-side">
+          <div class="metodo-panel">
+            <div class="metodo-panel-id" id="metodoCode" aria-hidden="true">F0</div>
+            <div class="metodo-panel-body">
+              <span class="metodo-name" id="metodoName">Postura Estratégica</span>
+              <p class="metodo-phase-desc" id="metodoDesc">El decisor escribe su preocupación en texto libre; la IA extrae zona, actores, tema y restricciones.</p>
+            </div>
+          </div>
+          <div class="metodo-controls">
+            <button class="metodo-btn" id="metodoPrev" type="button" aria-label="Fase anterior">‹</button>
+            <div class="metodo-dots" id="metodoDots" role="tablist" aria-label="Fases del Eneágono"></div>
+            <button class="metodo-btn" id="metodoNext" type="button" aria-label="Fase siguiente">›</button>
+            <button class="metodo-btn metodo-play is-playing" id="metodoPlay" type="button" aria-label="Pausar el ciclo automático">❚❚</button>
           </div>
         </div>
-        <div class="metodo-controls">
-          <button class="metodo-btn" id="metodoPrev" type="button" aria-label="Fase anterior">‹</button>
-          <div class="metodo-dots" id="metodoDots" role="tablist" aria-label="Fases del Eneágono"></div>
-          <button class="metodo-btn" id="metodoNext" type="button" aria-label="Fase siguiente">›</button>
-          <button class="metodo-btn metodo-play is-playing" id="metodoPlay" type="button" aria-label="Pausar el ciclo automático">❚❚</button>
+        <div class="metodo-viz">
+          <canvas id="metodoCanvas" aria-hidden="true"></canvas>
         </div>
       </div>
     </div>
