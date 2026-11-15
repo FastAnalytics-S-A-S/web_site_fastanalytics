@@ -297,6 +297,33 @@ ul {
   gap: 16px;
 }
 
+/* Social icons in navbar */
+.nav-social {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+
+.nav-social a:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 720px) {
+  .nav-social { display: none; }
+}
+
 /* Language Toggle */
 .lang-toggle {
   display: flex;
@@ -453,11 +480,20 @@ ul {
 }
 
 .hero-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: 1.25rem;
+  color: var(--text);
+  line-height: 1.65;
   margin-bottom: 32px;
   max-width: 600px;
+}
+
+.hero-hl {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.hero-hl--accent {
+  color: var(--accent);
 }
 
 .hero-cta {
@@ -1947,6 +1983,19 @@ ul {
   color: var(--text-muted);
 }
 
+.footer-founder {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  transition: all var(--transition);
+}
+
+.footer-founder:hover {
+  color: var(--primary);
+  opacity: 1;
+}
+
 /* ========== ANIMATIONS ========== */
 .animate-on-scroll {
   opacity: 0;
@@ -2369,7 +2418,7 @@ ul {
   }
 
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .hero-cta {
@@ -3822,45 +3871,156 @@ a.science-link:focus-visible .science-link-arrow {
   }
 }
 
-/* --- S1 · Eneágono Decisional (canvas pequeño bajo el subtítulo) --- */
-.eneagono-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin-top: 26px;
+/* --- S1.5 · Eneágono Decisional (sección propia: el método) --- */
+.metodo .metodo-lead {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.eneagono-hero canvas {
-  width: 320px;
-  max-width: 100%;
+
+.metodo-desc {
+  max-width: 780px;
+  margin: 18px auto 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.metodo-rumbo {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.metodo-stage {
+  max-width: 980px;
+  margin: 34px auto 0;
+}
+
+.metodo-stage canvas {
+  width: 100%;
   height: auto;
   display: block;
 }
-.eneagono-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.04em;
+
+.metodo-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 780px;
+  margin: 20px auto 0;
+  padding: 18px 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 109, 109, 0.07);
+}
+
+.metodo-panel-id {
+  min-width: 64px;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #E8943E;
   font-variant-numeric: tabular-nums;
 }
-.eneagono-label .eneagono-code {
-  color: #E8943E;
-  font-weight: 800;
+
+.metodo-name {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
 }
-.eneagono-dots {
+
+.metodo-phase-desc {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.metodo-controls {
   display: flex;
-  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
 }
-.eneagono-dot {
-  width: 7px;
-  height: 7px;
+
+.metodo-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--primary);
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.metodo-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.metodo-play {
+  font-size: 0.85rem;
+  width: auto;
+  min-width: 42px;
+  padding: 0 14px;
+  border-radius: 21px;
+}
+
+.metodo-play.is-playing {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.metodo-dots {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+}
+
+.metodo-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
   border-radius: 50%;
   background: rgba(0, 109, 109, 0.18);
+  cursor: pointer;
   transition: background 0.4s ease, transform 0.4s ease;
 }
-.eneagono-dot.active {
+
+.metodo-dot:hover {
+  background: rgba(63, 193, 180, 0.65);
+}
+
+.metodo-dot.active {
   background: #3FC1B4;
-  transform: scale(1.25);
+  transform: scale(1.3);
+}
+
+.metodo-stage:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 6px;
+  border-radius: 8px;
 }
 
 /* --- S3 · Soluciones: tres tarjetas grandes --- */
