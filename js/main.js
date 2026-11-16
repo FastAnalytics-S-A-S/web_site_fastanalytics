@@ -118,7 +118,6 @@
 
   // ========== SMOOTH SCROLL ==========
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    if (anchor.getAttribute('href') === '#agenda') return; // lo maneja el modal de agenda
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       var target = document.querySelector(this.getAttribute('href'));
@@ -173,103 +172,9 @@
     sectionObserver.observe(section);
   });
 
-  // ========== AGENDA MODAL (solicitud de demo) ==========
-  var agendaModal = document.getElementById('agendaModal');
-  if (agendaModal) {
-    // En producción usa api.fastanalytics.co; en previews locales usa el mismo host :8787
-    var AGENDA_API = /(^|\.)fastanalytics\.co$/.test(location.hostname)
-      ? 'https://api.fastanalytics.co/demo-request'
-      : 'http://' + location.hostname + ':8787/demo-request';
-    var agendaForm = document.getElementById('agendaForm');
-    var agendaStatus = document.getElementById('agendaStatus');
-    var agendaSubmit = document.getElementById('agendaSubmit');
-
-    var agendaI18n = {
-      es: { sending: 'Enviando...', ok: '¡Listo! Revisa tu correo, te escribiremos pronto.', error: 'No pudimos enviar. Escríbenos a hola@fastanalytics.co', invalid: 'Escribe tu nombre y un correo válido.' },
-      en: { sending: 'Sending...', ok: 'Done! Check your inbox, we will write back soon.', error: 'Could not send. Write to us at hola@fastanalytics.co', invalid: 'Please enter your name and a valid email.' },
-      fr: { sending: 'Envoi...', ok: 'C\'est fait ! Vérifiez votre boîte mail.', error: 'Envoi impossible. Écrivez à hola@fastanalytics.co', invalid: 'Indiquez votre nom et un e-mail valide.' }
-    };
-
-    function agendaLang() {
-      var l = document.documentElement.lang;
-      return agendaI18n[l] ? l : 'es';
-    }
-
-    function openAgenda() {
-      agendaModal.classList.add('active');
-      agendaModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      var first = document.getElementById('agNombre');
-      if (first) setTimeout(function () { first.focus(); }, 100);
-    }
-
-    function closeAgenda() {
-      agendaModal.classList.remove('active');
-      agendaModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('a[href="#agenda"]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        openAgenda();
-      });
-    });
-
-    document.getElementById('agendaClose').addEventListener('click', closeAgenda);
-    document.getElementById('agendaBackdrop').addEventListener('click', closeAgenda);
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && agendaModal.classList.contains('active')) closeAgenda();
-    });
-
-    // Abrir directo si llega con #agenda (p. ej. desde la demo)
-    if (location.hash === '#agenda') openAgenda();
-
-    agendaForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var t = agendaI18n[agendaLang()];
-      var data = {
-        nombre: agendaForm.nombre.value.trim(),
-        email: agendaForm.email.value.trim(),
-        entidad: agendaForm.entidad.value.trim(),
-        cargo: agendaForm.cargo.value.trim(),
-        ciudad: agendaForm.ciudad.value.trim(),
-        mensaje: agendaForm.mensaje.value.trim(),
-        website: agendaForm.website.value // honeypot
-      };
-      agendaStatus.className = 'agenda-status';
-      if (!data.nombre || !/^\S+@\S+\.\S+$/.test(data.email)) {
-        agendaStatus.textContent = t.invalid;
-        agendaStatus.classList.add('error');
-        return;
-      }
-      agendaSubmit.disabled = true;
-      agendaStatus.textContent = t.sending;
-      fetch(AGENDA_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          if (res.ok) {
-            agendaStatus.textContent = t.ok;
-            agendaStatus.classList.add('ok');
-            agendaForm.reset();
-            setTimeout(closeAgenda, 2500);
-          } else {
-            agendaStatus.textContent = res.error || t.error;
-            agendaStatus.classList.add('error');
-          }
-        })
-        .catch(function () {
-          agendaStatus.textContent = t.error;
-          agendaStatus.classList.add('error');
-        })
-        .finally(function () {
-          agendaSubmit.disabled = false;
-        });
-    });
+  // ========== AGENDA POR CORREO ==========
+  if (location.hash === '#agenda') {
+    window.location.href = 'mailto:hola@fastanalytics.co?subject=Solicitud%20de%20demostraci%C3%B3n%20FastAnalytics&body=Hola%20FastAnalytics%3A%0A%0AQuiero%20agendar%20una%20demostraci%C3%B3n.%0A%0AGracias.';
   }
 
   // ========== LIGHTBOX ==========
