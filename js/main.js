@@ -7,6 +7,19 @@
   const langToggle = document.getElementById('langToggle');
   const langOptions = langToggle ? langToggle.querySelectorAll('.lang-option') : [];
   let currentLang = 'es';
+  var langCycle = ['es', 'en', 'fr'];
+  var presentationPdfLink = document.getElementById('presentationPdf');
+  var presentationPdfHrefs = {
+    es: 'assets/demo/Presentacion_FastAnalytics.pdf',
+    en: 'assets/demo/Presentacion_FastAnalytics_EN.pdf',
+    fr: 'assets/demo/Presentacion_FastAnalytics_FR.pdf'
+  };
+
+  function updatePresentationPdf(lang) {
+    if (presentationPdfLink) {
+      presentationPdfLink.setAttribute('href', presentationPdfHrefs[lang] || presentationPdfHrefs.es);
+    }
+  }
 
   // Decodifica entidades HTML (&lt;, &quot;, ...) para que el marcado
   // interno (<a>, <strong>) sobreviva al cambio de idioma
@@ -17,8 +30,14 @@
   }
 
   function setLanguage(lang) {
+    if (langCycle.indexOf(lang) === -1) lang = 'es';
     currentLang = lang;
     document.documentElement.lang = lang;
+    updatePresentationPdf(lang);
+
+    try {
+      localStorage.setItem('fa-lang', lang);
+    } catch (e) {}
 
     // Update toggle buttons
     langOptions.forEach(function (opt) {
@@ -38,7 +57,12 @@
     // e IA para seguridad, defensa y riesgos").
   }
 
-  var langCycle = ['es', 'en', 'fr'];
+  var initialLang = 'es';
+  try {
+    var savedLang = localStorage.getItem('fa-lang');
+    if (langCycle.indexOf(savedLang) !== -1) initialLang = savedLang;
+  } catch (e) {}
+  setLanguage(initialLang);
 
   // ========== HERO ROTATING WORD ==========
   var heroRotate = document.getElementById('heroRotate');
