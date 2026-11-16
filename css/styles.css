@@ -3895,8 +3895,13 @@ a.science-link:focus-visible .science-link-arrow {
 
 .metodo-fn-block .metodo-fn {
   margin: 0 auto;
-  font-size: 1.35rem;
+  font-size: clamp(0.68rem, 2.4vw, 1.35rem);
   text-align: center;
+}
+
+.metodo-fn .mf-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .metodo-fn-block .metodo-fn-note {
