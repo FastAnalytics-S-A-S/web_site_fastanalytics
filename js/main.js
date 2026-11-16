@@ -4,6 +4,24 @@
   'use strict';
 
   // ========== LANGUAGE TOGGLE ==========
+  var PRES_VIDEO_SOURCES = {
+    es: 'assets/demo/00-presentacion-empresa.mp4?v=5',
+    en: 'assets/demo/00-presentacion-empresa-en.mp4?v=1',
+    fr: 'assets/demo/00-presentacion-empresa-fr.mp4?v=1'
+  };
+
+  function syncPresVideo() {
+    var video = document.getElementById('presVideo');
+    if (!video) return;
+    var lang = document.documentElement.lang;
+    var src = PRES_VIDEO_SOURCES[lang] || PRES_VIDEO_SOURCES.es;
+    if (video.getAttribute('src') !== src) {
+      video.pause();
+      video.setAttribute('src', src);
+      video.load();
+    }
+  }
+
   const langToggle = document.getElementById('langToggle');
   const langOptions = langToggle ? langToggle.querySelectorAll('.lang-option') : [];
   let currentLang = 'es';
@@ -51,6 +69,7 @@
         el.innerHTML = decodeEntities(text);
       }
     });
+    syncPresVideo();
 
     // Nota: el <title> ya no se redefine aquí. Hay un único título por página,
     // fijado en el HTML (rediseño home 2026: "FastAnalytics | Ciencia de datos
