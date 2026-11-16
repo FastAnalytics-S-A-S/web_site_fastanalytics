@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400" role="img" aria-label="Portada del libro Analítica de datos para la seguridad ciudadana">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1E22"/>
+      <stop offset="1" stop-color="#071418"/>
+    </linearGradient>
+    <linearGradient id="spine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#008C82" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#008C82" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="400" rx="10" fill="url(#bg)"/>
+  <rect x="0" y="0" width="16" height="400" fill="url(#spine)"/>
+  <rect x="16" y="0" width="2" height="400" fill="#3FC1B4" opacity=".35"/>
+  <g transform="translate(150,86)">
+    <polygon points="0,-46 29,-35 46,-12 42,15 22,36 -10,36 -34,15 -38,-12 -22,-35" fill="none" stroke="#3FC1B4" stroke-width="2.4" stroke-linejoin="round"/>
+    <text x="0" y="12" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="34" fill="#E8943E">f(x)</text>
+  </g>
+  <text x="150" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#F5FCFA">
+    <tspan x="150" dy="0">Analítica de datos</tspan>
+    <tspan x="150" dy="26">para la seguridad</tspan>
+    <tspan x="150" dy="26">ciudadana</tspan>
+  </text>
+  <text x="150" y="252" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12.5" fill="#3FC1B4">
+    <tspan x="150" dy="0">Modelos matemáticos para la anticipación</tspan>
+    <tspan x="150" dy="18">de respuestas orientadas a la convivencia</tspan>
+  </text>
+  <line x1="60" y1="292" x2="240" y2="292" stroke="#E8943E" stroke-width="2"/>
+  <text x="150" y="318" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#F5FCFA" opacity=".9">
+    <tspan x="150" dy="0">Andrés Pérez Coronado</tspan>
+    <tspan x="150" dy="18">Diana Alejandra Bejarano Sánchez</tspan>
+  </text>
+  <text x="150" y="366" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#3FC1B4" opacity=".8">Bogotá D.C., 2024</text>
+</svg>
