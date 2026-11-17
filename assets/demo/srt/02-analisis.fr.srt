@@ -1,15 +1,27 @@
 1
-00:00:00,500 --> 00:00:09,000
-MileInvestiga applique plus de vingt modèles d'intelligence artificielle sur les preuves, en moins de deux secondes.
+00:00:00,580 --> 00:00:08,940
+Avec la donnée en main, MileInvestiga applique plus de vingt modèles d'intelligence artificielle sur les preuves en moins de deux secondes.
 
 2
-00:00:09,800 --> 00:00:20,000
-Visages, plaques et scènes identifiés en temps réel. Voix transcrite et traduite. Texte analysé avec traitement du langage naturel.
+00:00:09,230 --> 00:00:12,649
+Visages, plaques et scènes identifiés en temps réel.
 
 3
-00:00:20,800 --> 00:00:30,000
-Le graphe du réseau criminel se révèle par l'analyse de centralité, et les motifs spatio-temporels montrent qui opère, où et à quelle fréquence.
+00:00:12,649 --> 00:00:14,415
+Voix transcrite et traduite.
 
 4
-00:00:30,800 --> 00:00:40,000
-AlejoGeo géoréférence tout et le croise avec des sources ouvertes et les données du client. L'analyste humain interprète le résultat avec discernement.
+00:00:14,415 --> 00:00:17,530
+Texte analysé avec traitement du langage naturel.
+
+5
+00:00:20,230 --> 00:00:28,470
+Le graphe du réseau criminel est révélé par analyse de centralité, et les motifs spatio-temporels montrent qui opère, où et à quelle fréquence.
+
+6
+00:00:30,230 --> 00:00:34,208
+AlejoGeo croise tout avec des sources ouvertes et les bases du client.
+
+7
+00:00:34,208 --> 00:00:38,585
+Et au final, l'analyste humain interprète le résultat avec discernement.

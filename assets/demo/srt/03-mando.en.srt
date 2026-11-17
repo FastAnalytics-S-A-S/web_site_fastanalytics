@@ -1,15 +1,31 @@
 1
-00:00:00,500 --> 00:00:06,000
-The old model. Officials behind a screen, waiting for instructions.
+00:00:00,580 --> 00:00:02,012
+That was the old model.
 
 2
-00:00:06,800 --> 00:00:16,000
-The new command. People active, integrating their knowledge into the solution, coordinating resources from the command post.
+00:00:02,012 --> 00:00:05,726
+Officials behind a screen, waiting for instructions.
 
 3
-00:00:16,800 --> 00:00:26,000
-GusCoordina brings institutions together in real time. Six specialized agents per incident, reports and permanent traceability.
+00:00:06,230 --> 00:00:07,410
+Today, the new command.
 
 4
-00:00:26,800 --> 00:00:35,000
-Everyone is notified instantly. Information is processed and articulated permanently, in daily operations and in crisis.
+00:00:07,410 --> 00:00:13,811
+Active people integrating their knowledge into the solution and coordinating resources from the command post.
+
+5
+00:00:16,230 --> 00:00:20,371
+GusCoordina articulates institutions in real time.
+
+6
+00:00:20,371 --> 00:00:25,415
+Six specialized agents per incident, with reports and permanent traceability.
+
+7
+00:00:26,230 --> 00:00:28,486
+Everyone is notified instantly. Information is handled and articulated permanently, in daily operations and in crisis.
+
+8
+00:00:28,486 --> 00:00:33,878
+La información se trata y se articula de forma permanente, en operación diaria y en crisis.

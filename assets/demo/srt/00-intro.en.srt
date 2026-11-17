@@ -1,39 +1,87 @@
 1
-00:00:00,500 --> 00:00:07,500
-The future speaks in data. We anticipate it with decisions. FastAnalytics is research, science and technology.
+00:00:00,480 --> 00:00:01,863
+The future speaks in data.
 
 2
-00:00:08,500 --> 00:00:21,800
-A platform that brings together mathematical modeling, data analytics and artificial intelligence, to anticipate security threats, organized crime, money laundering and disaster risks.
+00:00:01,863 --> 00:00:03,727
+We anticipate it with decisions.
 
 3
-00:00:22,900 --> 00:00:36,200
-Data. The territory reports through every channel, with facial recognition and license plate recognition built in. Eyes on every phone and on video surveillance cameras, anonymously and offline too.
+00:00:03,727 --> 00:00:07,058
+FastAnalytics is research, science and technology.
 
 4
-00:00:37,000 --> 00:00:47,800
-Analysis. Artificial intelligence and the analysts' judgment turn that data into information useful for deciding, in seconds, not weeks.
+00:00:08,610 --> 00:00:22,530
+We are a platform that unites mathematical modeling, data analytics and artificial intelligence in a single flow, to anticipate security threats, organized crime, money laundering and disaster risks.
 
 5
-00:00:48,000 --> 00:00:58,500
-Command. Organizations coordinate the response on a single dashboard, with reports and traceability in real time. Everyone notified, everyone active.
+00:00:23,010 --> 00:00:24,840
+First, the data line.
 
 6
-00:00:59,300 --> 00:01:08,300
-Foresight. The Decisional Enneagon turns the weak signal into tomorrow's decision, every day and in every crisis.
+00:00:24,840 --> 00:00:30,459
+The territory reports through every channel, with facial and license plate recognition built in.
 
 7
-00:01:09,100 --> 00:01:21,400
-Less harm to your people on the ground, media management, reputation protection and immediate information for your decision-makers, every day and in crisis.
+00:00:30,459 --> 00:00:36,330
+Eyes on every phone and on existing video surveillance cameras, anonymously and even offline.
 
 8
-00:01:22,400 --> 00:01:30,400
-And with CeciTeaches, everything learned stays available 24/7, for any question about the platform or the technical side.
+00:00:37,090 --> 00:00:40,652
+With that data, the analysis line springs into action.
 
 9
-00:01:31,200 --> 00:01:55,400
-This already happened, and it has method. Twenty twenty-one, homicide, univariate outlier detection. Ibague twenty twenty-two, multiple crimes, non-parametric spatio-temporal models. December twenty twenty-four, multiple crimes, multivariate outlier detection.
+00:00:40,652 --> 00:00:49,048
+Artificial intelligence and analyst judgment turn evidence into information worth deciding on, in seconds, not weeks.
 
 10
-00:01:56,200 --> 00:01:58,700
-FastAnalytics. Book a demo.
+00:00:49,210 --> 00:00:51,003
+Then, the command line.
+
+11
+00:00:51,003 --> 00:00:56,937
+Organizations coordinate the response on a single board, with real-time reports and traceability.
+
+12
+00:00:56,937 --> 00:00:58,791
+Everyone notified, everyone active.
+
+13
+00:01:00,490 --> 00:01:02,904
+And the anticipation line closes the cycle.
+
+14
+00:01:02,904 --> 00:01:09,350
+The Decisional Nonagon turns the weak signal into tomorrow's decision, every day and in every crisis.
+
+15
+00:01:11,290 --> 00:01:22,370
+Less impact on your people on the ground, media management, reputation protection and immediate information for your decision makers, every day and in crisis.
+
+16
+00:01:24,570 --> 00:01:31,993
+With CeciTeaches, everything learned stays available twenty-four seven, for any question about the platform or the technical side.
+
+17
+00:01:33,370 --> 00:01:35,364
+This already happened, and it has a method.
+
+18
+00:01:35,364 --> 00:01:40,300
+Twenty twenty-one, homicide, univariate outlier detection.
+
+19
+00:01:40,300 --> 00:01:45,304
+Ibagué twenty twenty-two, several crimes, non-parametric spatio-temporal statistical models.
+
+20
+00:01:45,304 --> 00:01:51,027
+December twenty twenty-four, several crimes, multivariate outliers.
+
+21
+00:01:58,650 --> 00:01:59,475
+FastAnalytics.
+
+22
+00:01:59,475 --> 00:02:00,950
+Book a demonstration.
