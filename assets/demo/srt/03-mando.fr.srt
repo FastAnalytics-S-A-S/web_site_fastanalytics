@@ -24,8 +24,8 @@ Six agents spécialisés par incident, avec rapports et traçabilité permanente
 
 7
 00:00:26,230 --> 00:00:28,486
-Tous sont notifiés instantanément. L'information est traitée et articulée en permanence, en opération quotidienne et en crise.
+Tous sont notifiés instantanément.
 
 8
 00:00:28,486 --> 00:00:33,878
-La información se trata y se articula de forma permanente, en operación diaria y en crisis.
+L'information est traitée et articulée en permanence, en opération quotidienne et en crise.

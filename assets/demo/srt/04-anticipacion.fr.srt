@@ -8,7 +8,7 @@ Hotspots prédictifs et scénarios pour les soixante-douze prochaines heures.
 
 3
 00:00:14,230 --> 00:00:21,163
-Et avec TavoDebate, les comités décisionnels délibèrent avec des preuves et suivent chaque ordre exécutée.
+Et avec TavoDebate, les comités décisionnels délibèrent avec des preuves et suivent chaque ordre exécuté.
 
 4
 00:00:23,430 --> 00:00:24,690

@@ -24,8 +24,8 @@ Six specialized agents per incident, with reports and permanent traceability.
 
 7
 00:00:26,230 --> 00:00:28,486
-Everyone is notified instantly. Information is handled and articulated permanently, in daily operations and in crisis.
+Everyone is notified instantly.
 
 8
 00:00:28,486 --> 00:00:33,878
-La información se trata y se articula de forma permanente, en operación diaria y en crisis.
+Information is handled and articulated permanently, in daily operations and in crisis.
